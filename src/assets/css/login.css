@@ -11,8 +11,8 @@
 .logincard {
     display: block;
    
-    padding :50px;
-    width: 300px;
+    padding :30px;
+    width: 320px;
     height:100%;
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
@@ -57,26 +57,6 @@
 
 @media screen and (max-width:430px) {
 
-    .logincard .title span {
-        font-size:25px;
-       
-    }
-
-    .logincard .title img {
-        width: 60px;
-        margin-bottom: 20px;
-    }
     
-    .user{
-        width: 300px;
-      
-    }
-    .pass {
-        width: 300px;
-      
-    }
-    #btnsignin{
-       width: 300px;
-     }
      
 }

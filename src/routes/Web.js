@@ -3,6 +3,9 @@ import { Routes, Route, Outlet, useLocation, Navigate } from 'react-router-dom';
 import Homepage from '../resources/pages/Homepage';
 import Login from '../resources/pages/auth/Login';
 import PageNotFound from '../resources/pages/PageNotFound';
+import Dashboard from '../resources/pages/admin/Dashboard';
+import Accounts from '../resources/pages/admin/Accounts';
+import Settings from '../resources/pages/admin/Settings';
 function Web() {
   return (
     <Routes>
@@ -14,6 +17,10 @@ function Web() {
               <Route path="/role" element={<Role />} />
             </Route> */}
 
+  <Route path="/admin" element={<Dashboard/>}></Route>
+  <Route path="/admin/Accounts" element={<Accounts/>}></Route>
+  <Route path="/admin/Settings" element={<Settings/>}></Route>
+           
 
   <Route path="*" element={<PageNotFound />} />
     </Routes>
