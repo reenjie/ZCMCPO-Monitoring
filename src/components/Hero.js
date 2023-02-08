@@ -25,11 +25,9 @@ function Hero() {
               m: 5,
             }}
           >
-            a software application that helps businesses manage their
-            procurement processes, from generating purchase orders to tracking
-            the delivery of goods and services. The system provides a
-            centralized platform for monitoring the purchase order process and
-            helps organizations to streamline their supply chain operations.
+            provides a centralized platform for monitoring the purchase order
+            process and helps organizations to streamline their supply chain
+            operations.
           </Box>
         </Grid>
         <Grid
