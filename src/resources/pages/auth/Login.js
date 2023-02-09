@@ -21,6 +21,7 @@ import {
 } from "../../../components/MaterialUI";
 import logo from "../../../assets/image/zcmc_logo.png";
 import { useAuth } from "../../../app/hooks/ContextHooks";
+import { loginUri } from "../../../app/controllers/auth/AuthController";
 
 function Login() {
   const { Auth } = useAuth();
