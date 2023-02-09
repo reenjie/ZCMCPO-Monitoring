@@ -3,10 +3,10 @@ import { Routes, Route, Outlet, useLocation, Navigate } from "react-router-dom";
 import Homepage from "../resources/pages/Homepage";
 import Login from "../resources/pages/auth/Login";
 import PageNotFound from "../resources/pages/PageNotFound";
-
 /* Controllers */
 import AdminController from "../app/controllers/AdminController";
 
+/* Instantiate Controller Classes */
 let administrator = new AdminController();
 function Web() {
   return (

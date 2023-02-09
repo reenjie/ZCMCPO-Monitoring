@@ -1,5 +1,16 @@
-import { api } from "../../config/api";
+import axios from "axios";
+import { loginUri } from "../../uri";
 
-export const loginUri = (username, password) => {
-  return `${api}/login?username=` + username + `&password=` + password;
+export const Signin = (username, password) => {
+  axios
+    .post(loginUri(), {
+      username: username,
+      password: password,
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch(function (error) {
+      return error;
+    });
 };
