@@ -17,17 +17,19 @@ import {
   Box,
   FormControlLabel,
   Checkbox,
-  Alert
+  Alert,
 } from "../../../components/MaterialUI";
 import logo from "../../../assets/image/zcmc_logo.png";
+import { useAuth } from "../../../app/hooks/ContextHooks";
 
 function Login() {
+  const { Auth } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [username,setUsername] = useState('');
-  const [password,setPassword] = useState('');
-  const [validate,setValidate] = useState(false);
-  const [invalidMessage,setInvalidMessage]= useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [validate, setValidate] = useState(false);
+  const [invalidMessage, setInvalidMessage] = useState("");
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -36,25 +38,25 @@ function Login() {
   };
 
   const handleClick = () => {
-      if(username == '' || password == ''){
-        setValidate(true);
-        setInvalidMessage('Please fill all fields');
-      }else {
-        setLoading(true);
-        /* Set Backend here.. */
+    if (username == "" || password == "") {
+      setValidate(true);
+      setInvalidMessage("Please fill all fields");
+    } else {
+      setLoading(true);
+      /* Set Backend here.. */
+    }
+  };
 
-      }
-    
+  const AlertNotify = ({ type, Message }) => {
+    return (
+      <>
+        <Alert sx={{ marginBottom: "10px" }} severity={type}>
+          {Message}
+        </Alert>
+      </>
+    );
+  };
 
-
-  }
-
-  const AlertNotify = ({type,Message}) =>{
-    return <>
-    <Alert sx={{marginBottom:'10px'}} severity={type}>{Message}</Alert>
-    </>
-  }
-  
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   return (
     <div className="card">
@@ -62,7 +64,12 @@ function Login() {
         <div className="title">
           <img src={logo} alt="" /> <span>P.O Monitoring</span>
         </div>
-        {validate && <> <AlertNotify type="error" Message={invalidMessage} /></>}
+        {validate && (
+          <>
+            {" "}
+            <AlertNotify type="error" Message={invalidMessage} />
+          </>
+        )}
         <TextField
           color="success"
           fullWidth
@@ -70,31 +77,32 @@ function Login() {
           label="Username"
           variant="outlined"
           autoFocus
-          sx={{marginBottom:'17px'}}
+          sx={{ marginBottom: "17px" }}
           error={validate}
-          onChange={(e)=>{
+          onChange={(e) => {
             setUsername(e.target.value);
             setValidate(false);
           }}
         />
-      
+
         <TextField
-        
-        error={validate}
+          error={validate}
           fullWidth
           color="success"
           label="Password"
           id="outlined-adornment-password"
           type={showPassword ? "text" : "password"}
-
-          onChange={(e)=>{
+          onChange={(e) => {
             setPassword(e.target.value);
             setValidate(false);
           }}
         />
         <Box sx={{ textAlign: "left" }}>
           <Checkbox id="checkpass" onChange={handleClickShowPassword} />
-          <label htmlFor="checkpass" style={{ fontSize: "13px", color: "#5f675f" }}>
+          <label
+            htmlFor="checkpass"
+            style={{ fontSize: "13px", color: "#5f675f" }}
+          >
             Show password
           </label>
         </Box>
@@ -112,7 +120,7 @@ function Login() {
           <span>{loading ? "Signing In" : "Sign In"}</span>
         </LoadingButton>
 
-      <span id="footer">Material Management Supply &middot; 2023</span>
+        <span id="footer">Material Management Supply &middot; 2023</span>
       </div>
     </div>
   );
