@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../../components/Navbar";
+import Hero from "../../components/Hero";
 
 const Homepage = () => {
   return (
-    <div>homepage</div>
-  )
-}
+    <div>
+      <Navbar />
+      <Hero />
+    </div>
+  );
+};
 
-export default Homepage
+export default Homepage;

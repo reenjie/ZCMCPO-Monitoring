@@ -5,24 +5,19 @@ import { FaCogs } from "react-icons/fa";
 /* Admin Link */
 
 export const AdminSidebar = [
-    {   
-        
-        title  : 'Dashboard',
-        icon   : <AiOutlineDashboard/>,
-        link   : '/admin'
-      
-    },
-    {
-        title  : 'Accounts',
-        icon   : <RiAccountCircleLine/>,
-        link   : '/admin/Accounts'
-      
-    },
-    {
-        title  : 'Settings',
-        icon   : <FaCogs/>,
-        link   : '/admin/Settings'
-      
-    },
-
+  {
+    title: "Dashboard",
+    icon: <AiOutlineDashboard />,
+    link: "/admin",
+  },
+  {
+    title: "Accounts",
+    icon: <RiAccountCircleLine />,
+    link: "/admin/Accounts",
+  },
+  {
+    title: "Settings",
+    icon: <FaCogs />,
+    link: "/admin/Settings",
+  },
 ];
