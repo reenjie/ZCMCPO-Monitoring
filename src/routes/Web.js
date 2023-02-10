@@ -12,11 +12,7 @@ import HomeController from "../app/controllers/HomeController";
 
 /* Instantiate Controller Classes */
 let administrator = new AdminController();
-<<<<<<< HEAD
 let user = new UserController();
-=======
-//acoco
->>>>>>> 46a98135b7d9478904182d3d1e3763b4eb64bc40
 function Web() {
   return (
     <Routes>
