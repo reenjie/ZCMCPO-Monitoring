@@ -1,16 +1,15 @@
 import axios from "axios";
-import { loginUri } from "../../uri";
+import { loginUri, FetchAuthUser } from "../../uri";
 
-export const Signin = (username, password) => {
-  axios
-    .post(loginUri(), {
-      username: username,
-      password: password,
-    })
-    .then((response) => {
-      return response;
-    })
-    .catch(function (error) {
-      return error;
-    });
+export const Signin = async (username, password) => {
+  return await axios.post(loginUri(), {
+    username: username,
+    password: password,
+  });
+};
+
+export const FetchUserData = async (token) => {
+  return await axios.post(FetchAuthUser(), {
+    token: token,
+  });
 };

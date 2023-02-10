@@ -5,28 +5,29 @@ import Login from "../resources/pages/auth/Login";
 import PageNotFound from "../resources/pages/PageNotFound";
 /* Controllers */
 import AdminController from "../app/controllers/AdminController";
+import HomeController from "../app/controllers/HomeController";
 
 /* Instantiate Controller Classes */
 let administrator = new AdminController();
+
 function Web() {
   return (
     <Routes>
       <Route path="/" element={<Homepage />}></Route>
       <Route path="/login" element={<Login />}></Route>
-      {/* <Route element={<AdminAuth />}>
-              <Route path="/admin" element={<AdminInfo />} />
-              <Route path="/adminview" element={<Admin />} />
-              <Route path="/role" element={<Role />} />
-            </Route> */}
-      <Route path="/admin" element={<administrator.dashboard />}></Route>
-      <Route
-        path="/admin/Accounts"
-        element={<administrator.accounts />}
-      ></Route>
-      <Route
-        path="/admin/Settings"
-        element={<administrator.settings />}
-      ></Route>
+
+      <Route element={<HomeController />}>
+        <Route path="/admin" element={<administrator.dashboard />}></Route>
+        <Route
+          path="/admin/Accounts"
+          element={<administrator.accounts />}
+        ></Route>
+        <Route
+          path="/admin/Settings"
+          element={<administrator.settings />}
+        ></Route>
+      </Route>
+
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
