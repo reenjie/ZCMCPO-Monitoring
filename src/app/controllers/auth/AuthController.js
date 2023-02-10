@@ -1,5 +1,15 @@
-import { api } from "../../config/api";
+import axios from "axios";
+import { loginUri, FetchAuthUser } from "../../uri";
 
-export const loginUri = (username, password) => {
-  return `${api}/login?username=` + username + `&password=` + password;
+export const Signin = async (username, password) => {
+  return await axios.post(loginUri(), {
+    username: username,
+    password: password,
+  });
+};
+
+export const FetchUserData = async (token) => {
+  return await axios.post(FetchAuthUser(), {
+    token: token,
+  });
 };

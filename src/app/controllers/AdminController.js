@@ -6,8 +6,8 @@ import Settings from "../../resources/pages/admin/Settings";
 
 class AdminController extends React.Component {
   dashboard() {
-    const aww = "data";
-    return <Dashboard />;
+    const aww = "awcddoo";
+    return <Dashboard data={aww} />;
   }
 
   accounts() {

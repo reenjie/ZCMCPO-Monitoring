@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import "../../../assets/css/login.css";
 import {
@@ -21,17 +21,30 @@ import {
 } from "../../../components/MaterialUI";
 import logo from "../../../assets/image/zcmc_logo.png";
 import { useAuth } from "../../../app/hooks/ContextHooks";
-import { loginUri } from "../../../app/controllers/auth/AuthController";
-
+import { Signin } from "../../../app/controllers/auth/AuthController";
+import {
+  setCookie,
+  getCookie,
+  validateUser,
+  checkCookie,
+} from "../../../app/hooks/Cookie";
+import { useNavigate } from "react-router-dom";
 function Login() {
   const { Auth } = useAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [validate, setValidate] = useState(false);
   const [invalidMessage, setInvalidMessage] = useState("");
+  const [alertType, setAlertType] = useState("");
 
+  useEffect(() => {
+    if (checkCookie()) {
+      navigate("/admin");
+    }
+  });
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
@@ -41,10 +54,28 @@ function Login() {
   const handleClick = () => {
     if (username == "" || password == "") {
       setValidate(true);
+      setAlertType("error");
       setInvalidMessage("Please fill all fields");
     } else {
       setLoading(true);
-      /* Set Backend here.. */
+      Signin(username, password)
+        .then(function (response) {
+          setValidate(true);
+          setAlertType("success");
+          setInvalidMessage(response.data.message);
+          setCookie({
+            token: response.data.token,
+            expiry: response.data.expiry,
+          });
+          navigate("/admin");
+        })
+        .catch(function (error) {
+          setInvalidMessage(error.response.data.message);
+          setPassword("");
+          setAlertType("error");
+          setValidate(true);
+          setLoading(false);
+        });
     }
   };
 
@@ -63,64 +94,72 @@ function Login() {
     <div className="card">
       <div className="logincard">
         <div className="title">
-          <img src={logo} alt="" /> <span>P.O Monitoring</span>
+          <img src={logo} alt="" />
+          <span>P.O Monitoring</span>
         </div>
         {validate && (
           <>
             {" "}
-            <AlertNotify type="error" Message={invalidMessage} />
+            <AlertNotify type={alertType} Message={invalidMessage} />
           </>
         )}
-        <TextField
-          color="success"
-          fullWidth
-          id="fullWidth"
-          label="Username"
-          variant="outlined"
-          autoFocus
-          sx={{ marginBottom: "17px" }}
-          error={validate}
-          onChange={(e) => {
-            setUsername(e.target.value);
-            setValidate(false);
-          }}
-        />
 
-        <TextField
-          error={validate}
-          fullWidth
-          color="success"
-          label="Password"
-          id="outlined-adornment-password"
-          type={showPassword ? "text" : "password"}
-          onChange={(e) => {
-            setPassword(e.target.value);
-            setValidate(false);
-          }}
-        />
-        <Box sx={{ textAlign: "left" }}>
-          <Checkbox id="checkpass" onChange={handleClickShowPassword} />
-          <label
-            htmlFor="checkpass"
-            style={{ fontSize: "13px", color: "#5f675f" }}
+        <form method="post">
+          <TextField
+            color="success"
+            fullWidth
+            id="fullWidth"
+            label="Username"
+            variant="outlined"
+            autoFocus
+            sx={{ marginBottom: "17px" }}
+            error={validate ? (alertType == "success" ? false : true) : false}
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+              setValidate(false);
+            }}
+            required
+          />
+
+          <TextField
+            error={validate ? (alertType == "success" ? false : true) : false}
+            fullWidth
+            color="success"
+            label="Password"
+            id="outlined-adornment-password"
+            type={showPassword ? "text" : "password"}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setValidate(false);
+            }}
+            required
+            value={password}
+          />
+          <Box sx={{ textAlign: "left" }}>
+            <Checkbox id="checkpass" onChange={handleClickShowPassword} />
+            <label
+              htmlFor="checkpass"
+              style={{ fontSize: "13px", color: "#5f675f" }}
+            >
+              Show password
+            </label>
+          </Box>
+          <LoadingButton
+            size="large"
+            onClick={handleClick}
+            endIcon={<AiOutlineLogin />}
+            loading={loading}
+            loadingPosition="end"
+            variant="contained"
+            color="success"
+            sx={{ padding: "14px", marginTop: "10px" }}
+            fullWidth
+            type="submit"
           >
-            Show password
-          </label>
-        </Box>
-        <LoadingButton
-          size="large"
-          onClick={handleClick}
-          endIcon={<AiOutlineLogin />}
-          loading={loading}
-          loadingPosition="end"
-          variant="contained"
-          color="success"
-          sx={{ padding: "14px", marginTop: "10px" }}
-          fullWidth
-        >
-          <span>{loading ? "Signing In" : "Sign In"}</span>
-        </LoadingButton>
-
+            <span>{loading ? "Signing In" : "Sign In"}</span>
+          </LoadingButton>
+        </form>
         <span id="footer">Material Management Supply &middot; 2023</span>
       </div>
     </div>

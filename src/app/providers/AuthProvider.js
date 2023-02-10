@@ -1,14 +1,21 @@
 import { authcontext } from "../contexts/context";
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import { getCookie, checkCookie, clearCookie } from "../hooks/Cookie";
+import { FetchUserData } from "../controllers/auth/AuthController";
 export const AuthProvider = ({ children }) => {
-  const [Auth, setAuth] = useState([
-    {
-      data: null,
-      isLoggedin: false,
-      token: null,
-    },
-  ]);
+  const [Auth, setAuth] = useState([]);
+
+  useEffect(() => {
+    if (checkCookie()) {
+      FetchUserData(getCookie().token.token)
+        .then(function (response) {
+          setAuth({ user: response.data.data[0] });
+        })
+        .catch(function (error) {
+          clearCookie();
+        });
+    }
+  }, []);
 
   return (
     <authcontext.Provider value={{ Auth, setAuth }}>
