@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginUri, FetchAuthUser } from "../../uri";
+import { loginUri, FetchAuthUser, FetchRole } from "../../uri";
 
 export const Signin = async (username, password) => {
   return await axios.post(loginUri(), {
@@ -12,4 +12,8 @@ export const FetchUserData = async (token) => {
   return await axios.post(FetchAuthUser(), {
     token: token,
   });
+};
+
+export const FetchRoles = async () => {
+  return await axios.post(FetchRole(), {});
 };

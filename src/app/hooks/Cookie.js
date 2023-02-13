@@ -10,13 +10,6 @@ export function setCookie(token) {
   );
 }
 
-export const ValidateUser = () => {
-  if (checkCookie()) {
-  } else {
-    window.location.href = "/login";
-  }
-};
-
 export function checkCookie() {
   if (getCookie()) {
     return true;
