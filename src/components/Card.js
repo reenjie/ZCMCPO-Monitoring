@@ -22,11 +22,8 @@ export default function BasicCard({ title, description, icon }) {
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {title}
         </Typography>
-        <Typography variant="h5" component="div">
-          {description}
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {icon}
+        <Typography variant="h5" sx={{ fontSize: 30 }} component="div">
+          {icon} {description}
         </Typography>
       </CardContent>
     </Card>

@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route, Outlet, useLocation, Navigate } from "react-router-dom";
 import Homepage from "../resources/pages/Homepage";
 import Login from "../resources/pages/auth/Login";
-import User from "../resources/pages/User";
 import PageNotFound from "../resources/pages/PageNotFound";
 
 /* Controllers */
@@ -12,17 +11,13 @@ import HomeController from "../app/controllers/HomeController";
 
 /* Instantiate Controller Classes */
 let administrator = new AdminController();
-<<<<<<< HEAD
 let user = new UserController();
-=======
-//acoco
->>>>>>> 46a98135b7d9478904182d3d1e3763b4eb64bc40
 function Web() {
   return (
     <Routes>
       <Route path="/" element={<Homepage />}></Route>
       <Route path="/login" element={<Login />}></Route>
-
+      //admin
       <Route element={<HomeController />}>
         <Route path="/admin" element={<administrator.dashboard />}></Route>
         <Route
@@ -34,7 +29,9 @@ function Web() {
           element={<administrator.settings />}
         ></Route>
       </Route>
-
+      //users
+      <Route path="/user" element={<user.dashboard />}></Route>
+      <Route path="/edititems" element={<user.editItems />}></Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

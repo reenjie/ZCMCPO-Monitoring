@@ -1,19 +1,13 @@
 import React from "react";
-import BasicCard from "../../../components/Card";
-import { Grid, TextField, Typography } from "@mui/material";
-import { Container } from "@mui/system";
+import "../../../assets/css/action.css";
+import { Button, Container, Grid, Stack, TextField } from "@mui/material";
 const Action = () => {
   return (
-    <div>
-      <Container
-        display="flex"
-        alignItems={"center"}
-        border="black"
-        sx={{ p: 5 }}
-      >
-        <Grid container xl={12} spacing={2}>
-          <Grid item xl={8}>
-            <Typography sx={{ m: 2 }}>Item Description</Typography>
+    <div className="card">
+      <Grid container xl={12}>
+        <Grid item xl={6}>
+          {" "}
+          <Stack spacing={2}>
             <TextField
               disabled
               id="outlined-disabled"
@@ -32,12 +26,30 @@ const Action = () => {
               label="Disabled"
               defaultValue="Hello World"
             />
-          </Grid>
-          <Grid item xl={4}>
-            <BasicCard title={"Manage  Items"} />
-          </Grid>
+            <TextField
+              disabled
+              id="outlined-disabled"
+              label="Disabled"
+              defaultValue="Hello World"
+            />
+          </Stack>
         </Grid>
-      </Container>
+        <Grid item xl={5}>
+          <Container>
+            <Stack spacing={3}>
+              <Button variant="contained" sx={{ width: "250px" }}>
+                Delivered
+              </Button>
+              <Button variant="contained" sx={{ width: "250px" }}>
+                Extended
+              </Button>
+              <Button variant="contained" sx={{ width: "250px" }}>
+                Undelivered
+              </Button>
+            </Stack>
+          </Container>
+        </Grid>
+      </Grid>
     </div>
   );
 };
