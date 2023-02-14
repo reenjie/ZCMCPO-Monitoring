@@ -1,18 +1,28 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../hooks/ContextHooks";
 import { useNavigate, Outlet } from "react-router-dom";
-import { checkCookie } from "../hooks/Cookie";
-function HomeController() {
+import { checkCookie, getCookie } from "../hooks/Cookie";
+
+export const AdminCheckAuth = () => {
   const navigate = useNavigate();
-  const { Auth } = useAuth();
 
   useEffect(() => {
     if (!checkCookie()) {
       navigate("/login");
     }
   }, []);
+  return checkCookie() && getCookie().token.role == 1 && <Outlet />;
+};
 
-  return <Outlet />;
-}
-
-export default HomeController;
+export const RedirectIfAuthenticated = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    return getCookie().token.role == 1 ? (
+      navigate("/admin")
+    ) : getCookie().token.role == 2 ? (
+      navigate("/admin") //user
+    ) : (
+      <Outlet />
+    );
+  });
+};

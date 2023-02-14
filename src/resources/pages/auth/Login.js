@@ -42,7 +42,7 @@ function Login() {
 
   useEffect(() => {
     if (checkCookie()) {
-      navigate("/admin");
+      navigate("/home");
     }
   });
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -65,9 +65,8 @@ function Login() {
           setInvalidMessage(response.data.message);
           setCookie({
             token: response.data.token,
-            expiry: response.data.expiry,
+            role: response.data.role,
           });
-          navigate("/admin");
         })
         .catch(function (error) {
           setInvalidMessage(error.response.data.message);

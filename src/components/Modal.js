@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { AddAccounts } from "../resources/pages/admin/components/ModalContent";
 
 const style = {
   position: "absolute",
@@ -21,6 +22,7 @@ export default function BasicModal({
   ModalContent,
   Close,
   setClose,
+  setFetch,
 }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -46,7 +48,17 @@ export default function BasicModal({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>{ModalContent}</Box>
+        <Box sx={style}>
+          {ModalContent[0].typeofcontent == "AddAccount" ? (
+            <AddAccounts
+              roles={ModalContent[0].data}
+              handleClose={handleClose}
+              setFetch={setFetch}
+            />
+          ) : (
+            ""
+          )}
+        </Box>
       </Modal>
     </div>
   );
