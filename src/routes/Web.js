@@ -10,7 +10,7 @@ import {
   AdminCheckAuth,
   RedirectIfAuthenticated,
 } from "../app/controllers/HomeController";
-
+import Action from "../resources/pages/user/Action";
 function Web() {
   return (
     <Routes>
