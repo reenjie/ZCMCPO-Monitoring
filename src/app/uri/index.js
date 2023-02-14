@@ -19,3 +19,11 @@ export const SaveUserUri = () => {
 export const FetchUserDataUri = () => {
   return `${api}/User/data`;
 };
+
+export const UpdateUserDataUri = () => {
+  return `${api}/User/update`;
+};
+
+export const DeleteUserDataUri = () => {
+  return `${api}/User/delete`;
+};
