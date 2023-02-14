@@ -9,7 +9,7 @@ import SearchItem from "./SearchItem";
 import { Container } from "@mui/system";
 import Main from "../layouts/navs/Main";
 
-function Dashboard() {
+function UserDashboard() {
   return (
     <div>
       <UserLayout SidebarNav={UserSidebar} />
@@ -28,4 +28,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default UserDashboard;

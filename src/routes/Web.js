@@ -11,6 +11,7 @@ import {
   RedirectIfAuthenticated,
 } from "../app/controllers/HomeController";
 import Action from "../resources/pages/user/Action";
+import UserDashboard from "../resources/pages/user/Dashboard";
 function Web() {
   return (
     <Routes>
@@ -23,7 +24,7 @@ function Web() {
         <Route path="/admin/Settings" element={<Settings />}></Route>
       </Route>
       //users
-      <Route path="/user" element={<Dashboard />}></Route>
+      <Route path="/user" element={<UserDashboard />}></Route>
       <Route path="/edititems" element={<Action />}></Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
