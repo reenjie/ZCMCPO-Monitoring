@@ -31,7 +31,7 @@ function Navbar() {
           sx={{ height: "60px", my: 4 }}
         >
           <Link
-            href="/user"
+            href="/login"
             underline="none"
             sx={{ height: "50px", mx: 3, fontSize: "25px", color: "green" }}
           >

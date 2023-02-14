@@ -7,11 +7,21 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import { Edit, Delete } from "./Action";
+import { ButtonGroup } from "@mui/material";
 
-export default function CustomPaginationActionsTable({ columns, rows }) {
+export default function CustomPaginationActionsTable({
+  columns,
+  rows,
+  tabletype,
+  setFetch,
+  setopenModal,
+  openModal,
+  roles,
+}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  //console.log(rows);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -39,24 +49,53 @@ export default function CustomPaginationActionsTable({ columns, rows }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+            {rows[0]
+              ? rows[0].data
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.code}
+                      >
+                        {columns.map((column) => {
+                          const value = row[column.id];
+
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === "number" ? (
+                                column.format(value)
+                              ) : column.id == "action" ? (
+                                <>
+                                  <ButtonGroup
+                                    variant="text"
+                                    aria-label="text button group"
+                                  >
+                                    <Edit
+                                      data={row}
+                                      tabletype={tabletype}
+                                      setFetch={setFetch}
+                                      roles={roles}
+                                    />
+                                    <Delete
+                                      data={row}
+                                      tabletype={tabletype}
+                                      setFetch={setFetch}
+                                    />
+                                  </ButtonGroup>
+                                </>
+                              ) : (
+                                value
+                              )}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })
+              : null}
           </TableBody>
         </Table>
       </TableContainer>

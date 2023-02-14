@@ -7,3 +7,23 @@ export const loginUri = () => {
 export const FetchAuthUser = () => {
   return `${api}/User`;
 };
+
+export const FetchRole = () => {
+  return `${api}/Roles`;
+};
+
+export const SaveUserUri = () => {
+  return `${api}/User/New`;
+};
+
+export const FetchUserDataUri = () => {
+  return `${api}/User/data`;
+};
+
+export const UpdateUserDataUri = () => {
+  return `${api}/User/update`;
+};
+
+export const DeleteUserDataUri = () => {
+  return `${api}/User/delete`;
+};

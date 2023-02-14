@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { AddAccounts } from "../resources/pages/admin/components/ModalContent";
 
 const style = {
   position: "absolute",
@@ -19,34 +20,46 @@ const style = {
 export default function BasicModal({
   Modalbtn,
   ModalContent,
-  Close,
-  setClose,
+  setFetch,
+  setopenModal,
+  openModal,
 }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  React.useEffect(() => {
-    setOpen(false);
-    setClose(false);
-  }, [Close]);
+
   return (
     <div>
-      <Button
-        variant="outlined"
-        color="success"
-        size="small"
-        sx={{ marginTop: "4px", marginBottom: "10px" }}
-        onClick={handleOpen}
-      >
-        {Modalbtn}
-      </Button>
+      {/* onClick={handleOpen} */}
+
+      {Modalbtn}
+
       <Modal
-        open={open}
+        open={openModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>{ModalContent}</Box>
+        <Box sx={style}>
+          {ModalContent[0].typeofcontent == "AddAccount" ? (
+            <AddAccounts
+              action="add"
+              roles={ModalContent[0].data}
+              handleClose={setopenModal}
+              setFetch={setFetch}
+            />
+          ) : ModalContent[0].typeofcontent == "EditAccount" ? (
+            <AddAccounts
+              action="edit"
+              roles={ModalContent[0].roles}
+              data={ModalContent[0].userdata}
+              handleClose={setopenModal}
+              setFetch={setFetch}
+            />
+          ) : (
+            ""
+          )}
+        </Box>
       </Modal>
     </div>
   );

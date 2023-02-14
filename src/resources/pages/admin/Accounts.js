@@ -1,143 +1,78 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import AdminLayout from "../layouts/AdminLayout";
 import { AdminSidebar } from "../layouts/navs/NavData";
 import Main from "../layouts/navs/Main";
 import CustomPaginationActionsTable from "../../../components/Table";
 import BasicModal from "../../../components/Modal";
-import { TextField, Grid, Button } from "@mui/material";
-
+import {
+  TextField,
+  Grid,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
+import { FetchRoles } from "../../../app/controllers/auth/AuthController";
+import { FetchUserData } from "../../../app/controllers/request/AdminRequest";
 import { IoIosAddCircle } from "react-icons/io";
-function Accounts() {
-  const [closeModal, setCloseModal] = useState(false);
+const Accounts = ({ Roles, Data }) => {
+  const [openModal, setopenModal] = useState(false);
+  const [roles, setRoles] = useState([]);
+  const [data, setData] = useState([]);
+  const [fetch, setFetch] = useState(false);
+
+  useEffect(() => {
+    const fetchDatas = async () => {
+      setRoles(await FetchRoles());
+      setData(await FetchUserData());
+    };
+    fetchDatas();
+    setFetch(false);
+  }, [fetch]);
 
   const columns = [
     { id: "name", label: "Name", minWidth: 170 },
-    { id: "code", label: "ISO\u00a0Code", minWidth: 100 },
+    { id: "email", label: "Email", minWidth: 100 },
     {
-      id: "population",
-      label: "Population",
+      id: "username",
+      label: "Username",
       minWidth: 170,
       align: "right",
       format: (value) => value.toLocaleString("en-US"),
     },
     {
-      id: "size",
-      label: "Size\u00a0(km\u00b2)",
+      id: "roles",
+      label: "Role",
       minWidth: 170,
       align: "right",
       format: (value) => value.toLocaleString("en-US"),
     },
     {
-      id: "density",
-      label: "Density",
+      id: "created_at",
+      label: "Created",
+      minWidth: 170,
+      align: "right",
+      format: (value) => value.toFixed(2),
+    },
+    {
+      id: "action",
+      label: "Action",
       minWidth: 170,
       align: "right",
       format: (value) => value.toFixed(2),
     },
   ];
 
-  function createData(name, code, population, size, dataid) {
-    const density = population / size;
-    return { name, code, population, size, density, dataid };
-  }
+  // function createData(dataid, name, username, email, role, created) {
+  //   const density = population / size;
+  //   return { dataid, name, username, email, role, created };
+  // }
 
-  const rows = [createData("India", "IN", 1324171354, 3287263, 51715)];
-
-  const AddAccounts = () => {
-    return (
-      <>
-        <h3 style={{ marginBottom: "10px", fontWeight: "normal" }}>
-          Add Accounts
-        </h3>
-
-        <Grid container spacing={2}>
-          <Grid item xs={6} md={6}>
-            <TextField
-              fullWidth
-              id="filled-basic"
-              size="small"
-              sx={{ marginBottom: "10px" }}
-              label="First Name"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={6} md={6}>
-            <TextField
-              fullWidth
-              id="filled-basic"
-              size="small"
-              sx={{ marginBottom: "10px" }}
-              label="Last Name"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={6} md={6}>
-            <TextField
-              fullWidth
-              id="filled-basic"
-              size="small"
-              sx={{ marginBottom: "10px" }}
-              label="Username"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={6} md={6}>
-            <TextField
-              fullWidth
-              id="filled-basic"
-              size="small"
-              sx={{ marginBottom: "10px" }}
-              label="Role"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={6} md={6}>
-            <TextField
-              fullWidth
-              type={"password"}
-              id="filled-basic"
-              size="small"
-              sx={{ marginBottom: "10px" }}
-              label="Password"
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item xs={6} md={6}>
-            <TextField
-              fullWidth
-              type={"password"}
-              id="filled-basic"
-              size="small"
-              sx={{ marginBottom: "10px" }}
-              label="Re-EnterPassword"
-              variant="outlined"
-            />
-          </Grid>
-        </Grid>
-        <div style={{ float: "right", marginTop: "10px" }}>
-          <Button
-            variant="contained"
-            size="small"
-            color="success"
-            sx={{ padding: "4px 30px" }}
-          >
-            {" "}
-            Save
-          </Button>
-          <Button
-            variant="contained"
-            size="small"
-            sx={{ marginLeft: "5px" }}
-            onClick={() => setCloseModal(true)}
-          >
-            {" "}
-            Close
-          </Button>
-        </div>
-      </>
-    );
-  };
+  //const rows = [createData("India", "IN", 1324171354, 3287263, 51715)];
+  const rows = [data.data];
+  // console.log();
 
   return (
     <div>
@@ -145,19 +80,38 @@ function Accounts() {
       <Main>
         <h3>Accounts</h3>
         <BasicModal
+          setFetch={setFetch}
           Modalbtn={
-            <>
+            <Button
+              color="success"
+              onClick={() => {
+                setopenModal(true);
+              }}
+            >
               Add <IoIosAddCircle />
-            </>
+            </Button>
           }
-          ModalContent={<AddAccounts />}
-          Close={closeModal}
-          setClose={setCloseModal}
+          ModalContent={[
+            {
+              typeofcontent: "AddAccount",
+              data: roles,
+            },
+          ]}
+          openModal={openModal}
+          setopenModal={setopenModal}
         />
-        <CustomPaginationActionsTable columns={columns} rows={rows} />
+        <CustomPaginationActionsTable
+          tabletype="accounts"
+          columns={columns}
+          rows={rows}
+          setFetch={setFetch}
+          openModal={openModal}
+          setopenModal={setopenModal}
+          roles={roles}
+        />
       </Main>
     </div>
   );
-}
+};
 
 export default Accounts;

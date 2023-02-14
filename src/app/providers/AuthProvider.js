@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (checkCookie()) {
-      FetchUserData(getCookie().token.token)
+      const res = FetchUserData(getCookie().token.token)
         .then(function (response) {
           setAuth({ user: response.data.data[0] });
         })
