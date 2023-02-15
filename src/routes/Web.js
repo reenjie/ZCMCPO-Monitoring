@@ -9,6 +9,7 @@ import Dashboard from "../resources/pages/admin/Dashboard";
 import {
   AdminCheckAuth,
   RedirectIfAuthenticated,
+  UserCheckAuth,
 } from "../app/controllers/HomeController";
 import Action from "../resources/pages/user/Action";
 import UserDashboard from "../resources/pages/user/Dashboard";
@@ -23,9 +24,12 @@ function Web() {
         <Route path="/admin/Accounts" element={<Accounts />}></Route>
         <Route path="/admin/Settings" element={<Settings />}></Route>
       </Route>
-      //users
-      <Route path="/user" element={<UserDashboard />}></Route>
-      <Route path="/edititems" element={<Action />}></Route>
+
+      <Route element={<UserCheckAuth />}>
+        <Route path="/user" element={<UserDashboard />}></Route>
+        <Route path="/edititems" element={<Action />}></Route>
+      </Route>
+
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

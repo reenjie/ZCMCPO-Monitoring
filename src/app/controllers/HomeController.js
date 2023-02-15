@@ -14,13 +14,24 @@ export const AdminCheckAuth = () => {
   return checkCookie() && getCookie().token.role == 1 && <Outlet />;
 };
 
+export const UserCheckAuth = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!checkCookie()) {
+      navigate("/login");
+    }
+  }, []);
+  return checkCookie() && getCookie().token.role == 2 && <Outlet />;
+};
+
 export const RedirectIfAuthenticated = () => {
   const navigate = useNavigate();
   useEffect(() => {
     return getCookie().token.role == 1 ? (
       navigate("/admin")
     ) : getCookie().token.role == 2 ? (
-      navigate("/admin") //user
+      navigate("/user") //user
     ) : (
       <Outlet />
     );
