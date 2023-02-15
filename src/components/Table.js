@@ -11,13 +11,7 @@ import { ButtonGroup } from "@mui/material";
 import { useAuth } from "../app/hooks/ContextHooks";
 import { Badge } from "@mui/icons-material";
 import { Box } from "@mui/material";
-
-import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
+import Search from "./Search";
 import React, { useState } from "react";
 export default function CustomPaginationActionsTable({
   columns,
@@ -41,35 +35,15 @@ export default function CustomPaginationActionsTable({
     setPage(0);
   };
 
-  const contentSearch = rows[0] ? rows[0].data : [];
+  const contentSearch = rows[0]
+    ? rows[0].data.filter((filter) =>
+        filter.name.toLowerCase().includes(search.toLowerCase())
+      )
+    : [];
 
-  console.log(contentSearch);
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <Paper
-        component="form"
-        sx={{
-          p: "2px 4px",
-          display: "flex",
-          alignItems: "center",
-          width: 400,
-        }}
-      >
-        <IconButton sx={{ p: "10px" }} aria-label="menu">
-          <MenuIcon />
-        </IconButton>
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Search  ..."
-          inputProps={{ "aria-label": "search..." }}
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
-        <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-          <SearchIcon />
-        </IconButton>
-      </Paper>
+      <Search setSearch={setSearch} />
       <TableContainer sx={{ maxHeight: 640 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
