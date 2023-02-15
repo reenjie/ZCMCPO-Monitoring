@@ -8,11 +8,18 @@ import Topbar from "../layouts/navs/Topbar";
 import SearchItem from "./SearchItem";
 import { Container } from "@mui/system";
 import Main from "../layouts/navs/Main";
+import AdminLayout from "../layouts/AdminLayout";
+import { AdminSidebar } from "../layouts/navs/NavData";
 
-function UserDashboard() {
+function Dashboard({ usertype }) {
   return (
     <div>
-      <UserLayout SidebarNav={UserSidebar} />
+      {usertype == "admin" ? (
+        <AdminLayout SidebarNav={AdminSidebar} />
+      ) : (
+        <UserLayout SidebarNav={UserSidebar} />
+      )}
+
       <Main>
         <div>
           <Status />
@@ -20,7 +27,7 @@ function UserDashboard() {
             <Grid item display={"flex"} justifyContent="left" sx={{ py: 5 }}>
               <SearchItem />
             </Grid>
-            <SummaryTable />
+            <SummaryTable usertype={usertype} />
           </Container>
         </div>
       </Main>
@@ -28,4 +35,4 @@ function UserDashboard() {
   );
 }
 
-export default UserDashboard;
+export default Dashboard;

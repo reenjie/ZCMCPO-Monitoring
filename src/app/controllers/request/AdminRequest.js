@@ -4,6 +4,8 @@ import {
   FetchUserDataUri,
   DeleteUserDataUri,
   UpdateUserDataUri,
+  ChangePasswordUri,
+  changeNameUri,
 } from "../../uri";
 
 export const SaveUser = async (data) => {
@@ -20,4 +22,12 @@ export const UpdateUserData = async (data) => {
 
 export const DeleteUserData = async (data) => {
   return await axios.post(DeleteUserDataUri(), data);
+};
+
+export const ChangePassUserData = async (data) => {
+  return await axios.post(ChangePasswordUri(), data);
+};
+
+export const ChangeNameUserData = async (data) => {
+  return await axios.post(changeNameUri(), data);
 };

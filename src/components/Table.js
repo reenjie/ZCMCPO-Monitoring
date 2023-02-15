@@ -12,7 +12,10 @@ import { useAuth } from "../app/hooks/ContextHooks";
 import { Badge } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import Search from "./Search";
+import "../assets/css/admin.css";
+import notfound from "../assets/image/notfound.svg";
 import React, { useState } from "react";
+
 export default function CustomPaginationActionsTable({
   columns,
   rows,
@@ -60,60 +63,71 @@ export default function CustomPaginationActionsTable({
             </TableRow>
           </TableHead>
           <TableBody>
-            {contentSearch
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
+            {contentSearch.length >= 1 ? (
+              contentSearch
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => {
+                  return (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.code}
+                    >
+                      {columns.map((column) => {
+                        const value = row[column.id];
 
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === "number" ? (
-                            column.format(value)
-                          ) : column.id == "action" ? (
-                            <>
-                              {Auth.user.id == row.dataid ? (
-                                <Box textAlign={"center"}>
-                                  <Badge
-                                    color="secondary"
-                                    badgeContent={0}
-                                    showZero
-                                  >
-                                    ass
-                                  </Badge>
-                                </Box>
-                              ) : (
-                                <Box textAlign={"center"}>
-                                  <ButtonGroup
-                                    variant="text"
-                                    aria-label="text button group"
-                                  >
-                                    <Edit
-                                      data={row}
-                                      tabletype={tabletype}
-                                      setFetch={setFetch}
-                                      roles={roles}
-                                    />
-                                    <Delete
-                                      data={row}
-                                      tabletype={tabletype}
-                                      setFetch={setFetch}
-                                    />
-                                  </ButtonGroup>
-                                </Box>
-                              )}
-                            </>
-                          ) : (
-                            value
-                          )}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.format && typeof value === "number" ? (
+                              column.format(value)
+                            ) : column.id == "action" ? (
+                              <>
+                                {Auth.user.id == row.dataid ? (
+                                  <Box textAlign={"center"}>
+                                    <Badge
+                                      color="secondary"
+                                      badgeContent={0}
+                                      showZero
+                                    >
+                                      ass
+                                    </Badge>
+                                  </Box>
+                                ) : (
+                                  <Box textAlign={"center"}>
+                                    <ButtonGroup
+                                      variant="text"
+                                      aria-label="text button group"
+                                    >
+                                      <Edit
+                                        data={row}
+                                        tabletype={tabletype}
+                                        setFetch={setFetch}
+                                        roles={roles}
+                                      />
+                                      <Delete
+                                        data={row}
+                                        tabletype={tabletype}
+                                        setFetch={setFetch}
+                                      />
+                                    </ButtonGroup>
+                                  </Box>
+                                )}
+                              </>
+                            ) : (
+                              value
+                            )}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })
+            ) : (
+              <>
+                <h5 style={{ padding: "20px" }}>No Data Found!</h5>
+              </>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

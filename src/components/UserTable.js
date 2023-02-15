@@ -369,7 +369,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ usertype }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -472,15 +472,20 @@ export default function EnhancedTable() {
                       key={row.name}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            "aria-labelledby": labelId,
-                          }}
-                        />
-                      </TableCell>
+                      {usertype == "admin" ? (
+                        ""
+                      ) : (
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                            color="primary"
+                            checked={isItemSelected}
+                            inputProps={{
+                              "aria-labelledby": labelId,
+                            }}
+                          />
+                        </TableCell>
+                      )}
+
                       <TableCell
                         component="th"
                         id={labelId}
@@ -540,9 +545,13 @@ export default function EnhancedTable() {
       /> */}
       <div>
         {" "}
-        <LoadingButton variant="contained" onClick={proceed}>
-          Proceed
-        </LoadingButton>
+        {usertype == "admin" ? (
+          ""
+        ) : (
+          <LoadingButton variant="contained" onClick={proceed}>
+            Proceed
+          </LoadingButton>
+        )}
       </div>
     </Box>
   );
