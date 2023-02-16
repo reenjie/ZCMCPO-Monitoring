@@ -18,6 +18,6 @@ export const UserSidebar = [
   {
     title: "Settings",
     icon: <FaCogs />,
-    // link: "/admin/Settings",
+    link: "/user/Settings",
   },
 ];

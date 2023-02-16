@@ -100,6 +100,7 @@ const Accounts = ({ Roles, Data }) => {
           openModal={openModal}
           setopenModal={setopenModal}
         />
+
         <CustomPaginationActionsTable
           tabletype="accounts"
           columns={columns}

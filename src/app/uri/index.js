@@ -27,3 +27,15 @@ export const UpdateUserDataUri = () => {
 export const DeleteUserDataUri = () => {
   return `${api}/User/delete`;
 };
+
+export const ChangePasswordUri = () => {
+  return `${api}/User/changepass`;
+};
+
+export const changeNameUri = () => {
+  return `${api}/User/changename`;
+};
+
+export const FetchPurchaseOrderUri = () => {
+  return `${api}/FetchPurchaseOrder`;
+};

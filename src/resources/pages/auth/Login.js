@@ -30,7 +30,6 @@ import {
 } from "../../../app/hooks/Cookie";
 import { useNavigate } from "react-router-dom";
 function Login() {
-  const { Auth } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -67,6 +66,7 @@ function Login() {
             token: response.data.token,
             role: response.data.role,
           });
+          window.location.reload();
         })
         .catch(function (error) {
           setInvalidMessage(error.response.data.message);
