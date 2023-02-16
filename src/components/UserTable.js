@@ -24,6 +24,8 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import SearchItem from "../resources/pages/user/SearchItem";
+import Search from "./Search";
 
 const headCells = [
   { id: "ponum", label: "PO NUMBER", minWidth: 170 },
@@ -104,13 +106,7 @@ const headCells = [
     align: "right",
     format: (value) => value.toFixed(2),
   },
-  {
-    id: "extend",
-    label: "EXTENSION",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toFixed(2),
-  },
+
   {
     id: "delivered",
     label: "DELIVERED DATE",
@@ -163,6 +159,13 @@ const headCells = [
   {
     id: "delstatus",
     label: "DELIVERY STATUS",
+    minWidth: 170,
+    align: "right",
+    format: (value) => value.toFixed(2),
+  },
+  {
+    id: "remarks",
+    label: "REMARKS",
     minWidth: 170,
     align: "right",
     format: (value) => value.toFixed(2),
@@ -271,9 +274,11 @@ function EnhancedTableHead(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{
-              "aria-label": "select all desserts",
-            }}
+            inputProps={
+              {
+                // "aria-label": "select all desserts",
+              }
+            }
           />
         </TableCell>
         {headCells.map((headCell) => (
@@ -339,14 +344,21 @@ function EnhancedTableToolbar(props) {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: "1 1 100%" }}
+          sx={{
+            flex: "1 1 100%",
+            fontStyle: "Roboto",
+            fontWeight: 700,
+            color: "#379237",
+            fontSize: 30,
+          }}
           variant="h6"
           id="tableTitle"
           component="div"
         >
-          PURCHASED ORDER STATUS
+          Purchased Order Status
         </Typography>
       )}
+      <Search />
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
@@ -439,7 +451,7 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+      <Paper sx={{ width: "100%", mb: 2, px: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table

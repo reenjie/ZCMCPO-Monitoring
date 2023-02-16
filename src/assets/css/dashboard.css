@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+.dashboard {
+  height: 100vh;
+  background-color: #f0eeed;
+}
+.search {
+  display: flex;
+  padding-bottom: 15px;
+  padding-top: 30px;
+}

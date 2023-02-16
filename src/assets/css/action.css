@@ -1,7 +1,12 @@
+.action {
+  height: 100vh;
+  background-color: #f0eeed;
+}
 .action-card {
+  background-color: #fff;
   position: absolute;
-  text-align: center;
-  top: 20%;
+  text-align: left;
+  top: 15%;
   bottom: 30%;
   left: 20%;
   width: 90rem;

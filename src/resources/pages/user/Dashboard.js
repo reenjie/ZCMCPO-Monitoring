@@ -8,18 +8,16 @@ import Topbar from "../layouts/navs/Topbar";
 import SearchItem from "./SearchItem";
 import { Container } from "@mui/system";
 import Main from "../layouts/navs/Main";
+import "../../../assets/css/dashboard.css";
 
 function UserDashboard() {
   return (
-    <div>
+    <div className="dashboard">
       <UserLayout SidebarNav={UserSidebar} />
       <Main>
         <div>
           <Status />
           <Container maxWidth="xxl" sx={{ py: 5 }}>
-            <Grid item display={"flex"} justifyContent="left" sx={{ py: 5 }}>
-              <SearchItem />
-            </Grid>
             <SummaryTable />
           </Container>
         </div>
