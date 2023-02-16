@@ -35,3 +35,7 @@ export const ChangePasswordUri = () => {
 export const changeNameUri = () => {
   return `${api}/User/changename`;
 };
+
+export const FetchPurchaseOrderUri = () => {
+  return `${api}/FetchPurchaseOrder`;
+};

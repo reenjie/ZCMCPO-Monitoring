@@ -83,6 +83,7 @@ function Settings({ usertype }) {
   };
   return (
     <div>
+      {console.log(usertype)}
       {usertype == "admin" ? (
         <AdminLayout SidebarNav={AdminSidebar} />
       ) : (

@@ -22,7 +22,10 @@ function Web() {
       <Route element={<AdminCheckAuth />}>
         <Route path="/admin" element={<Dashboard usertype="admin" />}></Route>
         <Route path="/admin/Accounts" element={<Accounts />}></Route>
-        <Route path="/admin/Settings" element={<Settings />}></Route>
+        <Route
+          path="/admin/Settings"
+          element={<Settings usertype="admin" />}
+        ></Route>
       </Route>
 
       <Route element={<UserCheckAuth />}>
