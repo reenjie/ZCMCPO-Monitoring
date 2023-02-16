@@ -24,6 +24,8 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import SearchItem from "../resources/pages/user/SearchItem";
+import Search from "./Search";
 
 const headCells = [
   {
@@ -62,6 +64,13 @@ const headCells = [
     minWidth: 170,
     align: "right",
     format: (value) => value.toLocaleString("en-US"),
+  },
+  {
+    id: "remarks",
+    label: "REMARKS",
+    minWidth: 170,
+    align: "right",
+    format: (value) => value.toFixed(2),
   },
 ];
 function createData(ponum) {
@@ -182,14 +191,21 @@ function EnhancedTableToolbar(props) {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: "1 1 100%" }}
+          sx={{
+            flex: "1 1 100%",
+            fontStyle: "Roboto",
+            fontWeight: 700,
+            color: "#379237",
+            fontSize: 30,
+          }}
           variant="h6"
           id="tableTitle"
           component="div"
         >
-          PURCHASED ORDER STATUS
+          Purchased Order Status
         </Typography>
       )}
+      <Search />
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
@@ -282,7 +298,7 @@ export default function EnhancedTable({ usertype }) {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+      <Paper sx={{ width: "100%", mb: 2, px: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
