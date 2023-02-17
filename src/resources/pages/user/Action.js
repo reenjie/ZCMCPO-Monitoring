@@ -4,130 +4,105 @@ import UserLayout from "../layouts/UserLayout";
 import { UserSidebar } from "../layouts/navs/UserNavData";
 import Main from "../layouts/navs/Main";
 import {
+  Container,
   Button,
   Grid,
   Stack,
   Typography,
-  Container,
   Divider,
 } from "@mui/material";
 const Action = () => {
   const delivered = () => {};
   return (
-    <div className="action">
+    <>
       <UserLayout SidebarNav={UserSidebar} />
       <Main>
-        <div className="action-card">
-          <Typography
-            sx={{
-              flex: "1 1 100%",
-              fontStyle: "Roboto",
-              fontWeight: 700,
-              color: "#379237",
-              fontSize: 30,
-              p: 3,
-            }}
-            variant="h6"
-            id="tableTitle"
-            component="div"
-          >
+        <Grid
+          container
+          xl={12}
+          lg={12}
+          xs={12}
+          display="flex"
+          justifyContent={"center"}
+        >
+          <Grid item>
+            <div className="action-card">
+              <Typography
+                sx={{
+                  flex: "1 1 100%",
+
+                  fontWeight: 700,
+                  color: "#379237",
+                  fontSize: 20,
+                  py: 1,
+                  textAlign: "center",
+                }}
+                variant="h5"
+                id="tableTitle"
+                component="div"
+              >
+                {" "}
+                Item Specifications
+              </Typography>{" "}
+              <Typography sx={{ fontSize: 12 }}>PO Number:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Supplier:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Item Description:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Brand:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Model:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Unit:</Typography>
+              <Typography sx={{ fontSize: 12 }}>PO Date:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Emailed Date:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Delivery Term:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Due Date 1:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Due Date:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Delivered Date:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Completed Date:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Delay:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Price:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Quantity Order:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Quantity Delivered:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Undelivered Items:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Delivery Status:</Typography>
+              <Typography sx={{ fontSize: 12 }}>Remarks:</Typography>
+              <Divider orientation="vertical" flexItem />
+            </div>
+          </Grid>
+          <Grid item>
             {" "}
-            Manage Items
-          </Typography>
-
-          <Grid container xl={12}>
-            <Grid item xl={8} sx={{ px: 5, py: 2 }}>
-              <Grid container xl={12}>
-                <Grid item xl={6}>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>
-                    PO Number:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>Supplier:</Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>
-                    Item Description:
-                  </Typography>
-
-                  <Typography sx={{ fontSize: 15, p: 1 }}>Brand:</Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>Model:</Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>Unit:</Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>PO Date:</Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>
-                    Emailed Date:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>
-                    Delivery Term:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
-                    Due Date 1:
-                  </Typography>
-                </Grid>
-
-                <Grid item xl={6}>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>Due Date:</Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>
-                    Delivered Date:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>
-                    Completed Date:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>Delay:</Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>Price:</Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>
-                    Quantity Order:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>
-                    Quantity Delivered:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>
-                    Undelivered Items:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>
-                    Delivery Status:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, p: 1 }}>Remarks:</Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Divider orientation="vertical" flexItem />
-            <Grid
-              display="flex"
-              justifyContent="center"
-              item
-              xl={3}
-              sx={{ px: 5 }}
-            >
-              <Stack spacing={3}>
+            <div className="action-card1">
+              {" "}
+              <Stack spacing={2}>
                 <Button
                   variant="contained"
                   color="success"
-                  sx={{ width: 200, height: 40 }}
+                  sx={{ width: 150, height: 30 }}
                   onClick={delivered}
                 >
                   Delivered
                 </Button>
-                <Button variant="contained" sx={{ width: 200, height: 40 }}>
+                <Button variant="contained" sx={{ width: 150, height: 30 }}>
                   Extended
                 </Button>
                 <Button
                   variant="contained"
                   color="warning"
-                  sx={{ width: 200, height: 40 }}
+                  sx={{ width: 150, height: 30 }}
                 >
                   Undelivered
                 </Button>
                 <Button
                   variant="contained"
                   color="error"
-                  sx={{ width: 200, height: 40 }}
+                  sx={{ width: 150, height: 30 }}
                 >
                   Cancelled
                 </Button>
               </Stack>
-            </Grid>
+            </div>
           </Grid>
-        </div>
+        </Grid>
       </Main>
-    </div>
+    </>
   );
 };
 

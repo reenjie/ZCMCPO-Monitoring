@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
@@ -24,7 +25,16 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
 import Search from "./Search";
+import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 
 const headCells = [
   {
@@ -38,6 +48,13 @@ const headCells = [
   {
     id: "PONo",
     label: "P.O Number",
+    minWidth: 170,
+    align: "right",
+    format: (value) => value.toLocaleString("en-US"),
+  },
+  {
+    id: "description",
+    label: "Description",
     minWidth: 170,
     align: "right",
     format: (value) => value.toLocaleString("en-US"),
@@ -63,13 +80,6 @@ const headCells = [
     minWidth: 170,
     align: "right",
     format: (value) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "remarks",
-    label: "REMARKS",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toFixed(2),
   },
 ];
 function createData(ponum) {
@@ -162,67 +172,6 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
-
-  return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(
-              theme.palette.primary.main,
-              theme.palette.action.activatedOpacity
-            ),
-        }),
-      }}
-    >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography
-          sx={{
-            flex: "1 1 100%",
-            fontStyle: "Roboto",
-            fontWeight: 700,
-            color: "#379237",
-            fontSize: 30,
-          }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Purchased Order Status
-        </Typography>
-      )}
-      <Search />
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-    </Toolbar>
-  );
-}
-
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
@@ -234,6 +183,7 @@ export default function EnhancedTable({ usertype }) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [opendrawer, setOpendrawer] = useState(false);
   let navigate = useNavigate();
 
   const proceed = () => {
@@ -298,7 +248,11 @@ export default function EnhancedTable({ usertype }) {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2, px: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          opendrawer={opendrawer}
+          setOpendrawer={setOpendrawer}
+          numSelected={selected.length}
+        />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
