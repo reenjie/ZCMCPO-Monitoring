@@ -17,6 +17,12 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import {
+  CustomSelect,
+  CustomButton,
+  CustomDatePicker,
+} from "./CustomComponents.js";
+import { CiViewList } from "react-icons/ci";
 
 export const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
@@ -87,123 +93,70 @@ export const EnhancedTableToolbar = (props) => {
                 <h4>Filter By</h4>
                 <Box p={2}>
                   <h6 style={{ color: "grey" }}>Contents</h6>
-                  <FormControl
-                    fullWidth
-                    size="small"
-                    sx={{ marginTop: "10px" }}
-                  >
-                    <InputLabel id="demo-simple-select-label">
-                      Supplier
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={[]}
-                      label="Supplier"
-                    >
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={20}>Twenty</MenuItem>
-                      <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                  </FormControl>
 
-                  <FormControl
-                    fullWidth
-                    size="small"
-                    sx={{ marginTop: "10px", marginBottom: "10px" }}
-                  >
-                    <InputLabel id="demo-simple-select-label">
-                      Category
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={[]}
-                      label="Supplier"
-                    >
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={20}>Twenty</MenuItem>
-                      <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                  </FormControl>
+                  <CustomSelect label="PO Number" data={[]} />
+                  <CustomSelect label="Supplier" data={[]} />
+                  <CustomSelect label="Category" data={[]} />
+                  <CustomSelect label="Units" data={[]} />
+                  <CustomButton
+                    label="Custom View"
+                    Icon={
+                      <CiViewList
+                        style={{ marginLeft: "2px", fontSize: "17px" }}
+                      />
+                    }
+                  />
 
                   <h6 style={{ color: "grey" }}>Transaction</h6>
-                  <FormControl
-                    fullWidth
-                    size="small"
-                    sx={{ marginTop: "10px" }}
-                  >
-                    <Button
-                      color="primary"
-                      variant="outlined"
-                      style={{ textTransform: "capitalize" }}
-                    >
-                      Recent{" "}
+
+                  <CustomButton
+                    label="Recent"
+                    Icon={
                       <BiTimeFive
                         style={{ marginLeft: "2px", fontSize: "17px" }}
                       />
-                    </Button>
-                  </FormControl>
+                    }
+                  />
 
-                  <FormControl
-                    fullWidth
-                    size="small"
-                    sx={{ marginTop: "10px" }}
-                  >
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <DatePicker
-                        label="Emailed Date"
-                        value={value}
-                        onChange={(newValue) => {
-                          setValue(newValue);
-                        }}
-                        renderInput={(params) => (
-                          <TextField size="small" {...params} />
-                        )}
-                      />
-                    </LocalizationProvider>
-                  </FormControl>
-
-                  <FormControl
-                    fullWidth
-                    size="small"
-                    sx={{ marginTop: "10px" }}
-                  >
-                    <Button
-                      color="primary"
-                      variant="outlined"
-                      style={{ textTransform: "capitalize" }}
-                    >
-                      Delivered Date
+                  <CustomButton
+                    label="Extension"
+                    Icon={
                       <BiTimeFive
                         style={{ marginLeft: "2px", fontSize: "17px" }}
                       />
-                    </Button>
-                  </FormControl>
+                    }
+                  />
 
-                  <FormControl
-                    fullWidth
-                    size="small"
-                    sx={{ marginTop: "10px" }}
-                  >
-                    <Button
-                      color="primary"
-                      variant="outlined"
-                      style={{ textTransform: "capitalize" }}
-                    >
-                      Completed Date
-                      <BiTimeFive
-                        style={{ marginLeft: "2px", fontSize: "17px" }}
-                      />
-                    </Button>
-                  </FormControl>
+                  <CustomDatePicker
+                    value={value}
+                    setValue={setValue}
+                    label="Emailed Date"
+                  />
+
+                  <CustomDatePicker
+                    value={value}
+                    setValue={setValue}
+                    label="Delivered Date"
+                  />
+
+                  <CustomDatePicker
+                    value={value}
+                    setValue={setValue}
+                    label="Completed Date"
+                  />
+
+                  <CustomDatePicker
+                    value={value}
+                    setValue={setValue}
+                    label="Due Date"
+                  />
                 </Box>
               </Box>
               <Box padding={5}>
                 <Button
                   sx={{ marginTop: "10px", float: "right" }}
                   variant="contained"
-                  color="success"
+                  color="info"
                   onClick={() => {
                     props.setOpendrawer(false);
                   }}

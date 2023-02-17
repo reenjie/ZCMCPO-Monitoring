@@ -48,6 +48,7 @@ function Sidebar({ SidebarNav }) {
             return (
               <>
                 <a
+                  key={row.link}
                   href={row.link}
                   className={location.pathname == row.link ? "active" : ""}
                 >
