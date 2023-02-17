@@ -24,7 +24,6 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import SearchItem from "../resources/pages/user/SearchItem";
 import Search from "./Search";
 
 const headCells = [

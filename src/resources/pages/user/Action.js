@@ -39,32 +39,22 @@ const Action = () => {
             <Grid item xl={8} sx={{ px: 5, py: 2 }}>
               <Grid container xl={12}>
                 <Grid item xl={6}>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>
                     PO Number:
                   </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
-                    Supplier:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>Supplier:</Typography>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>
                     Item Description:
                   </Typography>
 
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
-                    Brand:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
-                    Model:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
-                    Unit:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
-                    PO Date:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>Brand:</Typography>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>Model:</Typography>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>Unit:</Typography>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>PO Date:</Typography>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>
                     Emailed Date:
                   </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>
                     Delivery Term:
                   </Typography>
                   <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
@@ -73,36 +63,28 @@ const Action = () => {
                 </Grid>
 
                 <Grid item xl={6}>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
-                    Due Date:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>Due Date:</Typography>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>
                     Delivered Date:
                   </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>
                     Completed Date:
                   </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
-                    Delay:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
-                    Price:
-                  </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>Delay:</Typography>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>Price:</Typography>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>
                     Quantity Order:
                   </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>
                     Quantity Delivered:
                   </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>
                     Undelivered Items:
                   </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>
                     Delivery Status:
                   </Typography>
-                  <Typography sx={{ fontSize: 15, fontWeight: 600, p: 1 }}>
-                    Remarks:
-                  </Typography>
+                  <Typography sx={{ fontSize: 15, p: 1 }}>Remarks:</Typography>
                 </Grid>
               </Grid>
             </Grid>
