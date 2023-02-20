@@ -26,6 +26,8 @@ function Dashboard({ usertype }) {
     fetch();
   }, []);
 
+  console.log(data);
+
   const columns = [
     {
       id: "status_",

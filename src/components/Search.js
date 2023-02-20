@@ -2,16 +2,25 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-export default function Search() {
+export default function Search({ search, setSearch }) {
   return (
     <Autocomplete
       disablePortal
       id="combo-box-demo"
       options={top100Films}
       size={"small"}
+      onChange={(event, newValue) => {
+        console.log(newValue);
+      }}
       sx={{ width: 700, pt: 3, mb: 4 }}
       renderInput={(params) => (
-        <TextField {...params} label="Search for PO Number" />
+        <TextField
+          {...params}
+          label="Search for PO Number"
+          onChange={(event) => {
+            setSearch(event.target.value);
+          }}
+        />
       )}
     />
   );
