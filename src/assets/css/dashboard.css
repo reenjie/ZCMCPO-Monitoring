@@ -41,3 +41,12 @@
   background-color: #344d67;
   color: rgb(234, 236, 233);
 }
+
+.secondary {
+  background-color: #767a7e;
+  color: rgb(234, 236, 233);
+}
+
+.notfound {
+  width: 300px;
+}

@@ -66,7 +66,12 @@ export const EnhancedTableToolbar = (props) => {
           Purchased Order Status
         </Typography>
       )}
-      <Search setSearch={props.setSearch} search={props.search} />
+      <Search
+        setSearch={props.setSearch}
+        search={props.search}
+        rows={props.rows}
+        contentSearch={props.contentSearch}
+      />
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
@@ -78,6 +83,7 @@ export const EnhancedTableToolbar = (props) => {
         <Tooltip title="Filter list">
           <Box>
             <IconButton
+              sx={{ marginTop: "-25px", marginLeft: "5px" }}
               onClick={() => {
                 props.setOpendrawer(true);
               }}
