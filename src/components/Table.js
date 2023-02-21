@@ -68,10 +68,12 @@ export default function CustomPaginationActionsTable({
             opendrawer={opendrawer}
             setOpendrawer={setOpendrawer}
             numSelected={selected.length}
+            setSearch={setSearch}
+            search={search}
           />
         </Box>
       ) : (
-        <Search setSearch={setSearch} />
+        <Search setSearch={setSearch} search={search} />
       )}
 
       <TableContainer sx={{ maxHeight: 640 }}>

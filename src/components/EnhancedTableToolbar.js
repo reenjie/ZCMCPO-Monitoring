@@ -67,7 +67,7 @@ export const EnhancedTableToolbar = (props) => {
           Purchased Order Status
         </Typography>
       )}
-      <Search />
+      <Search setSearch={props.setSearch} search={props.search} />
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
