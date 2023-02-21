@@ -24,6 +24,55 @@ function Dashboard({ usertype }) {
   useEffect(() => {
     fetch();
   }, []);
+  const columns = [
+    {
+      id: "status_",
+      label: "Status",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+
+    {
+      id: "PONo",
+      label: "P.O Number",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "supplier",
+      label: "Suppliers",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+
+    {
+      id: "description",
+      label: "Description",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "category",
+      label: "Category",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "unit",
+      label: "Units",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+
+    {
+      id: "action",
+      label: "Action",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+  ];
+
+  const rows = [data];
 
   return (
     <div>
