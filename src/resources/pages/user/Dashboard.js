@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Status from "./Status";
 import UserLayout from "../layouts/UserLayout";
 import { UserSidebar } from "../layouts/navs/UserNavData";
@@ -11,16 +11,75 @@ import AdminLayout from "../layouts/AdminLayout";
 import { AdminSidebar } from "../layouts/navs/NavData";
 import { FetchPurchaseOrder } from "../../../app/controllers/request/UserRequest";
 import { Autocomplete, Box, TextField } from "@mui/material";
+import CustomPaginationActionsTable from "../../../components/Table";
 
 function Dashboard({ usertype }) {
+  const [data, setData] = useState([]);
+  const [supplier, setSupplier] = useState([]);
   const fetch = async () => {
     const res = await FetchPurchaseOrder();
 
-    console.log(res);
+    setData(res.data.data);
   };
   useEffect(() => {
     fetch();
   }, []);
+
+  const columns = [
+    {
+      id: "status_",
+      label: "Status",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+
+    {
+      id: "PONo",
+      label: "P.O Number",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "supplier",
+      label: "Suppliers",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+
+    {
+      id: "description",
+      label: "Description",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "category",
+      label: "Category",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "unit",
+      label: "Units",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+
+    {
+      id: "action",
+      label: "Action",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+  ];
+
+  // function createData(dataid, name, username, email, role, created) {
+  //   const density = population / size;
+  //   return { dataid, name, username, email, role, created };
+  // }
+
+  //const rows = [createData("India", "IN", 1324171354, 3287263, 51715)];
+  const rows = [data];
 
   return (
     <div>
@@ -34,7 +93,12 @@ function Dashboard({ usertype }) {
         <div>
           <Status />
           <Container maxWidth="xxl" sx={{ py: 5 }}>
-            <SummaryTable usertype={usertype} />
+            <CustomPaginationActionsTable
+              tabletype="dashboard"
+              columns={columns}
+              rows={rows}
+              supplier={supplier}
+            />
           </Container>
         </div>
       </Main>

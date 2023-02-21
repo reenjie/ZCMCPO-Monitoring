@@ -3,7 +3,7 @@ import { useState } from "react";
 import EnhancedTable from "../../../components/UserTable";
 import { Modal } from "@mui/material";
 
-function SummaryTable({ usertype }) {
+function SummaryTable({ usertype, data }) {
   const [closeModal, setCloseModal] = useState(false);
 
   function createData(name, code, population, size, dataid) {
@@ -15,7 +15,7 @@ function SummaryTable({ usertype }) {
     <div>
       {/* <h3> SUMMARY </h3> */}
 
-      <EnhancedTable usertype={usertype} sx={{ pt: 3 }} />
+      <EnhancedTable usertype={usertype} sx={{ pt: 3 }} data={data} />
     </div>
   );
 }

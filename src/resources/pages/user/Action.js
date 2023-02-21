@@ -11,95 +11,131 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
+import { VscOutput } from "react-icons/vsc";
+import { grey } from "@mui/material/colors";
 const Action = () => {
   const delivered = () => {};
   return (
     <>
       <UserLayout SidebarNav={UserSidebar} />
       <Main>
-        <Grid
-          container
-          xl={12}
-          lg={12}
-          xs={12}
-          display="flex"
-          justifyContent={"center"}
-        >
-          <Grid item>
-            <div className="action-card">
-              <Typography
-                sx={{
-                  flex: "1 1 100%",
+        <Grid container justifyContent={"center"}>
+          <div className="action-card">
+            <Typography
+              sx={{
+                fontSize: 15,
+                fontWeight: 600,
+                mb: 2,
+              }}
+            >
+              <VscOutput />
+              Item Overview
+              <Divider />
+            </Typography>
+            <Grid container>
+              <Grid item xl={10}>
+                <Typography sx={{ fontSize: 12, color: "green" }}>
+                  {" "}
+                  PO Number: 009324042
+                </Typography>
+                <Typography sx={{ fontSize: 15, fontWeight: 700 }}>
+                  Item Description:
+                </Typography>
+                <Typography sx={{ fontSize: 20, fontStyle: "Poppins" }}>
+                  Needle Hypo G-18 x 1 1/2", disposable
+                </Typography>
 
-                  fontWeight: 700,
-                  color: "#379237",
-                  fontSize: 20,
-                  py: 1,
-                  textAlign: "center",
-                }}
-                variant="h5"
-                id="tableTitle"
-                component="div"
-              >
-                {" "}
-                Item Specifications
-              </Typography>{" "}
-              <Typography sx={{ fontSize: 12 }}>PO Number:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Supplier:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Item Description:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Brand:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Model:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Unit:</Typography>
-              <Typography sx={{ fontSize: 12 }}>PO Date:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Emailed Date:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Delivery Term:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Due Date 1:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Due Date:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Delivered Date:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Completed Date:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Delay:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Price:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Quantity Order:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Quantity Delivered:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Undelivered Items:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Delivery Status:</Typography>
-              <Typography sx={{ fontSize: 12 }}>Remarks:</Typography>
-              <Divider orientation="vertical" flexItem />
-            </div>
-          </Grid>
-          <Grid item>
-            {" "}
-            <div className="action-card1">
-              {" "}
-              <Stack spacing={2}>
-                <Button
-                  variant="contained"
-                  color="success"
-                  sx={{ width: 150, height: 30 }}
-                  onClick={delivered}
-                >
-                  Delivered
-                </Button>
-                <Button variant="contained" sx={{ width: 150, height: 30 }}>
-                  Extended
-                </Button>
-                <Button
-                  variant="contained"
-                  color="warning"
-                  sx={{ width: 150, height: 30 }}
-                >
-                  Undelivered
-                </Button>
-                <Button
-                  variant="contained"
-                  color="error"
-                  sx={{ width: 150, height: 30 }}
-                >
-                  Cancelled
-                </Button>
-              </Stack>
-            </div>
-          </Grid>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Supplier:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Brand:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Model:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Unit:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  PO Date:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Price:
+                </Typography>
+                <Typography sx={{ fontSize: 15, fontWeight: 700 }}>
+                  Prioritize Task:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Emailed Date:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Delivery Term:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Due Date 1:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Due Date:
+                </Typography>
+
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Delay:
+                </Typography>
+
+                <Typography sx={{ fontSize: 15, fontWeight: 700 }}>
+                  Status:
+                </Typography>
+
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Undelivered Items:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Delivered Date:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Completed Date:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Quantity Delivered:
+                </Typography>
+                <Typography sx={{ fontSize: 12, color: "#71797E" }}>
+                  Remarks:
+                </Typography>
+              </Grid>
+
+              <Grid item xl={2}>
+                <Stack spacing={2} ml={5}>
+                  {" "}
+                  <Button
+                    variant="contained"
+                    color="success"
+                    sx={{ width: 150, height: 30 }}
+                    onClick={delivered}
+                  >
+                    Delivered
+                  </Button>
+                  <Button variant="contained" sx={{ width: 150, height: 30 }}>
+                    Extended
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="warning"
+                    sx={{ width: 150, height: 30 }}
+                  >
+                    Undelivered
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    sx={{ width: 150, height: 30 }}
+                  >
+                    Cancelled
+                  </Button>
+                </Stack>
+              </Grid>
+            </Grid>
+          </div>
         </Grid>
       </Main>
     </>

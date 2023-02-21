@@ -10,7 +10,9 @@ export default function Search() {
       options={top100Films}
       size={"small"}
       sx={{ width: 700, pt: 3, mb: 4 }}
-      renderInput={(params) => <TextField {...params} label="Search" />}
+      renderInput={(params) => (
+        <TextField {...params} label="Search for PO Number" />
+      )}
     />
   );
 }

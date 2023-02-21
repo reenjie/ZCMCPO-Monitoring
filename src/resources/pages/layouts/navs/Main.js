@@ -8,7 +8,7 @@ function Main({ children }) {
   useEffect(() => {
     setTimeout(() => {
       setLoader(false);
-    }, 800);
+    }, 100);
   });
   return <div className="main">{loader ? <Loader /> : children}</div>;
 }
