@@ -10,7 +10,8 @@ import { Edit, Delete } from "./Action";
 import { ButtonGroup, Button } from "@mui/material";
 import { useAuth } from "../app/hooks/ContextHooks";
 import { Badge } from "@mui/icons-material";
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
+import "../assets/css/dashboard.css";
 import Search from "./Search";
 import "../assets/css/admin.css";
 import notfound from "../assets/image/notfound.svg";
@@ -19,6 +20,7 @@ import { Typography } from "@mui/material";
 import EnhancedTable from "./UserTable";
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 
+import MailIcon from "@mui/icons-material/Mail";
 export default function CustomPaginationActionsTable({
   columns,
   rows,
@@ -53,7 +55,11 @@ export default function CustomPaginationActionsTable({
 
   const contentSearch =
     tabletype == "dashboard"
-      ? rows[0]
+      ? [rows[0]]
+        ? search
+          ? rows[0].filter((x) => x.PONo == search)
+          : rows[0]
+        : rows[0]
       : rows[0]
       ? rows[0].data.filter((filter) =>
           filter.name.toLowerCase().includes(search.toLowerCase())
@@ -109,7 +115,19 @@ export default function CustomPaginationActionsTable({
 
                           return tabletype == "dashboard" ? (
                             <TableCell key={column.id} align={column.align}>
-                              {column.id == "action" ? (
+                              {column.id == "status_" ? (
+                                <>
+                                  {row.batch > 1 ? (
+                                    row.newtag == 1 ? (
+                                      <div className="badge success">New</div>
+                                    ) : (
+                                      ""
+                                    )
+                                  ) : (
+                                    ""
+                                  )}
+                                </>
+                              ) : column.id == "action" ? (
                                 <>
                                   <Button
                                     variant="contained"

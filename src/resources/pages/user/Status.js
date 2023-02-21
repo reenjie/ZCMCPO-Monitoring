@@ -5,31 +5,52 @@ import { FcOvertime, FcShipped, FcInTransit } from "react-icons/fc";
 
 const Status = () => {
   return (
-    <div>
-      <Grid container sx={{ width: "100%" }}>
-        <Grid item xl={4} sx={{ px: 5, height: "25%" }}>
-          <BasicCard
-            title={"Delivered"}
-            description={"25 item"}
-            icon={<FcShipped />}
-          />
-        </Grid>
-        <Grid item xl={4} sx={{ px: 5, height: "25%" }}>
-          <BasicCard
-            title={"Undelivered"}
-            description={"25 item"}
-            icon={<FcInTransit />}
-          />
-        </Grid>
-        <Grid item xl={4} sx={{ px: 5, height: "25%" }}>
-          <BasicCard
-            title={"Extended"}
-            description={"25 item"}
-            icon={<FcOvertime />}
-          />
-        </Grid>
+    <Grid
+      container
+      justifyContent="center"
+      alignItems="center"
+      lg={12}
+      sx={{ width: "100%" }}
+    >
+      <Grid item lg={3} sx={{ height: "20%", py: 1 }}>
+        <BasicCard
+          title={"Undelivered"}
+          description={"25  "}
+          icon={<FcInTransit />}
+          desc={"as of June 19, 2023"}
+          bgcolor="#F07470"
+          color="#fff"
+        />
       </Grid>
-    </div>
+      <Grid item lg={3} sx={{ height: "20%", py: 1 }}>
+        <BasicCard
+          title={"Cancelled"}
+          description={"25"}
+          icon={<FcOvertime />}
+          desc={"as of June 19, 2023"}
+          bgcolor="#F07470"
+          color="#fff"
+        />
+      </Grid>
+      <Grid item lg={3} sx={{ height: "20%", py: 1 }}>
+        <BasicCard
+          title={"Extended"}
+          description={"25 "}
+          icon={<FcOvertime />}
+          desc={"as of June 19, 2023"}
+          bgcolor="#FFDAC1"
+        />
+      </Grid>
+      <Grid item lg={3} sx={{ height: "20%", py: 1 }}>
+        <BasicCard
+          title={"Delivered"}
+          description={"25  "}
+          icon={<FcShipped />}
+          desc={"as of June 19, 2023"}
+          bgcolor="#B5EAD7"
+        />
+      </Grid>
+    </Grid>
   );
 };
 

@@ -72,58 +72,6 @@ function Dashboard({ usertype }) {
     },
   ];
 
-  const rows = [data];
-
-  console.log(data);
-
-  const columns = [
-    {
-      id: "status_",
-      label: "Status",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-
-    {
-      id: "PONo",
-      label: "P.O Number",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-    {
-      id: "supplier",
-      label: "Suppliers",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-
-    {
-      id: "description",
-      label: "Description",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-    {
-      id: "category",
-      label: "Category",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-    {
-      id: "unit",
-      label: "Units",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-
-    {
-      id: "action",
-      label: "Action",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-  ];
-
   // function createData(dataid, name, username, email, role, created) {
   //   const density = population / size;
   //   return { dataid, name, username, email, role, created };
@@ -142,7 +90,10 @@ function Dashboard({ usertype }) {
 
       <Main>
         <div>
-          <Status />
+          <Container maxWidth="xxl">
+            <Status />
+          </Container>
+
           <Container maxWidth="xxl" sx={{ py: 5 }}>
             <CustomPaginationActionsTable
               tabletype="dashboard"

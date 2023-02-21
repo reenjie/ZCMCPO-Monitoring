@@ -5,6 +5,11 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import { Badge } from "@mui/material";
+import "../../src/assets/css/card.css";
 
 const bull = (
   <Box
@@ -14,17 +19,45 @@ const bull = (
     •
   </Box>
 );
-export default function BasicCard({ title, description, icon }) {
+export default function BasicCard({
+  title,
+  description,
+  icon,
+  desc,
+  style,
+  bgcolor,
+  color,
+}) {
   return (
-    <Card sx={{ minWidth: 250 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {title}
-        </Typography>
-        <Typography variant="h5" sx={{ fontSize: 30 }} component="div">
-          {icon} {description}
-        </Typography>
-      </CardContent>
-    </Card>
+    <>
+      <div className="badge">{icon}</div>
+      <Card sx={{ minWidth: 200, mx: 1, minHeight: 90 }} style={style}>
+        <CardContent>
+          <Stack>
+            <h2>
+              <Box textAlign={"center"}>{description}</Box>
+            </h2>
+            <Stack direction={"row"} justifyContent={"center"}>
+              <h3></h3>
+              <h6>
+                <Box mt={0.5} ml={0.5}>
+                  {desc}
+                </Box>
+              </h6>
+            </Stack>
+          </Stack>
+          <Box bgcolor={bgcolor} sx={{ w: "100%" }}>
+            {" "}
+            <Typography
+              sx={{ fontSize: 14, textAlign: "center" }}
+              color={color}
+              gutterBottom
+            >
+              {title}
+            </Typography>
+          </Box>
+        </CardContent>
+      </Card>
+    </>
   );
 }
