@@ -123,11 +123,11 @@ function Dashboard({ usertype }) {
 
       <Main>
         <div>
-          <Container maxWidth="xxl">
+          <Container maxWidth="xl">
             <Status />
           </Container>
 
-          <Container maxWidth="xxl" sx={{ py: 5 }}>
+          <Container maxWidth="xl" sx={{ py: 5 }}>
             <CustomPaginationActionsTable
               tabletype="dashboard"
               columns={columns}

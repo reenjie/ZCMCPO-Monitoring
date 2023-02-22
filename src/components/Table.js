@@ -21,8 +21,7 @@ import {
   Checkbox,
   Tooltip,
 } from "@mui/material";
-import "../assets/css/dashboard.css";
-import Search from "./Search";
+
 import "../assets/css/admin.css";
 import notfound from "../assets/image/notfound.svg";
 import React, { useEffect, useState } from "react";
@@ -31,7 +30,7 @@ import EnhancedTable from "./UserTable";
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 import notf from "../assets/image/notfound.jpg";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
-
+import "../assets/css/dashboard.css";
 import MailIcon from "@mui/icons-material/Mail";
 export default function CustomPaginationActionsTable({
   columns,
@@ -75,7 +74,6 @@ export default function CustomPaginationActionsTable({
         )
       : [];
 
-  console.log(contentSearch);
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       {tabletype == "dashboard" ? (
@@ -203,8 +201,9 @@ export default function CustomPaginationActionsTable({
                                 <div>
                                   {row.batch > 1 ? (
                                     row.newtag == 1 ? (
+                                      /* badge success */
                                       <div
-                                        className="badge success"
+                                        className="CustomBadge success"
                                         style={{ marginRight: "5px" }}
                                       >
                                         New

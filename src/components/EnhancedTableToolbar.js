@@ -13,6 +13,8 @@ import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { BiTimeFive } from "react-icons/bi";
 import Search from "./Search";
 import dayjs from "dayjs";
+import { SlClose } from "react-icons/sl";
+import { FiCheckCircle } from "react-icons/fi";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -27,6 +29,32 @@ import { CiViewList } from "react-icons/ci";
 export const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
   const [value, setValue] = useState("");
+  const [sort, setSort] = useState([]);
+
+  const supplier = [
+    ...new Set(
+      props.rows[0].map((x) => {
+        return x.supplier;
+      })
+    ),
+  ];
+
+  const units = [
+    ...new Set(
+      props.rows[0].map((c) => {
+        return c.unit;
+      })
+    ),
+  ];
+
+  const categories = [
+    ...new Set(
+      props.rows[0].map((c) => {
+        return c.category;
+      })
+    ),
+  ];
+
   return (
     <Toolbar
       sx={{
@@ -96,15 +124,29 @@ export const EnhancedTableToolbar = (props) => {
               open={props.opendrawer ? true : false}
               onClose={props.opendrawer ? false : true}
             >
-              <Box width={300} p={3}>
+              <Box width={500} p={3}>
                 <h4>Filter By</h4>
                 <Box p={2}>
                   <h6 style={{ color: "grey" }}>Contents</h6>
 
-                  <CustomSelect label="PO Number" data={[]} />
-                  <CustomSelect label="Supplier" data={[]} />
-                  <CustomSelect label="Category" data={[]} />
-                  <CustomSelect label="Units" data={[]} />
+                  <CustomSelect
+                    label="Supplier"
+                    data={supplier}
+                    setSort={setSort}
+                    sort={sort}
+                  />
+                  <CustomSelect
+                    label="Category"
+                    data={categories}
+                    setSort={setSort}
+                    sort={sort}
+                  />
+                  <CustomSelect
+                    label="Units"
+                    data={units}
+                    setSort={setSort}
+                    sort={sort}
+                  />
                   <CustomButton
                     label="Custom View"
                     Icon={
@@ -154,14 +196,26 @@ export const EnhancedTableToolbar = (props) => {
               </Box>
               <Box padding={5}>
                 <Button
-                  sx={{ marginTop: "10px", float: "right" }}
-                  variant="contained"
+                  sx={{ marginTop: "10px", float: "right", color: "#D3756B" }}
+                  variant="outlined"
                   color="info"
                   onClick={() => {
                     props.setOpendrawer(false);
                   }}
                 >
-                  Close
+                  Close <SlClose style={{ marginLeft: "3px" }} />
+                </Button>
+
+                <Button
+                  sx={{ marginTop: "10px", float: "right", marginRight: "5px" }}
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    //props.setOpendrawer(false);
+                    console.log(sort);
+                  }}
+                >
+                  Proceed <FiCheckCircle style={{ marginLeft: "3px" }} />
                 </Button>
               </Box>
             </Drawer>
