@@ -7,7 +7,7 @@ import {
   ChangePasswordUri,
   changeNameUri,
 } from "../../uri";
-
+   
 export const SaveUser = async (data) => {
   return await axios.post(SaveUserUri(), data);
 };

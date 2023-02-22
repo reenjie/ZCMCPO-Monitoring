@@ -1,5 +1,5 @@
-import { Grid } from "@mui/material";
-import React, { useEffect } from "react";
+import { Grid, Button } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import Status from "./Status";
 import UserLayout from "../layouts/UserLayout";
 import { UserSidebar } from "../layouts/navs/UserNavData";
@@ -12,16 +12,107 @@ import AdminLayout from "../layouts/AdminLayout";
 import { AdminSidebar } from "../layouts/navs/NavData";
 import { FetchPurchaseOrder } from "../../../app/controllers/request/UserRequest";
 import { Autocomplete, Box, TextField } from "@mui/material";
+import CustomPaginationActionsTable from "../../../components/Table";
 
 function Dashboard({ usertype }) {
+  const [data, setData] = useState([]);
+  const [supplier, setSupplier] = useState([]);
+  const [selection, setSelection] = useState([]);
   const fetch = async () => {
     const res = await FetchPurchaseOrder();
 
-    console.log(res);
+    setData(res.data.data);
   };
   useEffect(() => {
     fetch();
   }, []);
+
+  const columns = [
+    {
+      id: "PK_posID",
+      label: "",
+      minWidth: 50,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "status_",
+      label: "Status",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+
+    {
+      id: "PONo",
+      label: "P.O Number",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "supplier",
+      label: "Suppliers",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+
+    {
+      id: "description",
+      label: "Description",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "category",
+      label: "Category",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "unit",
+      label: "Units",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+
+    {
+      id: "action",
+      label: "Action",
+      minWidth: 170,
+      format: (value) => value.toLocaleString("en-US"),
+    },
+  ];
+
+  const handleSelection = (e) => {
+    const id = e.target.value;
+    const row = data.filter((x) => x.PK_posID == id);
+
+    if (selection.length >= 1) {
+      for (let { id: Rowid } of selection) {
+        if (id === Rowid) {
+          const newSet = selection.filter((x) => x.id != id);
+          setSelection(newSet);
+          return;
+        }
+      }
+      setSelection([
+        ...selection,
+        {
+          id: id,
+          data: row,
+        },
+      ]);
+      return;
+    } else {
+      setSelection([
+        {
+          id: id,
+          data: row,
+        },
+      ]);
+      return;
+    }
+  };
+
+  const rows = [data];
 
   return (
     <div>
@@ -35,42 +126,15 @@ function Dashboard({ usertype }) {
         <div>
           <Status />
           <Container maxWidth="xxl" sx={{ py: 5 }}>
-            <Grid item display={"flex"} justifyContent="left" sx={{ py: 5 }}>
-              <Autocomplete
-                id="country-select-demo"
-                sx={{ width: 300 }}
-                options={[]}
-                autoHighlight
-                getOptionLabel={(option) => option.label}
-                renderOption={(props, option) => (
-                  <Box
-                    component="li"
-                    sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                    {...props}
-                  >
-                    <img
-                      loading="lazy"
-                      width="20"
-                      src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                      srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                      alt=""
-                    />
-                    {option.label} ({option.code}) +{option.phone}
-                  </Box>
-                )}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Search .."
-                    inputProps={{
-                      ...params.inputProps,
-                      autoComplete: "new-password", // disable autocomplete and autofill
-                    }}
-                  />
-                )}
-              />
-            </Grid>
-            <SummaryTable usertype={usertype} />
+            <CustomPaginationActionsTable
+              tabletype="dashboard"
+              columns={columns}
+              rows={rows}
+              supplier={supplier}
+              handleSelection={handleSelection}
+              setSelection={setSelection}
+              selection={selection}
+            />
           </Container>
         </div>
       </Main>
