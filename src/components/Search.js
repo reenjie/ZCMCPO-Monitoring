@@ -6,17 +6,24 @@ import { CiEraser, CiSquarePlus } from "react-icons/ci";
 import "../assets/css/dashboard.css";
 import { useRef } from "react";
 import { useState } from "react";
-export default function Search({ search, setSearch, rows, contentSearch }) {
+export default function Search({
+  search,
+  setSearch,
+  rows,
+  contentSearch = [],
+}) {
   const [autoinfo, setAutoinfo] = useState("");
   /* Create New array from existing Array */
-  const data = rows[0].map((row, keys) => {
-    return {
-      key: row.PK_posID,
-      id: row.PK_posID,
-      label: keys + 1 + " | PO#" + row.PONo + " | " + row.supplier,
-      ponumber: row.PONo,
-    };
-  });
+  const data = rows
+    ? rows[0].map((row, keys) => {
+        return {
+          key: row.PK_posID,
+          id: row.PK_posID,
+          label: keys + 1 + " | PO#" + row.PONo + " | " + row.supplier,
+          ponumber: row.PONo,
+        };
+      })
+    : [];
 
   return (
     <div style={{ display: "inline-block" }}>
