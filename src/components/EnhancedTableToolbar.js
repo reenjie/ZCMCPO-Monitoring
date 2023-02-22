@@ -55,9 +55,10 @@ export const EnhancedTableToolbar = (props) => {
           sx={{
             flex: "1 1 100%",
             fontStyle: "Roboto",
-            fontWeight: 700,
+            fontWeight: "normal",
             color: "#379237",
             fontSize: 35,
+            textTransform:"uppercase"
           }}
           variant="h2"
           id="tableTitle"

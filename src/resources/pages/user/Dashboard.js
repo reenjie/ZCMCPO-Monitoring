@@ -86,25 +86,29 @@ function Dashboard({ usertype }) {
     const row = data.filter((x) => x.PK_posID == id);
 
     if (selection.length >= 1) {
-  
-        /* 
-        CHECK WETHER DATA EXIST
-
-        if exist. then remove.
-        else if not 
-        then Add  to the selections.
-        
-        
-        */
-  
+      for (let { id: Rowid } of selection) {
+        if (id === Rowid) {
+          const newSet = selection.filter((x) => x.id != id);
+          setSelection(newSet);
+          return;
+        }
+      }
+      setSelection([
+        ...selection,
+        {
+          id: id,
+          data: row,
+        },
+      ]);
+      return;
     } else {
       setSelection([
         {
           id: id,
           data: row,
         },
-       
       ]);
+      return;
     }
   };
 

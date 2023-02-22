@@ -6,9 +6,7 @@ import Loader from "../Loader";
 function Main({ children }) {
   const [loader, setLoader] = useState(true);
   useEffect(() => {
-    setTimeout(() => {
-      setLoader(false);
-    }, 100);
+    setLoader(false);
   });
   return <div className="main">{loader ? <Loader /> : children}</div>;
 }
