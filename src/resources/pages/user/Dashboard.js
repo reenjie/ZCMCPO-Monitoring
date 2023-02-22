@@ -101,6 +101,7 @@ function Dashboard({ usertype }) {
           data: row,
         },
       ]);
+      return;
     }
   };
 

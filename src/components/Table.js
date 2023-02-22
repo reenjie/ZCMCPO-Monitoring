@@ -7,16 +7,18 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Edit, Delete } from "./Action";
-import { ButtonGroup, Button } from "@mui/material";
+import { ButtonGroup, Button, Badge as Count } from "@mui/material";
 import { useAuth } from "../app/hooks/ContextHooks";
 import { Badge } from "@mui/icons-material";
-import { MdOutlineClear } from "react-icons/md";
+import { MdOutlineClear, MdOutlineRemoveRedEye } from "react-icons/md";
+
 import {
   Box,
   IconButton,
   Tabs,
   FormControlLabel,
   Checkbox,
+  Tooltip,
 } from "@mui/material";
 import "../assets/css/dashboard.css";
 import Search from "./Search";
@@ -107,22 +109,27 @@ export default function CustomPaginationActionsTable({
               style={{ marginLeft: "3px", fontSize: "17px", marginTop: "-5px" }}
             />
           </Button>
-
-          <Button
-            size="small"
-            variant="contained"
-            color="primary"
-            style={{ marginLeft: "10px" }}
-            onClick={() => {
-              console.log(selection);
-            }}
-          >
-            {" "}
-            Proceed
-            <BsFillArrowRightCircleFill
-              style={{ marginLeft: "3px", fontSize: "17px", marginTop: "-5px" }}
-            />
-          </Button>
+          <Count badgeContent={selection.length} color="error">
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              style={{ marginLeft: "10px" }}
+              onClick={() => {
+                console.log(selection);
+              }}
+            >
+              {" "}
+              Proceed
+              <BsFillArrowRightCircleFill
+                style={{
+                  marginLeft: "3px",
+                  fontSize: "17px",
+                  marginTop: "-5px",
+                }}
+              />
+            </Button>
+          </Count>
         </div>
       )}
       <TableContainer sx={{ maxHeight: 640 }}>
@@ -159,23 +166,36 @@ export default function CustomPaginationActionsTable({
                           return tabletype == "dashboard" ? (
                             <TableCell key={column.id} align={column.align}>
                               {column.id == "PK_posID" ? (
-                                <>
-                                  <Checkbox
-                                    value={value}
-                                    onChange={handleSelection}
-                                  />
-                                </>
+                                <Checkbox
+                                  value={value}
+                                  checked={
+                                    selection.length >= 1
+                                      ? selection.filter((x) => x.id == value)
+                                          .length >= 1
+                                        ? true
+                                        : false
+                                      : false
+                                  }
+                                  onChange={handleSelection}
+                                />
                               ) : column.id == "status_" ? (
                                 <></>
                               ) : column.id == "action" ? (
                                 <>
-                                  <Button
-                                    variant="contained"
-                                    size="small"
-                                    color="info"
-                                  >
-                                    View
-                                  </Button>
+                                  <Tooltip title="View">
+                                    <Button
+                                      variant="text"
+                                      size="small"
+                                      color="info"
+                                      onClick={() => {
+                                        console.log("aww");
+                                      }}
+                                    >
+                                      <MdOutlineRemoveRedEye
+                                        style={{ fontSize: "18px" }}
+                                      />
+                                    </Button>
+                                  </Tooltip>
                                 </>
                               ) : column.id == "PONo" ? (
                                 <div>
@@ -194,7 +214,15 @@ export default function CustomPaginationActionsTable({
                                     ""
                                   )}
 
-                                  {value}
+                                  <span
+                                    style={{
+                                      fontWeight: "bold",
+                                      color: "#F16767",
+                                    }}
+                                  >
+                                    {" "}
+                                    {value}
+                                  </span>
                                 </div>
                               ) : (
                                 value
