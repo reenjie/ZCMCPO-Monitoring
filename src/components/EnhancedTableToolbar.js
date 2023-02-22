@@ -27,15 +27,6 @@ import { CiViewList } from "react-icons/ci";
 export const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
   const [value, setValue] = useState("");
-
-  const supplier = [
-    ...new Set(
-      props.rows[0].map((x) => {
-        return x.supplier;
-      })
-    ),
-  ];
-
   return (
     <Toolbar
       sx={{
@@ -110,7 +101,8 @@ export const EnhancedTableToolbar = (props) => {
                 <Box p={2}>
                   <h6 style={{ color: "grey" }}>Contents</h6>
 
-                  <CustomSelect label="Supplier" data={supplier} />
+                  <CustomSelect label="PO Number" data={[]} />
+                  <CustomSelect label="Supplier" data={[]} />
                   <CustomSelect label="Category" data={[]} />
                   <CustomSelect label="Units" data={[]} />
                   <CustomButton
@@ -121,9 +113,7 @@ export const EnhancedTableToolbar = (props) => {
                       />
                     }
                   />
-
                   <h6 style={{ color: "grey" }}>Transaction</h6>
-
                   <CustomButton
                     label="Recent"
                     Icon={
@@ -132,7 +122,6 @@ export const EnhancedTableToolbar = (props) => {
                       />
                     }
                   />
-
                   <CustomButton
                     label="Extension"
                     Icon={
@@ -141,25 +130,21 @@ export const EnhancedTableToolbar = (props) => {
                       />
                     }
                   />
-
                   <CustomDatePicker
                     value={value}
                     setValue={setValue}
                     label="Emailed Date"
                   />
-
                   <CustomDatePicker
                     value={value}
                     setValue={setValue}
                     label="Delivered Date"
                   />
-
                   <CustomDatePicker
                     value={value}
                     setValue={setValue}
                     label="Completed Date"
                   />
-
                   <CustomDatePicker
                     value={value}
                     setValue={setValue}

@@ -30,7 +30,7 @@ function Web() {
 
       <Route element={<UserCheckAuth />}>
         <Route path="/user" element={<Dashboard usertype="user" />}></Route>
-        <Route path="/edititems" element={<Action />}></Route>
+        <Route path="/edititem" element={<Action />}></Route>
         <Route
           path="/user/Settings"
           element={<Settings usertype="user" />}

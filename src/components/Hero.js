@@ -6,7 +6,7 @@ function Hero() {
   return (
     <div>
       <Grid container sx={{ width: "100%", mt: 5 }}>
-        <Grid item xl={6} xs={12}>
+        <Grid item xl={6} lg={6} xs={12}>
           <Box
             sx={{
               fontSize: "70px",
@@ -33,11 +33,15 @@ function Hero() {
         <Grid
           item
           xl={6}
+          lg={6}
           xs={12}
           sx={{ mt: 3, backgroundColor: "#419f57", borderRadius: 150 }}
         >
           {" "}
-          <img src={Home} height={600}></img>
+          <Box>
+            {" "}
+            <img src={Home} height={500}></img>
+          </Box>
         </Grid>
       </Grid>
     </div>

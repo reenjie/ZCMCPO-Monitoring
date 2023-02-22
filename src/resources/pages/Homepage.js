@@ -4,7 +4,7 @@ import Hero from "../../components/Hero";
 
 const Homepage = () => {
   return (
-    <div>
+    <div sx={{ width: "100%" }}>
       <Navbar />
       <Hero />
     </div>

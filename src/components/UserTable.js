@@ -25,10 +25,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Button } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import SearchItem from "../resources/pages/user/SearchItem";
-
 import Drawer from "@mui/material/Drawer";
-
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
