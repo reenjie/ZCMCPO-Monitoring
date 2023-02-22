@@ -12,3 +12,41 @@
   padding-bottom: 15px;
   padding-top: 30px;
 }
+
+.badge {
+  padding: 2px 10px;
+  border-radius: 14px;
+  font-size: 10px;
+  width: auto;
+  display: inline;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+.success {
+  background-color: #ade792;
+  color: rgb(13, 53, 7);
+}
+.info {
+  background-color: #6eccaf;
+  color: rgb(13, 53, 7);
+}
+
+.danger {
+  background-color: #fd8a8a;
+  color: rgb(226, 233, 224);
+}
+
+.primary {
+  background-color: #344d67;
+  color: rgb(234, 236, 233);
+}
+
+.secondary {
+  background-color: #767a7e;
+  color: rgb(234, 236, 233);
+}
+
+.notfound {
+  width: 300px;
+}

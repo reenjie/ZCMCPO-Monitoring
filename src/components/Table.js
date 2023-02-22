@@ -10,7 +10,14 @@ import { Edit, Delete } from "./Action";
 import { ButtonGroup, Button } from "@mui/material";
 import { useAuth } from "../app/hooks/ContextHooks";
 import { Badge } from "@mui/icons-material";
-import { Box, IconButton } from "@mui/material";
+import { MdOutlineClear } from "react-icons/md";
+import {
+  Box,
+  IconButton,
+  Tabs,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 import "../assets/css/dashboard.css";
 import Search from "./Search";
 import "../assets/css/admin.css";
@@ -19,6 +26,8 @@ import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import EnhancedTable from "./UserTable";
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
+import notf from "../assets/image/notfound.jpg";
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 import MailIcon from "@mui/icons-material/Mail";
 export default function CustomPaginationActionsTable({
@@ -30,6 +39,9 @@ export default function CustomPaginationActionsTable({
   openModal,
   roles,
   supplier,
+  handleSelection,
+  setSelection,
+  selection,
 }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -46,12 +58,6 @@ export default function CustomPaginationActionsTable({
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
-  // const contentSearch = rows[0]
-  //   ? rows[0].data.filter((filter) =>
-  //       filter.name.toLowerCase().includes(search.toLowerCase())
-  //     )
-  //   : [];
 
   const contentSearch =
     tabletype == "dashboard"
@@ -76,12 +82,49 @@ export default function CustomPaginationActionsTable({
             numSelected={selected.length}
             setSearch={setSearch}
             search={search}
+            rows={rows}
+            contentSearch={contentSearch}
           />
         </Box>
       ) : (
         <Search setSearch={setSearch} search={search} />
       )}
 
+      {selection.length >= 1 && (
+        <div style={{ padding: "10px" }}>
+          <Button
+            size="small"
+            variant="text"
+            color="error"
+            style={{ marginLeft: "20px" }}
+            onClick={() => {
+              setSelection([]);
+            }}
+          >
+            {" "}
+            Clear Selection{" "}
+            <MdOutlineClear
+              style={{ marginLeft: "3px", fontSize: "17px", marginTop: "-5px" }}
+            />
+          </Button>
+
+          <Button
+            size="small"
+            variant="contained"
+            color="primary"
+            style={{ marginLeft: "10px" }}
+            onClick={() => {
+              console.log(selection);
+            }}
+          >
+            {" "}
+            Proceed
+            <BsFillArrowRightCircleFill
+              style={{ marginLeft: "3px", fontSize: "17px", marginTop: "-5px" }}
+            />
+          </Button>
+        </div>
+      )}
       <TableContainer sx={{ maxHeight: 640 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -115,18 +158,15 @@ export default function CustomPaginationActionsTable({
 
                           return tabletype == "dashboard" ? (
                             <TableCell key={column.id} align={column.align}>
-                              {column.id == "status_" ? (
+                              {column.id == "PK_posID" ? (
                                 <>
-                                  {row.batch > 1 ? (
-                                    row.newtag == 1 ? (
-                                      <div className="badge success">New</div>
-                                    ) : (
-                                      ""
-                                    )
-                                  ) : (
-                                    ""
-                                  )}
+                                  <Checkbox
+                                    value={value}
+                                    onChange={handleSelection}
+                                  />
                                 </>
+                              ) : column.id == "status_" ? (
+                                <></>
                               ) : column.id == "action" ? (
                                 <>
                                   <Button
@@ -137,6 +177,25 @@ export default function CustomPaginationActionsTable({
                                     View
                                   </Button>
                                 </>
+                              ) : column.id == "PONo" ? (
+                                <div>
+                                  {row.batch > 1 ? (
+                                    row.newtag == 1 ? (
+                                      <div
+                                        className="badge success"
+                                        style={{ marginRight: "5px" }}
+                                      >
+                                        New
+                                      </div>
+                                    ) : (
+                                      ""
+                                    )
+                                  ) : (
+                                    ""
+                                  )}
+
+                                  {value}
+                                </div>
                               ) : (
                                 value
                               )}
@@ -189,9 +248,15 @@ export default function CustomPaginationActionsTable({
                   );
                 })
             ) : (
-              <>
-                <h5 style={{ padding: "20px" }}>No Data Found!</h5>
-              </>
+              <TableRow>
+                <TableCell
+                  style={{ textAlign: "center" }}
+                  colSpan={columns.length}
+                >
+                  <img src={notf} className="notfound" />
+                  <h3>NO DATA FOUND</h3>
+                </TableCell>
+              </TableRow>
             )}
           </TableBody>
         </Table>

@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Status from "./Status";
 import UserLayout from "../layouts/UserLayout";
@@ -16,6 +16,7 @@ import CustomPaginationActionsTable from "../../../components/Table";
 function Dashboard({ usertype }) {
   const [data, setData] = useState([]);
   const [supplier, setSupplier] = useState([]);
+  const [selection, setSelection] = useState([]);
   const fetch = async () => {
     const res = await FetchPurchaseOrder();
 
@@ -24,7 +25,14 @@ function Dashboard({ usertype }) {
   useEffect(() => {
     fetch();
   }, []);
+
   const columns = [
+    {
+      id: "PK_posID",
+      label: "",
+      minWidth: 50,
+      format: (value) => value.toLocaleString("en-US"),
+    },
     {
       id: "status_",
       label: "Status",
@@ -72,12 +80,30 @@ function Dashboard({ usertype }) {
     },
   ];
 
-  // function createData(dataid, name, username, email, role, created) {
-  //   const density = population / size;
-  //   return { dataid, name, username, email, role, created };
-  // }
+  const handleSelection = (e) => {
+    const id = e.target.value;
+    const row = data.filter((x) => x.PK_posID == id);
 
-  //const rows = [createData("India", "IN", 1324171354, 3287263, 51715)];
+    if (selection.length >= 1) {
+      /* 
+        CHECK WETHER DATA EXIST
+
+        if exist. then remove.
+        else if not 
+        then Add  to the selections.
+        
+        
+        */
+    } else {
+      setSelection([
+        {
+          id: id,
+          data: row,
+        },
+      ]);
+    }
+  };
+
   const rows = [data];
 
   return (
@@ -100,6 +126,9 @@ function Dashboard({ usertype }) {
               columns={columns}
               rows={rows}
               supplier={supplier}
+              handleSelection={handleSelection}
+              setSelection={setSelection}
+              selection={selection}
             />
           </Container>
         </div>
