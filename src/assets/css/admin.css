@@ -40,12 +40,12 @@
   margin-top: 10px;
 }
 .topbar h1 {
-  margin: 5px 5px;
-  font-size: 25px;
+  margin: 10px 10px;
+
   text-transform: uppercase;
   color: white;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 21px;
 }
 
 .topbar .navigation_ .link {
@@ -82,9 +82,9 @@
 }
 
 .main {
-  margin-top: 70px;
+  margin-top: 30px;
 
-  padding: 20px;
+  padding: 60px;
 }
 
 .loader {

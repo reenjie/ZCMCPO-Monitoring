@@ -35,7 +35,7 @@ function Topbar({ SidebarNav }) {
                   className={location.pathname == row.link ? " active" : ""}
                 >
                   {" "}
-                  <span className="icon">{row.icon}</span>{" "}
+                  <span className="icons">{row.icon}</span>{" "}
                   <span className="title">{row.title}</span>
                 </a>
               </>
