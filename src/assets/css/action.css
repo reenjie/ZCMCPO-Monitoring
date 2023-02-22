@@ -4,18 +4,21 @@
   margin: 0;
   font-family: "Poppins", sans-serif;
 }
-.action {
+action-grid {
   height: 100vh;
+  position: relative;
+  overflow-x: visible;
+  display: flex;
 }
 .action-card {
   display: block;
   padding: 30px;
-  /* width: 600px; */
+  width: 800px;
   height: 100%;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-left: 20px;
+  margin-top: 20px;
 }
 /* .action-card1 {
   display: block;

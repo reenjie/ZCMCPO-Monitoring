@@ -58,7 +58,7 @@ export const EnhancedTableToolbar = (props) => {
             fontStyle: "Roboto",
             fontWeight: 700,
             color: "#379237",
-            fontSize: 35,
+            fontSize: 30,
           }}
           variant="h2"
           id="tableTitle"
