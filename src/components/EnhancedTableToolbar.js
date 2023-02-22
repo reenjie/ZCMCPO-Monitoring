@@ -101,8 +101,8 @@ export const EnhancedTableToolbar = (props) => {
                 <h4>Filter By</h4>
                 <Box p={2}>
                   <h6 style={{ color: "grey" }}>Contents</h6>
-
                   <CustomSelect label="PO Number" data={[]} />
+
                   <CustomSelect label="Supplier" data={[]} />
                   <CustomSelect label="Category" data={[]} />
                   <CustomSelect label="Units" data={[]} />
@@ -114,9 +114,7 @@ export const EnhancedTableToolbar = (props) => {
                       />
                     }
                   />
-
                   <h6 style={{ color: "grey" }}>Transaction</h6>
-
                   <CustomButton
                     label="Recent"
                     Icon={
@@ -125,7 +123,6 @@ export const EnhancedTableToolbar = (props) => {
                       />
                     }
                   />
-
                   <CustomButton
                     label="Extension"
                     Icon={
@@ -134,25 +131,21 @@ export const EnhancedTableToolbar = (props) => {
                       />
                     }
                   />
-
                   <CustomDatePicker
                     value={value}
                     setValue={setValue}
                     label="Emailed Date"
                   />
-
                   <CustomDatePicker
                     value={value}
                     setValue={setValue}
                     label="Delivered Date"
                   />
-
                   <CustomDatePicker
                     value={value}
                     setValue={setValue}
                     label="Completed Date"
                   />
-
                   <CustomDatePicker
                     value={value}
                     setValue={setValue}
