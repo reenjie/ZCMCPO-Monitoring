@@ -11,6 +11,7 @@ import { ButtonGroup, Button, Badge as Count } from "@mui/material";
 import { useAuth } from "../app/hooks/ContextHooks";
 import { Badge } from "@mui/icons-material";
 import { MdOutlineClear, MdOutlineRemoveRedEye } from "react-icons/md";
+import { TableCellAccount } from "./TableCellAccount";
 
 import {
   Box,
@@ -43,7 +44,7 @@ export default function CustomPaginationActionsTable({
   supplier,
   handleSelection,
   setSelection,
-  selection,
+  selection = [],
 }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -74,6 +75,7 @@ export default function CustomPaginationActionsTable({
         )
       : [];
 
+  console.log(contentSearch);
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       {tabletype == "dashboard" ? (
@@ -89,7 +91,7 @@ export default function CustomPaginationActionsTable({
           />
         </Box>
       ) : (
-        <Search setSearch={setSearch} search={search} />
+        ""
       )}
 
       {selection.length >= 1 && (
@@ -229,46 +231,19 @@ export default function CustomPaginationActionsTable({
                               )}
                             </TableCell>
                           ) : (
-                            <TableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === "number" ? (
-                                column.format(value)
-                              ) : column.id == "action" ? (
-                                <>
-                                  {Auth.user.id == row.dataid ? (
-                                    <Box textAlign={"center"}>
-                                      <Badge
-                                        color="secondary"
-                                        badgeContent={0}
-                                        showZero
-                                      >
-                                        ass
-                                      </Badge>
-                                    </Box>
-                                  ) : (
-                                    <Box textAlign={"center"}>
-                                      <ButtonGroup
-                                        variant="text"
-                                        aria-label="text button group"
-                                      >
-                                        <Edit
-                                          data={row}
-                                          tabletype={tabletype}
-                                          setFetch={setFetch}
-                                          roles={roles}
-                                        />
-                                        <Delete
-                                          data={row}
-                                          tabletype={tabletype}
-                                          setFetch={setFetch}
-                                        />
-                                      </ButtonGroup>
-                                    </Box>
-                                  )}
-                                </>
-                              ) : (
-                                value
-                              )}
-                            </TableCell>
+                            <TableCellAccount
+                              column={column}
+                              columnid={column.id}
+                              columnalign={column.align}
+                              columnformat={column.format}
+                              value={value}
+                              tabletype={tabletype}
+                              setFetch={setFetch}
+                              roles={roles}
+                              row={row}
+                              dataid={row.dataid}
+                              Authuserid={Auth.user.id}
+                            />
                           );
                         })}
                       </TableRow>

@@ -27,7 +27,6 @@ import { CiViewList } from "react-icons/ci";
 export const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
   const [value, setValue] = useState("");
-
   return (
     <Toolbar
       sx={{
@@ -101,8 +100,8 @@ export const EnhancedTableToolbar = (props) => {
                 <h4>Filter By</h4>
                 <Box p={2}>
                   <h6 style={{ color: "grey" }}>Contents</h6>
-                  <CustomSelect label="PO Number" data={[]} />
 
+                  <CustomSelect label="PO Number" data={[]} />
                   <CustomSelect label="Supplier" data={[]} />
                   <CustomSelect label="Category" data={[]} />
                   <CustomSelect label="Units" data={[]} />
