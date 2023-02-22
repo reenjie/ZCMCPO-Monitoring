@@ -27,6 +27,7 @@ export default function BasicCard({
   style,
   bgcolor,
   color,
+  color1,
 }) {
   return (
     <>
@@ -35,7 +36,9 @@ export default function BasicCard({
         <CardContent>
           <Stack>
             <h2>
-              <Box textAlign={"center"}>{description}</Box>
+              <Box textAlign={"center"} color={color1}>
+                {description}
+              </Box>
             </h2>
             <Stack direction={"row"} justifyContent={"center"}>
               <h3></h3>

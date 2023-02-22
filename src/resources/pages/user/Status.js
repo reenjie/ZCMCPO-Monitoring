@@ -20,6 +20,7 @@ const Status = () => {
           desc={"as of June 19, 2023"}
           bgcolor="#F07470"
           color="#fff"
+          color1="#CD0404"
         />
       </Grid>
       <Grid item lg={3} sx={{ height: "20%", py: 1 }}>
@@ -30,6 +31,7 @@ const Status = () => {
           desc={"as of June 19, 2023"}
           bgcolor="#F07470"
           color="#fff"
+          color1="#CD0404"
         />
       </Grid>
       <Grid item lg={3} sx={{ height: "20%", py: 1 }}>
@@ -39,6 +41,7 @@ const Status = () => {
           icon={<FcOvertime />}
           desc={"as of June 19, 2023"}
           bgcolor="#FFDAC1"
+          color1="#F49D1A"
         />
       </Grid>
       <Grid item lg={3} sx={{ height: "20%", py: 1 }}>
