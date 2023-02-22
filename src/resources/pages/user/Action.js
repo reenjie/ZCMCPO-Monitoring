@@ -11,8 +11,6 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
-import { VscOutput } from "react-icons/vsc";
-import { grey } from "@mui/material/colors";
 import Transaction from "../../../components/Transaction";
 const Action = () => {
   const delivered = () => {};
@@ -20,9 +18,9 @@ const Action = () => {
     <>
       <UserLayout SidebarNav={UserSidebar} />
       <Main>
-        <Grid container justifyContent={"center"}>
+        <div className="card-grid">
           <Transaction />
-        </Grid>
+        </div>
       </Main>
     </>
   );

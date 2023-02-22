@@ -14,7 +14,7 @@ const Transaction = () => {
   const delivered = () => {};
   return (
     <>
-      <div className="action-card">
+      <div className="action-card module">
         <Typography
           sx={{
             fontSize: 15,
