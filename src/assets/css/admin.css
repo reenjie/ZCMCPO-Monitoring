@@ -15,12 +15,14 @@
   top: 0;
   margin: 0;
   height: 50px;
+
   width: 100%;
   background-color: #54b435;
   z-index: 500;
 }
-.topbar a {
+.topbar .logout {
   position: absolute;
+
   top: 8px;
   border-radius: 5px;
   right: 10px;
@@ -38,88 +40,51 @@
   margin-top: 10px;
 }
 .topbar h1 {
-  margin: 5px 290px;
+  margin: 5px 5px;
   font-size: 25px;
   text-transform: uppercase;
   color: white;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 24px;
 }
 
-.sidebar {
-  width: 280px;
-  height: 100%;
-  position: fixed;
-  z-index: 501;
-  top: 0;
-  left: 0;
-  border-right: 2px solid #f0ff42;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.topbar .navigation_ .link {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-weight: bold;
+  color: #1d491d;
 }
-.active {
-  background-color: rgb(185, 44, 44);
+.topbar .navigation_ .link a {
+  padding: 2px 20px;
+  margin: 5px;
+  color: white;
+  text-decoration: none;
+  display: block;
+  border-radius: 15px;
+  transition: ease-in-out 0.4s;
+  transform: scaleX(1.1);
+}
+.topbar .navigation_ .link .active {
+  background-color: rgb(239, 222, 94);
+  color: rgb(110, 88, 7);
+}
+
+.topbar .navigation_ .link a .icon {
+  font-size: 20px;
+}
+
+.topbar .navigation_ .link a:hover .icon {
+  animation: swing 0.4s;
 }
 
 .main {
-  margin-left: 280px;
   margin-top: 70px;
 
   padding: 20px;
-}
-
-.sidebar .userinfo {
-  padding: 10px;
-  display: flex;
-  background-color: #379237;
-}
-.sidebar .userinfo h2 span {
-  font-size: 20px;
-  font-weight: bold;
-}
-.sidebar .userinfo h2 {
-  margin: 30px 10px;
-  font-size: 17px;
-  font-weight: normal;
-
-  color: #f0ff42;
-}
-.sidebar .userinfo img {
-  width: 80px;
-}
-
-.sidebar .navigation_sidebar .link a {
-  padding: 20px;
-  font-weight: bold;
-  background-color: rgb(253, 253, 253);
-  text-decoration: none;
-  display: block;
-  text-transform: capitalize;
-  color: #379237;
-}
-.sidebar .navigation_sidebar .link .active {
-  background-color: #d1f3b6;
-  color: rgb(33, 77, 16);
-}
-.sidebar .navigation_sidebar .link .active .icon {
-  color: #e9b321;
-}
-.sidebar .navigation_sidebar .link a:hover {
-  background-color: #d1f3b6;
-  color: rgb(33, 77, 16);
-}
-
-.sidebar .navigation_sidebar .link a .icon {
-  font-size: 30px;
-  float: left;
-  margin-top: -7px;
-}
-.sidebar .navigation_sidebar .link a .title {
-  margin-left: 10px;
-}
-.sidebar .navigation_sidebar .link a:hover .icon {
-  animation: swing 0.4s;
-  color: #081402;
 }
 
 .loader {
