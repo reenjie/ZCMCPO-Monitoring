@@ -66,7 +66,6 @@ function Login() {
             token: response.data.token,
             role: response.data.role,
           });
-          window.location.reload();
         })
         .catch(function (error) {
           setInvalidMessage(error.response.data.message);

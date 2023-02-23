@@ -30,11 +30,16 @@ export const CustomSelect = ({ label, data, sort, setSort }) => {
             if (sort.length >= 1) {
               for (let { labelled } of sort) {
                 if (labelled === label) {
-                  /* 
-                  UPDATE SORT ARRAY WITH SPECIFIC KEY
-                  */
-                  console.log(label);
-
+                  const update = {
+                    labelled: label,
+                    value: newValue,
+                  };
+                  const index = sort.findIndex((item) =>
+                    item.labelled.toLowerCase().includes(label.toLowerCase())
+                  );
+                  const updatedItems = [...sort];
+                  updatedItems[index] = update;
+                  setSort(updatedItems);
                   return;
                 }
               }
@@ -58,23 +63,14 @@ export const CustomSelect = ({ label, data, sort, setSort }) => {
             }
           }}
           sx={{ width: "auto" }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label={label}
-              // onChange={(event) => {
-              //   console.log(event.target.value);
-              // }}
-            />
-          )}
+          renderInput={(params) => <TextField {...params} label={label} />}
         />
       </FormControl>
     </div>
   );
 };
 
-//
-export const CustomButton = ({ label, Icon }) => {
+export const CustomButton = ({ label, Icon, setOpenCustom }) => {
   return (
     <FormControl
       fullWidth
@@ -85,6 +81,11 @@ export const CustomButton = ({ label, Icon }) => {
         color="primary"
         variant="outlined"
         style={{ textTransform: "capitalize" }}
+        onClick={() => {
+          if (label === "Custom View") {
+            setOpenCustom(true);
+          }
+        }}
       >
         {label} {Icon}
       </Button>

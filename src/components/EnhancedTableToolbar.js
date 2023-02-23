@@ -5,31 +5,26 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { Button, TextField, Stack } from "@mui/material";
+import { Button } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { BiTimeFive } from "react-icons/bi";
 import Search from "./Search";
-import dayjs from "dayjs";
 import { SlClose } from "react-icons/sl";
 import { FiCheckCircle } from "react-icons/fi";
-
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import swal from "sweetalert";
 import {
   CustomSelect,
   CustomButton,
   CustomDatePicker,
 } from "./CustomComponents.js";
+import { FaSort } from "react-icons/fa";
 import { CiViewList } from "react-icons/ci";
-
+import { CustomView } from "./CustomView";
 export const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
   const [value, setValue] = useState("");
-  const [sort, setSort] = useState([]);
+  const [openCustom, setOpenCustom] = useState(false);
 
   const supplier = [
     ...new Set(
@@ -100,6 +95,8 @@ export const EnhancedTableToolbar = (props) => {
         search={props.search}
         rows={props.rows}
         contentSearch={props.contentSearch}
+        setscuFilter={props.setscuFilter}
+        setSort={props.setSort}
       />
 
       {numSelected > 0 ? (
@@ -109,7 +106,7 @@ export const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title="Filter list">
+        <Tooltip title="">
           <Box>
             <IconButton
               sx={{ marginTop: "-25px", marginLeft: "5px" }}
@@ -117,7 +114,16 @@ export const EnhancedTableToolbar = (props) => {
                 props.setOpendrawer(true);
               }}
             >
-              <FilterListIcon />
+              <span
+                style={{
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                  color: "#F55050",
+                  display: "flex",
+                }}
+              >
+                FILTER <FaSort style={{ marginTop: "3px" }} />
+              </span>{" "}
             </IconButton>
             <Drawer
               anchor="right"
@@ -132,23 +138,24 @@ export const EnhancedTableToolbar = (props) => {
                   <CustomSelect
                     label="Supplier"
                     data={supplier}
-                    setSort={setSort}
-                    sort={sort}
+                    setSort={props.setSort}
+                    sort={props.sort}
                   />
                   <CustomSelect
                     label="Category"
                     data={categories}
-                    setSort={setSort}
-                    sort={sort}
+                    setSort={props.setSort}
+                    sort={props.sort}
                   />
                   <CustomSelect
                     label="Units"
                     data={units}
-                    setSort={setSort}
-                    sort={sort}
+                    setSort={props.setSort}
+                    sort={props.sort}
                   />
                   <CustomButton
                     label="Custom View"
+                    setOpenCustom={setOpenCustom}
                     Icon={
                       <CiViewList
                         style={{ marginLeft: "2px", fontSize: "17px" }}
@@ -205,19 +212,40 @@ export const EnhancedTableToolbar = (props) => {
                 >
                   Close <SlClose style={{ marginLeft: "3px" }} />
                 </Button>
-
-                <Button
-                  sx={{ marginTop: "10px", float: "right", marginRight: "5px" }}
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    //props.setOpendrawer(false);
-                    console.log(sort);
-                  }}
-                >
-                  Proceed <FiCheckCircle style={{ marginLeft: "3px" }} />
-                </Button>
+                {!props.scuFilter && (
+                  <Button
+                    sx={{
+                      marginTop: "10px",
+                      float: "right",
+                      marginRight: "5px",
+                    }}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                      if (props.sort.length >= 1) {
+                        props.setscuFilter(true);
+                        props.setOpendrawer(false);
+                        props.setSelection([]);
+                      } else {
+                        swal(
+                          "Unable to Proceed!",
+                          "No type of filter selected",
+                          "error"
+                        );
+                      }
+                    }}
+                  >
+                    Proceed <FiCheckCircle style={{ marginLeft: "3px" }} />
+                  </Button>
+                )}
               </Box>
+            </Drawer>
+            <Drawer
+              anchor="top"
+              open={openCustom ? true : false}
+              onClose={openCustom ? false : true}
+            >
+              <CustomView setOpenCustom={setOpenCustom} />
             </Drawer>
           </Box>
         </Tooltip>
