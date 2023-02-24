@@ -6,33 +6,22 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Edit, Delete } from "./Action";
-import { ButtonGroup, Button, Badge as Count } from "@mui/material";
 import { useAuth } from "../app/hooks/ContextHooks";
 import { Badge } from "@mui/icons-material";
-import { MdOutlineClear, MdOutlineRemoveRedEye } from "react-icons/md";
 import { TableCellAccount } from "./TableCellAccount";
-
-import {
-  Box,
-  IconButton,
-  Tabs,
-  FormControlLabel,
-  Checkbox,
-  Tooltip,
-} from "@mui/material";
-import "../assets/css/dashboard.css";
-import Search from "./Search";
+import { FetchAdvanceSortSCU } from "../app/controllers/request/UserRequest";
+import { TableCellUser } from "./TableCellUser";
+import { Selection } from "./Selection";
+import { Box, Chip } from "@mui/material";
 import "../assets/css/admin.css";
-import notfound from "../assets/image/notfound.svg";
+
 import React, { useEffect, useState } from "react";
-import { Typography } from "@mui/material";
-import EnhancedTable from "./UserTable";
+
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 import notf from "../assets/image/notfound.jpg";
-import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
-import MailIcon from "@mui/icons-material/Mail";
+import "../assets/css/dashboard.css";
+
 export default function CustomPaginationActionsTable({
   columns,
   rows,
@@ -52,7 +41,19 @@ export default function CustomPaginationActionsTable({
   const [selected, setSelected] = React.useState([]);
   const { Auth } = useAuth();
   const [opendrawer, setOpendrawer] = useState(false);
+  const [sort, setSort] = useState([]);
+  const [scuFilter, setscuFilter] = useState(false);
+  const [SCUData, setSCUdata] = useState([]);
 
+  const filter = async () => {
+    const result = await FetchAdvanceSortSCU({
+      data: sort,
+    });
+    setSCUdata(result.data.data);
+  };
+  useEffect(() => {
+    filter();
+  }, [sort]);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -62,20 +63,40 @@ export default function CustomPaginationActionsTable({
     setPage(0);
   };
 
-  const contentSearch =
-    tabletype == "dashboard"
-      ? [rows[0]]
-        ? search
-          ? rows[0].filter((x) => x.PONo == search)
-          : rows[0]
-        : rows[0]
-      : rows[0]
-      ? rows[0].data.filter((filter) =>
-          filter.name.toLowerCase().includes(search.toLowerCase())
-        )
-      : [];
+  const Bolderized = (value) => {
+    if (sort.length >= 1) {
+      return sort.filter((x) => x.value == value).length >= 1 ? (
+        <span style={{ fontWeight: "bold", color: "#537FE7" }}>{value}</span>
+      ) : (
+        value
+      );
+    } else {
+      return value;
+    }
+  };
 
-  console.log(contentSearch);
+  const contentSearch = () => {
+    if (tabletype == "dashboard") {
+      if (rows[0]) {
+        if (search) {
+          return rows[0].filter((x) => x.PONo == search);
+        }
+
+        if (scuFilter) {
+          return SCUData;
+        }
+
+        return rows[0];
+      }
+    } else {
+      return rows[0]
+        ? rows[0].data.filter((filter) =>
+            filter.name.toLowerCase().includes(search.toLowerCase())
+          )
+        : [];
+    }
+  };
+
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       {tabletype == "dashboard" ? (
@@ -88,51 +109,47 @@ export default function CustomPaginationActionsTable({
             search={search}
             rows={rows}
             contentSearch={contentSearch}
+            sort={sort}
+            setSort={setSort}
+            setscuFilter={setscuFilter}
+            scuFilter={scuFilter}
+            setSelection={setSelection}
           />
         </Box>
       ) : (
         ""
       )}
+      {scuFilter
+        ? sort.length >= 1 && (
+            <Box p={5}>
+              <h5 style={{ marginBottom: "4px" }}>Filter By :</h5>
 
+              {sort.map((row) => {
+                return (
+                  <Chip
+                    color="info"
+                    variant="outlined"
+                    label={`${row.labelled} : ${row.value}`}
+                    onClick={() => {
+                      setOpendrawer(true);
+                    }}
+                    onDelete={() => {
+                      const newSet = sort.filter(
+                        (x) => x.labelled != row.labelled
+                      );
+                      setSort(newSet);
+                      if (newSet.length == 0) {
+                        setscuFilter(false);
+                      }
+                    }}
+                  />
+                );
+              })}
+            </Box>
+          )
+        : ""}
       {selection.length >= 1 && (
-        <div style={{ padding: "10px" }}>
-          <Button
-            size="small"
-            variant="text"
-            color="error"
-            style={{ marginLeft: "20px" }}
-            onClick={() => {
-              setSelection([]);
-            }}
-          >
-            {" "}
-            Clear Selection{" "}
-            <MdOutlineClear
-              style={{ marginLeft: "3px", fontSize: "17px", marginTop: "-5px" }}
-            />
-          </Button>
-          <Count badgeContent={selection.length} color="error">
-            <Button
-              size="small"
-              variant="contained"
-              color="primary"
-              style={{ marginLeft: "10px" }}
-              onClick={() => {
-                console.log(selection);
-              }}
-            >
-              {" "}
-              Proceed
-              <BsFillArrowRightCircleFill
-                style={{
-                  marginLeft: "3px",
-                  fontSize: "17px",
-                  marginTop: "-5px",
-                }}
-              />
-            </Button>
-          </Count>
-        </div>
+        <Selection selection={selection} setSelection={setSelection} />
       )}
       <TableContainer sx={{ maxHeight: 640 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -150,8 +167,8 @@ export default function CustomPaginationActionsTable({
             </TableRow>
           </TableHead>
           <TableBody>
-            {contentSearch.length >= 1 ? (
-              contentSearch
+            {contentSearch().length >= 1 ? (
+              contentSearch()
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
@@ -166,71 +183,18 @@ export default function CustomPaginationActionsTable({
                           const value = row[column.id];
 
                           return tabletype == "dashboard" ? (
-                            <TableCell key={column.id} align={column.align}>
-                              {column.id == "PK_posID" ? (
-                                <Checkbox
-                                  value={value}
-                                  checked={
-                                    selection.length >= 1
-                                      ? selection.filter((x) => x.id == value)
-                                          .length >= 1
-                                        ? true
-                                        : false
-                                      : false
-                                  }
-                                  onChange={handleSelection}
-                                />
-                              ) : column.id == "status_" ? (
-                                <></>
-                              ) : column.id == "action" ? (
-                                <>
-                                  <Tooltip title="View">
-                                    <Button
-                                      variant="text"
-                                      size="small"
-                                      color="info"
-                                      onClick={() => {
-                                        console.log("aww");
-                                      }}
-                                    >
-                                      <MdOutlineRemoveRedEye
-                                        style={{ fontSize: "18px" }}
-                                      />
-                                    </Button>
-                                  </Tooltip>
-                                </>
-                              ) : column.id == "PONo" ? (
-                                <div>
-                                  {row.batch > 1 ? (
-                                    row.newtag == 1 ? (
-                                      <div
-                                        className="badge success"
-                                        style={{ marginRight: "5px" }}
-                                      >
-                                        New
-                                      </div>
-                                    ) : (
-                                      ""
-                                    )
-                                  ) : (
-                                    ""
-                                  )}
-
-                                  <span
-                                    style={{
-                                      fontWeight: "bold",
-                                      color: "#F16767",
-                                    }}
-                                  >
-                                    {" "}
-                                    {value}
-                                  </span>
-                                </div>
-                              ) : (
-                                value
-                              )}
-                            </TableCell>
+                            /* All Dashboard */
+                            <TableCellUser
+                              columnid={column.id}
+                              columnalign={column.align}
+                              value={value}
+                              selection={selection}
+                              handleSelection={handleSelection}
+                              row={row}
+                              Bolderized={Bolderized}
+                            />
                           ) : (
+                            /* Admin Accounts Table */
                             <TableCellAccount
                               column={column}
                               columnid={column.id}
@@ -267,7 +231,7 @@ export default function CustomPaginationActionsTable({
       <TablePagination
         rowsPerPageOptions={[25, 50, 100]}
         component="div"
-        count={contentSearch.length}
+        count={contentSearch().length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

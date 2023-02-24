@@ -39,3 +39,7 @@ export const changeNameUri = () => {
 export const FetchPurchaseOrderUri = () => {
   return `${api}/FetchPurchaseOrder`;
 };
+
+export const FetchAdvanceSortSCUUri = () => {
+  return `${api}/FetchAdvanceSortSCU`;
+};

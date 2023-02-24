@@ -11,6 +11,8 @@ export default function Search({
   setSearch,
   rows,
   contentSearch = [],
+  setscuFilter,
+  setSort,
 }) {
   const [autoinfo, setAutoinfo] = useState("");
   /* Create New array from existing Array */
@@ -37,6 +39,7 @@ export default function Search({
         onChange={(event, newValue) => {
           setSearch(newValue.ponumber);
           setAutoinfo(newValue.label);
+          setSort([]);
         }}
         sx={{ width: 700, pt: 3, mb: 1 }}
         renderInput={(params) => (
@@ -59,6 +62,8 @@ export default function Search({
           onClick={() => {
             setSearch("");
             setAutoinfo("");
+            setscuFilter(false);
+            setSort([]);
           }}
         >
           Clear Search{" "}
@@ -69,25 +74,31 @@ export default function Search({
 
         <Button
           variant={
-            search ? (contentSearch.length >= 1 ? "contained" : "text") : "text"
+            search
+              ? contentSearch().length >= 1
+                ? "contained"
+                : "text"
+              : "text"
           }
           size="medium"
           className="secondary"
           color={
             search
-              ? contentSearch.length >= 1
+              ? contentSearch().length >= 1
                 ? "primary"
                 : "warning"
               : "warning"
           }
           sx={
             search
-              ? contentSearch.length >= 1
+              ? contentSearch().length >= 1
                 ? { cursor: "pointer" }
                 : { color: "gray" }
               : { color: "gray" }
           }
-          disabled={search ? (contentSearch.length >= 1 ? false : true) : true}
+          disabled={
+            search ? (contentSearch().length >= 1 ? false : true) : true
+          }
           style={{ marginRight: "5px", marginBottom: "5px" }}
         >
           Select All
