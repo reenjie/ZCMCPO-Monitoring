@@ -34,6 +34,8 @@ export default function CustomPaginationActionsTable({
   handleSelection,
   setSelection,
   selection = [],
+  setColumnChoice,
+  columnchoice,
 }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -114,6 +116,8 @@ export default function CustomPaginationActionsTable({
             setscuFilter={setscuFilter}
             scuFilter={scuFilter}
             setSelection={setSelection}
+            setColumnChoice={setColumnChoice}
+            columnchoice={columnchoice}
           />
         </Box>
       ) : (
