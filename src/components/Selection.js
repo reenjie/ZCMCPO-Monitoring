@@ -2,8 +2,13 @@ import React from "react";
 import { Button, Badge as Count } from "@mui/material";
 import { MdOutlineClear } from "react-icons/md";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 export const Selection = ({ setSelection, selection }) => {
+  const navigate = useNavigate();
+  const proceed = () => {
+    navigate("/edititem", { state: selection });
+  };
   return (
     <div style={{ padding: "10px" }}>
       <Button
@@ -29,6 +34,7 @@ export const Selection = ({ setSelection, selection }) => {
           style={{ marginLeft: "10px" }}
           onClick={() => {
             console.log(selection);
+            proceed();
           }}
         >
           {" "}
