@@ -6,6 +6,8 @@ import { CiEraser, CiSquarePlus } from "react-icons/ci";
 import "../assets/css/dashboard.css";
 import { useRef } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { LoadingButton } from "@mui/lab";
 export default function Search({
   search,
   setSearch,
@@ -13,8 +15,12 @@ export default function Search({
   contentSearch = [],
   setscuFilter,
   setSort,
+  selection,
+  scuFilter,
 }) {
   const [autoinfo, setAutoinfo] = useState("");
+  const navigate = useNavigate();
+  const [load, setLoad] = useState(false);
   /* Create New array from existing Array */
   const data = rows
     ? rows[0].map((row, keys) => {
@@ -72,12 +78,14 @@ export default function Search({
           />
         </Button>
 
-        <Button
+        <LoadingButton
           variant={
             search
               ? contentSearch().length >= 1
                 ? "contained"
                 : "text"
+              : scuFilter
+              ? "contained"
               : "text"
           }
           size="medium"
@@ -87,6 +95,8 @@ export default function Search({
               ? contentSearch().length >= 1
                 ? "primary"
                 : "warning"
+              : scuFilter
+              ? "primary"
               : "warning"
           }
           sx={
@@ -94,12 +104,39 @@ export default function Search({
               ? contentSearch().length >= 1
                 ? { cursor: "pointer" }
                 : { color: "gray" }
+              : scuFilter
+              ? { color: "white" }
               : { color: "gray" }
           }
           disabled={
-            search ? (contentSearch().length >= 1 ? false : true) : true
+            search
+              ? contentSearch().length >= 1
+                ? false
+                : true
+              : scuFilter
+              ? false
+              : true
           }
           style={{ marginRight: "5px", marginBottom: "5px" }}
+          loading={load}
+          onClick={() => {
+            const selected = contentSearch().map((x) => {
+              return {
+                id: x.PK_posID,
+                data: [x],
+              };
+            });
+
+            if (selected.length <= 100) {
+              console.log("fit");
+              // setLoad(true);
+              // setTimeout(() => {
+              //   navigate("/manage", { state: selected });
+              // }, 2000);
+            } else {
+              console.log("lapse");
+            }
+          }}
         >
           Select All
           <CiSquarePlus
@@ -109,7 +146,7 @@ export default function Search({
               fontWeight: "Bold",
             }}
           />
-        </Button>
+        </LoadingButton>
       </div>
     </div>
   );

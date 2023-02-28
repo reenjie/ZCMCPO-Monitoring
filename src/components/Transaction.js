@@ -1,39 +1,32 @@
 import * as React from "react";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import UserLayout from "../resources/pages/layouts/UserLayout";
-import { UserSidebar } from "../resources/pages/layouts/navs/UserNavData";
 import Main from "../resources/pages/layouts/navs/Main";
-import Action from "../resources/pages/user/Action";
+import { Container } from "@mui/material";
+import { CustomAccordion } from "./CustomAccordion";
 
-export default function Transaction({ PoNo, itemdex, det }) {
+export default function Transaction({ selection }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
+  console.log(selection);
   return (
-    <div>
-      <UserLayout SidebarNav={UserSidebar} />
-      <Main>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>{PoNo}</Typography>
-            <Typography sx={{ color: "text.secondary" }}>{itemdex}</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>{det}</Typography>
-          </AccordionDetails>
-        </Accordion>
-      </Main>
-    </div>
+    <Main>
+      <div>
+        {selection.map((row, key) => {
+          const { id, data } = row;
+          const { PONo, description } = data[0];
+          return (
+            <CustomAccordion
+              key={key}
+              index={key}
+              PONo={PONo}
+              id={id}
+              description={description}
+            />
+          );
+        })}
+      </div>
+    </Main>
   );
 }

@@ -97,6 +97,8 @@ export const EnhancedTableToolbar = (props) => {
         contentSearch={props.contentSearch}
         setscuFilter={props.setscuFilter}
         setSort={props.setSort}
+        selection={props.selection}
+        scuFilter={props.scuFilter}
       />
 
       {numSelected > 0 ? (

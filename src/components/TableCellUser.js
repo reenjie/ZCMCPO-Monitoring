@@ -1,6 +1,7 @@
 import React from "react";
 import { TableCell, Checkbox, Tooltip, Button } from "@mui/material";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { useNavigate } from "react-router";
 export const TableCellUser = ({
   columnid,
   columnalign,
@@ -10,6 +11,7 @@ export const TableCellUser = ({
   row,
   Bolderized,
 }) => {
+  const navigate = useNavigate();
   return (
     <TableCell key={columnid} align={columnalign}>
       {columnid == "PK_posID" ? (
@@ -34,7 +36,13 @@ export const TableCellUser = ({
               size="small"
               color="info"
               onClick={() => {
-                console.log("aww");
+                const selected = [
+                  {
+                    id: row.PK_posID,
+                    data: [row],
+                  },
+                ];
+                navigate("/manage", { state: selected });
               }}
             >
               <MdOutlineRemoveRedEye style={{ fontSize: "18px" }} />
