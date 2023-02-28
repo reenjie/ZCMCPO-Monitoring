@@ -245,7 +245,12 @@ export const EnhancedTableToolbar = (props) => {
               open={openCustom ? true : false}
               onClose={openCustom ? false : true}
             >
-              <CustomView setOpenCustom={setOpenCustom} />
+              <CustomView
+                setOpenCustom={setOpenCustom}
+                setColumnChoice={props.setColumnChoice}
+                columnchoice={props.columnchoice}
+                setOpendrawer={props.setOpendrawer}
+              />
             </Drawer>
           </Box>
         </Tooltip>

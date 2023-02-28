@@ -12,11 +12,13 @@ import { AdminSidebar } from "../layouts/navs/NavData";
 import { FetchPurchaseOrder } from "../../../app/controllers/request/UserRequest";
 import { Autocomplete, Box, TextField } from "@mui/material";
 import CustomPaginationActionsTable from "../../../components/Table";
+import { defaultcolumns } from "../../../data/CustomViewData";
 
 function Dashboard({ usertype }) {
   const [data, setData] = useState([]);
   const [supplier, setSupplier] = useState([]);
   const [selection, setSelection] = useState([]);
+  const [columnchoice, setColumnChoice] = useState(defaultcolumns);
   const fetch = async () => {
     const res = await FetchPurchaseOrder();
 
@@ -25,60 +27,6 @@ function Dashboard({ usertype }) {
   useEffect(() => {
     fetch();
   }, []);
-
-  const columns = [
-    {
-      id: "PK_posID",
-      label: "",
-      minWidth: 50,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-    {
-      id: "status_",
-      label: "Status",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-
-    {
-      id: "PONo",
-      label: "P.O Number",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-    {
-      id: "supplier",
-      label: "Suppliers",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-
-    {
-      id: "description",
-      label: "Description",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-    {
-      id: "category",
-      label: "Category",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-    {
-      id: "unit",
-      label: "Units",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-
-    {
-      id: "action",
-      label: "Action",
-      minWidth: 170,
-      format: (value) => value.toLocaleString("en-US"),
-    },
-  ];
 
   const handleSelection = (e) => {
     const id = e.target.value;
@@ -130,12 +78,14 @@ function Dashboard({ usertype }) {
           <Container maxWidth="xl" sx={{ py: 5 }}>
             <CustomPaginationActionsTable
               tabletype="dashboard"
-              columns={columns}
+              columns={columnchoice}
               rows={rows}
               supplier={supplier}
               handleSelection={handleSelection}
               setSelection={setSelection}
               selection={selection}
+              setColumnChoice={setColumnChoice}
+              columnchoice={columnchoice}
             />
           </Container>
         </div>
