@@ -4,21 +4,43 @@
   margin: 0;
   font-family: "Poppins", sans-serif;
 }
-action-grid {
+.card-grid {
   height: 100vh;
   position: relative;
   overflow-x: visible;
   display: flex;
+  gap: 1rem;
+  justify-content: center;
 }
 .action-card {
-  display: block;
-  padding: 30px;
-  width: 800px;
-  height: 100%;
+  /* width: 800px;
+  height: 100%; */
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-top: 20px;
+  scroll-snap-align: start;
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s;
+  margin: 0;
+}
+.module {
+  clear: both;
+  position: relative;
+}
+.front {
+  background-color: red;
+}
+
+.back {
+  background-color: blue;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 /* .action-card1 {
   display: block;
@@ -31,3 +53,19 @@ action-grid {
   margin-left: 20px;
   justify-content: center;
 } */
+@keyframes flip {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+.card-action:hover .front {
+  animation: flip 1s;
+}
+
+.cardiaction:hover .back {
+  animation: flip 1s reverse;
+}

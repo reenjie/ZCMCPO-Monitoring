@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../../assets/css/action.css";
 import UserLayout from "../layouts/UserLayout";
 import { UserSidebar } from "../layouts/navs/UserNavData";
@@ -11,18 +11,32 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
-import { VscOutput } from "react-icons/vsc";
-import { grey } from "@mui/material/colors";
 import Transaction from "../../../components/Transaction";
+import { Selection } from "../../../components/Selection";
+import { useLocation } from "react-router-dom";
 const Action = () => {
-  const delivered = () => {};
+  const [PONo, setPONo] = useState("");
+  const location = useLocation();
+  const selection = location.state;
+  console.log(selection);
+  useEffect(() => {
+    for (let { id, data } of selection) {
+      console.log(`${id} is ${id} years old!!!`);
+      for (const { PONo, fullname, description, category, unit } of data) {
+        console.log(
+          `${PONo}: ${fullname}:  ${description}:  ${category}: ${unit}`
+        );
+      }
+    }
+  });
+
   return (
     <>
       <UserLayout SidebarNav={UserSidebar} />
       <Main>
-        <Grid container justifyContent={"center"}>
-          <Transaction />
-        </Grid>
+        <div className="card-grid">
+          <Transaction PoNo={PONo} />
+        </div>
       </Main>
     </>
   );
