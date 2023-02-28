@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export const Selection = ({ setSelection, selection }) => {
   const navigate = useNavigate();
   const proceed = () => {
-    navigate("/edititem", { state: selection });
+    navigate("/manage", { state: selection });
   };
   return (
     <div style={{ padding: "10px" }}>

@@ -15,35 +15,27 @@ import Transaction from "../../../components/Transaction";
 import { Selection } from "../../../components/Selection";
 import { useLocation } from "react-router-dom";
 const Action = () => {
+  const [PONo, setPONo] = useState("");
   const location = useLocation();
   const selection = location.state;
   console.log(selection);
-
-  const data = selection.map(({ data }) => data);
-  console.log(data);
+  useEffect(() => {
+    for (let { id, data } of selection) {
+      console.log(`${id} is ${id} years old!!!`);
+      for (const { PONo, fullname, description, category, unit } of data) {
+        console.log(
+          `${PONo}: ${fullname}:  ${description}:  ${category}: ${unit}`
+        );
+      }
+    }
+  });
 
   return (
     <>
       <UserLayout SidebarNav={UserSidebar} />
       <Main>
         <div className="card-grid">
-          {data[0].map((info) => {
-            return (
-              <>
-                <Transaction
-                  ponumber={info.PONo}
-                  itemdex={info.itemdesc}
-                  details={
-                    "Item Description:" +
-                    info.itemdesc +
-                    "\n" +
-                    "Item Description:" +
-                    info.itemdesc
-                  }
-                />
-              </>
-            );
-          })}
+          <Transaction PoNo={PONo} />
         </div>
       </Main>
     </>
