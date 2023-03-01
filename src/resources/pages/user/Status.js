@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import BasicCard from "../../../components/Card";
-import { FcOvertime, FcShipped, FcInTransit } from "react-icons/fc";
+import { FcOvertime, FcShipped, FcInTransit, FcCancel } from "react-icons/fc";
 
 const Status = () => {
   return (
@@ -16,10 +16,8 @@ const Status = () => {
         <BasicCard
           title={"Undelivered"}
           description={"25  "}
-          icon={<FcInTransit />}
-          desc={"as of June 19, 2023"}
-          bgcolor="#F07470"
-          color="#fff"
+          icon={<FcInTransit size={50} />}
+          desc={"06/19/2023"}
           color1="#CD0404"
         />
       </Grid>
@@ -27,10 +25,8 @@ const Status = () => {
         <BasicCard
           title={"Cancelled"}
           description={"25"}
-          icon={<FcOvertime />}
-          desc={"as of June 19, 2023"}
-          bgcolor="#F07470"
-          color="#fff"
+          icon={<FcCancel size={50} />}
+          desc={"06/19/2023"}
           color1="#CD0404"
         />
       </Grid>
@@ -38,9 +34,8 @@ const Status = () => {
         <BasicCard
           title={"Extended"}
           description={"25 "}
-          icon={<FcOvertime />}
-          desc={"as of June 19, 2023"}
-          bgcolor="#FFDAC1"
+          icon={<FcOvertime size={50} />}
+          desc={"06/19/2023"}
           color1="#F49D1A"
         />
       </Grid>
@@ -48,9 +43,9 @@ const Status = () => {
         <BasicCard
           title={"Delivered"}
           description={"25  "}
-          icon={<FcShipped />}
-          desc={"as of June 19, 2023"}
-          bgcolor="#B5EAD7"
+          icon={<FcShipped size={50} />}
+          desc={"06/19/2023"}
+          color1="green"
         />
       </Grid>
     </Grid>

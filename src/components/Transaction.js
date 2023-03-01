@@ -18,7 +18,6 @@ export default function Transaction({ PoNo, itemdex, det }) {
 
   return (
     <div>
-      <UserLayout SidebarNav={UserSidebar} />
       <Main>
         <Accordion>
           <AccordionSummary
