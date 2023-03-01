@@ -13,18 +13,18 @@
   justify-content: center;
 }
 .action-card {
-  /* width: 800px;
-  height: 100%; */
+  width: 250px;
+  height: 400px;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   scroll-snap-align: start;
   padding: 1.5rem;
   border-radius: 16px;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   transition: 0.2s;
-  margin: 0;
+  margin: 2;
 }
 .module {
   clear: both;
