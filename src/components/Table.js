@@ -19,6 +19,7 @@ import React, { useEffect, useState } from "react";
 
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 import notf from "../assets/image/notfound.jpg";
+import { AiOutlineClockCircle } from "react-icons/ai";
 
 import "../assets/css/dashboard.css";
 
@@ -36,6 +37,10 @@ export default function CustomPaginationActionsTable({
   selection = [],
   setColumnChoice,
   columnchoice,
+  recent,
+  recentfilter,
+  setRecent,
+  setRecentfilter,
 }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -88,6 +93,10 @@ export default function CustomPaginationActionsTable({
           return SCUData;
         }
 
+        if (recentfilter) {
+          return recent;
+        }
+
         return rows[0];
       }
     } else {
@@ -119,6 +128,9 @@ export default function CustomPaginationActionsTable({
             setColumnChoice={setColumnChoice}
             columnchoice={columnchoice}
             selection={selection}
+            setRecent={setRecent}
+            setRecentfilter={setRecentfilter}
+            recentfilter={recentfilter}
           />
         </Box>
       ) : (
@@ -153,6 +165,21 @@ export default function CustomPaginationActionsTable({
             </Box>
           )
         : ""}
+
+      {recentfilter && (
+        <Box p={4}>
+          <h5>Filtered By </h5>
+
+          <span
+            style={{ fontSize: "17px", fontWeight: "bold", color: "#F16767" }}
+          >
+            RECENT TRANSACTIONS{" "}
+            <span style={{ marginTop: "5px" }}>
+              <AiOutlineClockCircle />
+            </span>
+          </span>
+        </Box>
+      )}
       {selection.length >= 1 && (
         <Selection selection={selection} setSelection={setSelection} />
       )}

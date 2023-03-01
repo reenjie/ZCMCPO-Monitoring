@@ -13,6 +13,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useState } from "react";
+import { FetchRecent } from "../app/controllers/request/UserRequest";
 export const CustomSelect = ({ label, data, sort, setSort }) => {
   const [val, setVal] = useState();
   return (
@@ -70,7 +71,13 @@ export const CustomSelect = ({ label, data, sort, setSort }) => {
   );
 };
 
-export const CustomButton = ({ label, Icon, setOpenCustom }) => {
+export const CustomButton = ({
+  label,
+  Icon,
+  setOpenCustom,
+  setRecentfilter,
+  closeDrawer,
+}) => {
   return (
     <FormControl
       fullWidth
@@ -84,6 +91,9 @@ export const CustomButton = ({ label, Icon, setOpenCustom }) => {
         onClick={() => {
           if (label === "Custom View") {
             setOpenCustom(true);
+          } else if (label === "Recent") {
+            setRecentfilter(true);
+            closeDrawer(false);
           }
         }}
       >

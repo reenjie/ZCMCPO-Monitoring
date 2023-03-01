@@ -9,7 +9,10 @@ import { Container } from "@mui/system";
 import Main from "../layouts/navs/Main";
 import AdminLayout from "../layouts/AdminLayout";
 import { AdminSidebar } from "../layouts/navs/NavData";
-import { FetchPurchaseOrder } from "../../../app/controllers/request/UserRequest";
+import {
+  FetchPurchaseOrder,
+  FetchRecent,
+} from "../../../app/controllers/request/UserRequest";
 import { Autocomplete, Box, TextField } from "@mui/material";
 import CustomPaginationActionsTable from "../../../components/Table";
 import { defaultcolumns } from "../../../data/CustomViewData";
@@ -19,10 +22,17 @@ function Dashboard({ usertype }) {
   const [supplier, setSupplier] = useState([]);
   const [selection, setSelection] = useState([]);
   const [columnchoice, setColumnChoice] = useState(defaultcolumns);
+  const [recent, setRecent] = useState([]);
+  const [recentfilter, setRecentfilter] = useState(false);
   const fetch = async () => {
     const res = await FetchPurchaseOrder();
-
     setData(res.data.data);
+    if (res.data.refresh == 1) {
+      window.location.reload();
+    }
+
+    const fetchrecent = await FetchRecent({});
+    setRecent(fetchrecent.data.data);
   };
   useEffect(() => {
     fetch();
@@ -86,6 +96,10 @@ function Dashboard({ usertype }) {
               selection={selection}
               setColumnChoice={setColumnChoice}
               columnchoice={columnchoice}
+              setRecent={setRecent}
+              setRecentfilter={setRecentfilter}
+              recent={recent}
+              recentfilter={recentfilter}
             />
           </Container>
         </div>

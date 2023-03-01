@@ -43,3 +43,11 @@ export const FetchPurchaseOrderUri = () => {
 export const FetchAdvanceSortSCUUri = () => {
   return `${api}/FetchAdvanceSortSCU`;
 };
+
+export const SetNewtoViewedUri = () => {
+  return `${api}/SetNewtoViewed`;
+};
+
+export const FetchRecentUri = () => {
+  return `${api}/FetchRecent`;
+};

@@ -78,12 +78,12 @@ export const EnhancedTableToolbar = (props) => {
           sx={{
             flex: "1 1 100%",
             fontStyle: "Roboto",
-            fontWeight: "normal",
+            fontWeight: "bold",
             color: "#379237",
-            fontSize: 35,
+            fontSize: 27,
             textTransform: "uppercase",
           }}
-          variant="h2"
+          variant="h3"
           id="tableTitle"
           component="div"
         >
@@ -99,6 +99,10 @@ export const EnhancedTableToolbar = (props) => {
         setSort={props.setSort}
         selection={props.selection}
         scuFilter={props.scuFilter}
+        setRecentfilter={props.setRecentfilter}
+        setRecent={props.setRecent}
+        closedrawer={props.setOpendrawer}
+        recentfilter={props.recentfilter}
       />
 
       {numSelected > 0 ? (
@@ -167,6 +171,9 @@ export const EnhancedTableToolbar = (props) => {
                   <h6 style={{ color: "grey" }}>Transaction</h6>
                   <CustomButton
                     label="Recent"
+                    setRecent={props.setRecent}
+                    setRecentfilter={props.setRecentfilter}
+                    closeDrawer={props.setOpendrawer}
                     Icon={
                       <BiTimeFive
                         style={{ marginLeft: "2px", fontSize: "17px" }}

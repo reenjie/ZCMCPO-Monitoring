@@ -1,13 +1,15 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { Button } from "@mui/material";
+import { Badge, Button } from "@mui/material";
 import { CiEraser, CiSquarePlus } from "react-icons/ci";
 import "../assets/css/dashboard.css";
 import { useRef } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { LoadingButton } from "@mui/lab";
+import swal from "sweetalert";
+import { SetViewed } from "../app/controllers/request/UserRequest";
 export default function Search({
   search,
   setSearch,
@@ -17,6 +19,10 @@ export default function Search({
   setSort,
   selection,
   scuFilter,
+  setRecentfilter,
+  setRecent,
+  closedrawer,
+  recentfilter,
 }) {
   const [autoinfo, setAutoinfo] = useState("");
   const navigate = useNavigate();
@@ -32,6 +38,30 @@ export default function Search({
         };
       })
     : [];
+
+  const selectall = async () => {
+    const selected = contentSearch().map((x) => {
+      return {
+        id: x.PK_posID,
+        data: [x],
+      };
+    });
+    if (selected.length <= 100) {
+      setLoad(true);
+      const result = await SetViewed({
+        selection: selected,
+      });
+      if (result.status == 200) {
+        navigate("/manage", { state: selected });
+      }
+    } else {
+      swal({
+        title: "Error Selection",
+        text: "A Maximum of 100 items only is allowed",
+        icon: "error",
+      });
+    }
+  };
 
   return (
     <div style={{ display: "inline-block" }}>
@@ -70,6 +100,7 @@ export default function Search({
             setAutoinfo("");
             setscuFilter(false);
             setSort([]);
+            setRecentfilter(false);
           }}
         >
           Clear Search{" "}
@@ -77,76 +108,73 @@ export default function Search({
             style={{ marginLeft: "5px", fontSize: "18px", fontWeight: "Bold" }}
           />
         </Button>
-
-        <LoadingButton
-          variant={
-            search
-              ? contentSearch().length >= 1
+        <Badge
+          badgeContent={contentSearch().length}
+          overlap="rectangular"
+          color="error"
+          max={contentSearch().length}
+        >
+          <LoadingButton
+            variant={
+              search
+                ? contentSearch().length >= 1
+                  ? "contained"
+                  : "text"
+                : scuFilter
+                ? "contained"
+                : recentfilter
                 ? "contained"
                 : "text"
-              : scuFilter
-              ? "contained"
-              : "text"
-          }
-          size="medium"
-          className="secondary"
-          color={
-            search
-              ? contentSearch().length >= 1
+            }
+            size="medium"
+            className="secondary"
+            color={
+              search
+                ? contentSearch().length >= 1
+                  ? "primary"
+                  : "warning"
+                : scuFilter
+                ? "primary"
+                : recentfilter
                 ? "primary"
                 : "warning"
-              : scuFilter
-              ? "primary"
-              : "warning"
-          }
-          sx={
-            search
-              ? contentSearch().length >= 1
-                ? { cursor: "pointer" }
+            }
+            sx={
+              search
+                ? contentSearch().length >= 1
+                  ? { cursor: "pointer" }
+                  : { color: "gray" }
+                : scuFilter
+                ? { color: "white" }
+                : recentfilter
+                ? { color: "white" }
                 : { color: "gray" }
-              : scuFilter
-              ? { color: "white" }
-              : { color: "gray" }
-          }
-          disabled={
-            search
-              ? contentSearch().length >= 1
+            }
+            disabled={
+              search
+                ? contentSearch().length >= 1
+                  ? false
+                  : true
+                : scuFilter
+                ? false
+                : recentfilter
                 ? false
                 : true
-              : scuFilter
-              ? false
-              : true
-          }
-          style={{ marginRight: "5px", marginBottom: "5px" }}
-          loading={load}
-          onClick={() => {
-            const selected = contentSearch().map((x) => {
-              return {
-                id: x.PK_posID,
-                data: [x],
-              };
-            });
-
-            if (selected.length <= 100) {
-              console.log("fit");
-              // setLoad(true);
-              // setTimeout(() => {
-              //   navigate("/manage", { state: selected });
-              // }, 2000);
-            } else {
-              console.log("lapse");
             }
-          }}
-        >
-          Select All
-          <CiSquarePlus
-            style={{
-              marginLeft: "5px",
-              fontSize: "18px",
-              fontWeight: "Bold",
-            }}
-          />
-        </LoadingButton>
+            style={{ marginRight: "5px", marginBottom: "5px" }}
+            loading={load}
+            onClick={selectall}
+          >
+            Select All
+            <CiSquarePlus
+              style={{
+                marginLeft: "5px",
+                fontSize: "18px",
+                fontWeight: "Bold",
+              }}
+            />
+          </LoadingButton>
+        </Badge>
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { TableCell, Checkbox, Tooltip, Button } from "@mui/material";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useNavigate } from "react-router";
+import { SetViewed } from "../app/controllers/request/UserRequest";
+import { LoadingButton } from "@mui/lab";
 export const TableCellUser = ({
   columnid,
   columnalign,
@@ -12,6 +14,22 @@ export const TableCellUser = ({
   Bolderized,
 }) => {
   const navigate = useNavigate();
+  const [load, setLoad] = useState(false);
+  const viewed = async () => {
+    setLoad(true);
+    const selected = [
+      {
+        id: row.PK_posID,
+        data: [row],
+      },
+    ];
+    const result = await SetViewed({
+      selection: selected,
+    });
+    if (result.status == 200) {
+      navigate("/manage", { state: selected });
+    }
+  };
   return (
     <TableCell key={columnid} align={columnalign}>
       {columnid == "PK_posID" ? (
@@ -31,38 +49,24 @@ export const TableCellUser = ({
       ) : columnid == "action" ? (
         <>
           <Tooltip title="View">
-            <Button
+            <LoadingButton
               variant="text"
               size="small"
+              loading={load}
               color="info"
-              onClick={() => {
-                const selected = [
-                  {
-                    id: row.PK_posID,
-                    data: [row],
-                  },
-                ];
-                navigate("/manage", { state: selected });
-              }}
+              onClick={viewed}
             >
               <MdOutlineRemoveRedEye style={{ fontSize: "18px" }} />
-            </Button>
+            </LoadingButton>
           </Tooltip>
         </>
       ) : columnid == "PONo" ? (
         <div>
-          {row.batch > 1 ? (
-            row.newtag == 1 ? (
-              /* badge success */
-              <div
-                className="CustomBadge success"
-                style={{ marginRight: "5px" }}
-              >
-                New
-              </div>
-            ) : (
-              ""
-            )
+          {row.newtag == 1 ? (
+            /* badge success */
+            <div className="CustomBadge success" style={{ marginRight: "5px" }}>
+              New
+            </div>
           ) : (
             ""
           )}

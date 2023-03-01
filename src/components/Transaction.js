@@ -2,6 +2,7 @@ import * as React from "react";
 import Main from "../resources/pages/layouts/navs/Main";
 import { Container } from "@mui/material";
 import { CustomAccordion } from "./CustomAccordion";
+import { useState } from "react";
 
 export default function Transaction({ selection }) {
   const [expanded, setExpanded] = React.useState(false);
@@ -9,7 +10,7 @@ export default function Transaction({ selection }) {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  console.log(selection);
+
   return (
     <Main>
       <div>

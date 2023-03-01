@@ -4,12 +4,20 @@ import { MdOutlineClear } from "react-icons/md";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
+import { SetViewed } from "../app/controllers/request/UserRequest";
 
 export const Selection = ({ setSelection, selection }) => {
   const navigate = useNavigate();
   const [load, setLoad] = useState(false);
-  const proceed = () => {
-    navigate("/manage", { state: selection });
+  const proceed = async () => {
+    console.log(selection);
+    setLoad(true);
+    const result = await SetViewed({
+      selection: selection,
+    });
+    if (result.status == 200) {
+      navigate("/manage", { state: selection });
+    }
   };
 
   return (
@@ -36,12 +44,7 @@ export const Selection = ({ setSelection, selection }) => {
           color="primary"
           style={{ marginLeft: "10px" }}
           loading={load}
-          onClick={() => {
-            setLoad(true);
-            setTimeout(() => {
-              proceed();
-            }, 2000);
-          }}
+          onClick={proceed}
         >
           {" "}
           Proceed
