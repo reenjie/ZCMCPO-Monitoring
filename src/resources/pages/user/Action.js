@@ -2,43 +2,54 @@ import React, { useState, useEffect } from "react";
 import "../../../assets/css/action.css";
 import UserLayout from "../layouts/UserLayout";
 import { UserSidebar } from "../layouts/navs/UserNavData";
-import Main from "../layouts/navs/Main";
-import {
-  Container,
-  Button,
-  Grid,
-  Stack,
-  Typography,
-  Divider,
-} from "@mui/material";
+import { Button } from "@mui/material";
 import Transaction from "../../../components/Transaction";
-import { Selection } from "../../../components/Selection";
-import { useLocation } from "react-router-dom";
+import { CiCircleList } from "react-icons/ci";
+
+import { useLocation, useNavigate } from "react-router-dom";
 const Action = () => {
-  const [PONo, setPONo] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
   const selection = location.state;
-  console.log(selection);
-  useEffect(() => {
-    for (let { id, data } of selection) {
-      console.log(`${id} is ${id} years old!!!`);
-      for (const { PONo, fullname, description, category, unit } of data) {
-        console.log(
-          `${PONo}: ${fullname}:  ${description}:  ${category}: ${unit}`
-        );
-      }
-    }
-  });
 
   return (
-    <>
-      <UserLayout SidebarNav={UserSidebar} />
-      <Main>
-        <div className="card-grid">
-          <Transaction PoNo={PONo} />
-        </div>
-      </Main>
-    </>
+    <div>
+      <UserLayout SidebarNav={UserSidebar} view={true} />
+
+      <Button
+        variant="contained"
+        size="small"
+        style={{ position: "absolute", top: "70px", left: "20px" }}
+        onClick={() => {
+          navigate("/user");
+        }}
+      >
+        Back
+      </Button>
+
+      <h2
+        style={{
+          marginTop: "70px",
+          marginLeft: "100px",
+          textTransform: "uppercase",
+          color: "#658864",
+        }}
+      >
+        <span
+          style={{
+            padding: "5px",
+            borderRadius: "5px",
+          }}
+        >
+          Managing Item{selection.length >= 2 ? "s" : ""}{" "}
+          <CiCircleList style={{ paddingTop: "2px" }} />
+        </span>
+      </h2>
+
+      <div style={{ marginTop: "-100px" }}>
+        <Transaction selection={selection} />
+      </div>
+    </div>
   );
 };
 

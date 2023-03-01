@@ -118,6 +118,7 @@ export default function CustomPaginationActionsTable({
             setSelection={setSelection}
             setColumnChoice={setColumnChoice}
             columnchoice={columnchoice}
+            selection={selection}
           />
         </Box>
       ) : (

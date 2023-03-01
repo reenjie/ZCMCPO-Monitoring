@@ -15,6 +15,7 @@ import { HiTable } from "react-icons/hi";
 import { tableColumn, defaultcolumns } from "../data/CustomViewData";
 import { CustomCheckbox } from "./CustomCheckbox";
 import { SlReload } from "react-icons/sl";
+import { LoadingButton } from "@mui/lab";
 
 export const CustomView = ({
   setOpenCustom,
@@ -23,6 +24,7 @@ export const CustomView = ({
   setOpendrawer,
 }) => {
   const [load, setLoad] = useState(false);
+  const [reset, setReset] = useState(false);
 
   const handleChecked = (id) => {
     for (let { id: columnid } of columnchoice) {
@@ -39,11 +41,16 @@ export const CustomView = ({
 
   const handleReset = () => {
     setLoad(true);
-    setColumnChoice(defaultcolumns);
-    setOpenCustom(false);
+    setReset(true);
+    //
+    // setOpenCustom(false);
     setTimeout(() => {
-      setOpenCustom(true);
-    }, 500);
+      setOpenCustom(false);
+      setColumnChoice(defaultcolumns);
+      setTimeout(() => {
+        setOpenCustom(true);
+      }, 500);
+    }, 2000);
   };
 
   return (
@@ -52,9 +59,14 @@ export const CustomView = ({
         <h2>Custom Table Header</h2>
         <span style={{ fontSize: "12px" }}>Manage Table View</span>
         <div style={{ padding: "10px" }}>
-          <Button variant="outlined" size="small" onClick={handleReset}>
+          <LoadingButton
+            loading={reset}
+            variant="outlined"
+            size="small"
+            onClick={handleReset}
+          >
             Reset To Default <SlReload style={{ marginLeft: "3px" }} />
-          </Button>
+          </LoadingButton>
           <br />
           <span style={{ fontSize: "12px", color: "#5B8FB9" }}>
             Current View
