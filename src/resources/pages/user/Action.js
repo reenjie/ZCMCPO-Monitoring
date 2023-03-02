@@ -5,14 +5,26 @@ import { UserSidebar } from "../layouts/navs/UserNavData";
 import { Button } from "@mui/material";
 import Transaction from "../../../components/Transaction";
 import { CiCircleList } from "react-icons/ci";
-
 import { useLocation, useNavigate } from "react-router-dom";
+import { GetPOstatus } from "../../../app/controllers/request/UserRequest";
+import { TransSkeleton } from "../../../components/TransSkeleton";
+import ActionModal from "../../../components/ActionModal";
+import { FaCogs } from "react-icons/fa";
 const Action = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const selection = location.state;
   const [openModal, setopenModal] = useState(false);
+  const [trans, setTrans] = useState([]);
   const applyall = () => {};
+  const fetch = async () => {
+    const fetchrecent = await GetPOstatus({});
+    setTrans(fetchrecent.data.data);
+  };
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
     <div>
@@ -45,32 +57,39 @@ const Action = () => {
         >
           Managing Item{selection.length >= 2 ? "s" : ""}{" "}
           <CiCircleList style={{ paddingTop: "2px" }} />
+          <ActionModal
+            Modalbtn={
+              <Button
+                color="success"
+                variant="contained"
+                size="small"
+                onClick={() => {
+                  setopenModal(true);
+                }}
+              >
+                Advance Option{" "}
+                <FaCogs style={{ marginLeft: "3px", fontSize: "17px" }} />
+              </Button>
+            }
+            openModal={openModal}
+            setopenModal={setopenModal}
+          />
         </span>
+
         <span
           style={{
             padding: "5px",
             borderRadius: "5px",
           }}
-        >
-          {/* <ActionModal
-            Modalbtn={
-              <Button
-                color="success"
-                onClick={() => {
-                  setopenModal(true);
-                }}
-              >
-                APPLY TO ALL
-              </Button>
-            }
-            openModal={openModal}
-            setopenModal={setopenModal}
-          /> */}
-        </span>
+        ></span>
       </h2>
 
-      <div style={{ marginTop: "-100px" }}>
-        <Transaction selection={selection} />
+      <div style={{ marginTop: "-167px" }}>
+        {trans.length >= 1 ? (
+          <Transaction selection={selection} trans={trans} />
+        ) : (
+          <TransSkeleton />
+        )}
       </div>
     </div>
   );

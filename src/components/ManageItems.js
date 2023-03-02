@@ -3,8 +3,16 @@ import { Typography, Stack, Button } from "@mui/material";
 function ManageItems() {
   return (
     <div>
-      <div className="action-card">
-        <Typography sx={{ fontSize: 15 }}>Action</Typography>
+      <div className="">
+        <Typography
+          sx={{
+            fontSize: 14,
+            textTransform: "uppercase",
+            marginBottom: "20px",
+          }}
+        >
+          Action
+        </Typography>
         <Stack spacing={1.5}>
           <Button
             sx={{ width: "200px", backgroundColor: "#BE0000" }}

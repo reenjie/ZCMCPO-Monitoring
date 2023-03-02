@@ -7,34 +7,27 @@ import {
   AccordionDetails,
   Grid,
   Divider,
+  Card,
+  Box,
+  Badge,
 } from "@mui/material";
 import "../../src/assets/css/action.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import { useState } from "react";
-import {
-  AiOutlineNumber,
-  AiOutlineShop,
-  AiOutlineShopping,
-  AiOutlineTags,
-  AiFillCalculator,
-  AiFillEuroCircle,
-  AiFillTags,
-  AiOutlineCalculator,
-  AiOutlineCalendar,
-  AiOutlineOrderedList,
-  AiFillMail,
-  AiOutlineFileProtect,
-  AiFillWarning,
-  AiFillAlert,
-  AiOutlineClose,
-  AiFillDatabase,
-  AiFillCalendar,
-  AiOutlineFileDone,
-  AiTwotoneEdit,
-} from "react-icons/ai";
+
 import ManageItems from "./ManageItems";
-export const CustomAccordion = ({ id, PONo, description, PODate, index }) => {
+import { AccordionData } from "../data/AccordionData";
+import TableStatus from "./tableStatus";
+export const CustomAccordion = ({
+  id,
+  PONo,
+  description,
+  PODate,
+  index,
+  data,
+  trans,
+}) => {
   const [expand, setExpand] = useState(false);
 
   return (
@@ -71,106 +64,36 @@ export const CustomAccordion = ({ id, PONo, description, PODate, index }) => {
         }}
       >
         <Grid container spacing={15}>
-          <Grid item md={8}>
-            <Typography
-              sx={{
-                fontWeight: 600,
-                fontSize: "15px",
-                color: "#183A1D",
-              }}
-            >
-              {" "}
-              Item Specifications
-            </Typography>{" "}
-            <Typography sx={{ fontSize: 15 }}>
-              {" "}
-              <AiFillEuroCircle color="#183A1D" size="14px" />
-              Price:
-            </Typography>
-            <Typography sx={{ fontSize: 15 }}>
-              {" "}
-              <AiOutlineOrderedList color="#183A1D" size="14px" />
-              Quantity Order:
-            </Typography>
-            <Typography sx={{ fontSize: 15 }}>
-              {" "}
-              <AiFillTags color="#183A1D" size="14px" />
-              Brand:
-            </Typography>
-            <Typography sx={{ fontSize: 15 }}>
-              {" "}
-              <AiOutlineTags color="#183A1D" size="14px" />
-              Model:
-            </Typography>
-            <Typography sx={{ fontSize: 15 }}>
-              {" "}
-              <AiFillCalculator color="#183A1D" size="14px" />
-              Unit:
-            </Typography>
-            <Typography sx={{ fontSize: 15 }}>
-              {" "}
-              <AiOutlineShop color="#183A1D" size="14px" />
-              Supplier:
-            </Typography>
-            <Typography
-              sx={{ fontWeight: 600, fontSize: "15px", color: "#EF5B0C" }}
-            >
-              Terms & Conditions
-            </Typography>{" "}
-            <Typography sx={{ fontSize: 15 }}>
-              {" "}
-              <AiFillMail color="#183A1D" size="14px" /> Emailed Date:
-            </Typography>
-            <Typography sx={{ fontSize: 15 }}>
-              <AiOutlineFileProtect color="#183A1D" size="14px" />
-              Delivery Term:
-            </Typography>
-            <Typography sx={{ fontSize: 15 }}>
-              {" "}
-              <AiFillWarning color="red" size="14px" />
-              Delay:
-            </Typography>
-            <Typography sx={{ fontSize: 15 }}>
-              {" "}
-              <AiFillAlert color="red" size="14px" />
-              DueDate 1:
-            </Typography>
-            <Typography sx={{ fontSize: 15 }}>
-              <AiFillAlert color="orange" size="14px" />
-              Due Date:
-            </Typography>
-            <Typography
-              sx={{ fontWeight: 600, fontSize: "15px", color: "#183A1D" }}
-            >
-              Delivery Status: Completed
-            </Typography>{" "}
-            <Typography sx={{ fontSize: 15 }}>
-              {" "}
-              <AiOutlineClose color="red" size="14px" /> Undelivered Items:
-            </Typography>
-            <Grid container direction="row">
-              <Typography sx={{ fontSize: 15, mr: 2 }}>
-                {" "}
-                <AiFillDatabase color="#183A1D" size="14px" />
-                Quantity Delivered: 56 items
-              </Typography>
-              <Typography sx={{ fontSize: 15, mr: 2 }}>
-                {" "}
-                <AiOutlineCalendar color="#183A1D" size="14px" />
-                Delivered Date: 06-15-34
-              </Typography>
-              <Typography sx={{ fontSize: 15 }}>
-                {" "}
-                <AiFillCalendar color="#183A1D" size="14px" />
-                Completed Date:
-              </Typography>
-            </Grid>
-            <Typography sx={{ fontSize: 15 }}>
-              {" "}
-              <AiOutlineFileDone color="#183A1D" size="14px" />
-              Remarks:
-            </Typography>
+          <Grid item md={7}>
+            {AccordionData.map((x) => {
+              return (
+                <Typography
+                  sx={{
+                    fontWeight: x.fontWeight,
+                    fontSize: x.fontSize,
+                    color: x.color,
+                  }}
+                >
+                  <span>
+                    {" "}
+                    {x.icon} {x.title}
+                  </span>
+                  <span style={{ float: "right", fontWeight: "bold" }}>
+                    {x.id == "price" || x.id == "vatamt" || x.id == "totAmount"
+                      ? "₱ "
+                      : ""}
+                    {data[x.id]}
+                  </span>
+                </Typography>
+              );
+            })}
             <Divider orientation="vertical" flexItem />
+
+            <Card variant="outlined" sx={{ marginTop: "7px" }}>
+              <Box p={2}>
+                <TableStatus trans={trans} id={data.PK_posID} />
+              </Box>
+            </Card>
           </Grid>
           <Grid item md={4}>
             <ManageItems />

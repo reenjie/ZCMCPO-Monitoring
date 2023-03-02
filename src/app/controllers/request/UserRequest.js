@@ -3,6 +3,7 @@ import {
   FetchAdvanceSortSCUUri,
   SetNewtoViewedUri,
   FetchRecentUri,
+  GetPOstatusUri,
 } from "../../uri";
 import axios from "axios";
 
@@ -20,4 +21,8 @@ export const SetViewed = async (data) => {
 
 export const FetchRecent = async (data) => {
   return await axios.post(FetchRecentUri(), data);
+};
+
+export const GetPOstatus = async (data) => {
+  return await axios.post(GetPOstatusUri(), data);
 };
