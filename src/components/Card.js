@@ -33,57 +33,59 @@ export default function BasicCard({
     <>
       <Card
         sx={{
-          minWidth: 200,
-          mx: 1,
+          minWidth: 250,
+          m: 1,
           minHeight: 90,
         }}
         border="10px solid green"
         style={style}
       >
-        <CardContent sx={{ margin: 0 }}>
-          <Stack>
-            <Grid container xl={12} spacing={5}>
-              <Grid item xl={6}>
-                <Box sx={{ height: "50px" }} backgroundColor={bgcolor1}>
-                  {icon}
-                </Box>
-              </Grid>
-              <Grid item xl={6}>
-                <Box>
-                  <Typography
-                    color={color1}
-                    sx={{ textAlign: "center", fontSize: 30, fontWeight: 600 }}
-                  >
-                    {" "}
-                    {description}
-                  </Typography>
-                </Box>
-
-                <Box>
-                  <Typography
-                    sx={{
-                      fontWeight: 400,
-                      fontSize: "18px",
-                      textAlign: "center",
-                    }}
-                  >
-                    {title}
-                  </Typography>
-                </Box>
-
-                <Box bgcolor={bgcolor} sx={{ w: "100%" }}>
-                  {" "}
-                  <Typography
-                    sx={{ fontSize: 14, textAlign: "center" }}
-                    color={color}
-                    gutterBottom
-                  >
-                    {desc}
-                  </Typography>
-                </Box>
-              </Grid>
+        <CardContent sx={{ margin: 0, padding: 0 }}>
+          <Grid container xl={12} spacing={6} pt={1} pb={0}>
+            <Grid item xl={6}>
+              <Box sx={{ height: "50px", ml: 1 }} backgroundColor={bgcolor1}>
+                {icon}
+              </Box>
             </Grid>
-          </Stack>
+            <Grid item xl={6}>
+              <Box>
+                <Typography
+                  color={color1}
+                  sx={{ fontSize: 35, fontWeight: 600 }}
+                >
+                  {" "}
+                  {description}
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+          <Box
+            borderRadius={1}
+            borderTopLeftRadius={0}
+            borderBottomLeftRadius={0}
+            backgroundColor={color1}
+            p={0.5}
+          >
+            <Typography
+              sx={{
+                fontWeight: 400,
+                fontSize: "18px",
+                textAlign: "center",
+                color: "#fff",
+              }}
+            >
+              {title}
+            </Typography>
+          </Box>
+          <Box bgcolor={bgcolor} sx={{ w: "100%" }}>
+            {" "}
+            <Typography
+              sx={{ fontSize: 14, textAlign: "center", mt: 1 }}
+              gutterBottom
+            >
+              {desc}
+            </Typography>
+          </Box>
         </CardContent>
       </Card>
     </>
