@@ -11,6 +11,8 @@ const Action = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const selection = location.state;
+  const [openModal, setopenModal] = useState(false);
+  const applyall = () => {};
 
   return (
     <div>
@@ -43,6 +45,27 @@ const Action = () => {
         >
           Managing Item{selection.length >= 2 ? "s" : ""}{" "}
           <CiCircleList style={{ paddingTop: "2px" }} />
+        </span>
+        <span
+          style={{
+            padding: "5px",
+            borderRadius: "5px",
+          }}
+        >
+          {/* <ActionModal
+            Modalbtn={
+              <Button
+                color="success"
+                onClick={() => {
+                  setopenModal(true);
+                }}
+              >
+                APPLY TO ALL
+              </Button>
+            }
+            openModal={openModal}
+            setopenModal={setopenModal}
+          /> */}
         </span>
       </h2>
 
