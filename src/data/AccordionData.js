@@ -9,6 +9,7 @@ import {
   AiOutlineCalculator,
   AiOutlineCalendar,
   AiOutlineOrderedList,
+  AiFillShop,
   AiFillMail,
   AiOutlineFileProtect,
   AiFillWarning,
@@ -18,6 +19,13 @@ import {
   AiFillCalendar,
   AiOutlineFileDone,
   AiTwotoneEdit,
+  AiFillFile,
+  AiOutlineHome,
+  AiFillContacts,
+  AiOutlinePhone,
+  AiFillFileText,
+  AiOutlineContainer,
+  AiFillContainer,
 } from "react-icons/ai";
 
 export const AccordionData = [
@@ -32,7 +40,7 @@ export const AccordionData = [
   {
     id: "PODate",
     title: "PO Date:",
-    icon: <AiOutlineShop />,
+    icon: <AiOutlineCalendar />,
     color: "#183A1D",
     fontSize: "14px",
     fontWeight: "",
@@ -40,7 +48,7 @@ export const AccordionData = [
   {
     id: "supplier",
     title: "Supplier:",
-    icon: <AiOutlineShop />,
+    icon: <AiFillShop />,
     color: "#183A1D",
     fontSize: "14px",
     fontWeight: "",
@@ -49,7 +57,7 @@ export const AccordionData = [
   {
     id: "unit",
     title: "Unit:",
-    icon: <AiFillCalculator />,
+    icon: <AiOutlineCalculator />,
     color: "#183A1D",
     fontSize: "14px",
     fontWeight: "",
@@ -57,7 +65,7 @@ export const AccordionData = [
   {
     id: "ItemId",
     title: "Item ID:",
-    icon: <AiFillCalculator />,
+    icon: <AiOutlineNumber />,
     color: "#183A1D",
     fontSize: "14px",
     fontWeight: "",
@@ -74,7 +82,7 @@ export const AccordionData = [
   {
     id: "itemdesc",
     title: "Item Description:",
-    icon: <AiOutlineShop />,
+    icon: <AiFillFile />,
     color: "#183A1D",
     fontSize: "14px",
     fontWeight: "",
@@ -91,7 +99,7 @@ export const AccordionData = [
   {
     id: "praddress",
     title: "PR Address:",
-    icon: <AiOutlineShop />,
+    icon: <AiOutlineHome />,
     color: "#183A1D",
     fontSize: "14px",
     fontWeight: "",
@@ -99,7 +107,7 @@ export const AccordionData = [
   {
     id: "prcontactperson",
     title: "PR Contact Person:",
-    icon: <AiOutlineShop />,
+    icon: <AiFillContacts />,
     color: "#183A1D",
     fontSize: "14px",
     fontWeight: "",
@@ -107,7 +115,7 @@ export const AccordionData = [
   {
     id: "prtelno",
     title: "PR Telephone No:",
-    icon: <AiOutlineShop />,
+    icon: <AiOutlinePhone />,
     color: "#183A1D",
     fontSize: "14px",
     fontWeight: "",
@@ -116,7 +124,7 @@ export const AccordionData = [
   {
     id: "remarks",
     title: "Remarks:",
-    icon: <AiOutlineShop />,
+    icon: <AiFillFileText />,
     color: "#183A1D",
     fontSize: "14px",
     fontWeight: "",
@@ -141,7 +149,7 @@ export const AccordionData = [
   {
     id: "vatamt",
     title: "VAT Amount:",
-    icon: <AiOutlineShop />,
+    icon: <AiOutlineContainer />,
     color: "#183A1D",
     fontSize: "14px",
     fontWeight: "",
@@ -150,7 +158,7 @@ export const AccordionData = [
   {
     id: "totAmount",
     title: "Total Amount:",
-    icon: <AiOutlineShop />,
+    icon: <AiFillContainer />,
     color: "#183A1D",
     fontSize: "14px",
     fontWeight: "",

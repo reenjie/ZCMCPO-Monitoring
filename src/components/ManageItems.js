@@ -1,6 +1,16 @@
 import React from "react";
 import { Typography, Stack, Button } from "@mui/material";
+import { question } from "../components/Sweetalert";
 function ManageItems() {
+  const cancel = () => {
+    question({
+      title: "Are you sure",
+      message: "you want to cancel transaction?",
+      type: "warning",
+      btndanger: false,
+      // action: Action,
+    });
+  };
   return (
     <div>
       <div className="">
@@ -17,6 +27,7 @@ function ManageItems() {
           <Button
             sx={{ width: "200px", backgroundColor: "#BE0000" }}
             variant="contained"
+            onClick={cancel}
           >
             Cancelled
           </Button>

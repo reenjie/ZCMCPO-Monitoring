@@ -4,12 +4,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { AddAccounts } from "../resources/pages/admin/components/ModalContent";
+import ActionCheckbox from "./ActionCheckbox";
 
 import { FaCogs } from "react-icons/fa";
 import ManageItems from "./ManageItems";
 const style = {
   position: "absolute",
-  top: "30%",
+  top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "40%",
@@ -51,9 +52,13 @@ export default function ActionModal({
             Advanced Options <FaCogs />
           </Typography>
 
-          <span style={{ fontSize: "12px" }}>Manage All items at once</span>
+          <span style={{ fontSize: "12px" }}>
+            Perform actions on all items.
+          </span>
 
-          <Box></Box>
+          <Box>
+            <ActionCheckbox />
+          </Box>
 
           <div
             style={{
