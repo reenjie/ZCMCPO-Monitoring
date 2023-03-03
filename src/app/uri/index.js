@@ -51,3 +51,7 @@ export const SetNewtoViewedUri = () => {
 export const FetchRecentUri = () => {
   return `${api}/FetchRecent`;
 };
+
+export const GetPOstatusUri = () => {
+  return `${api}/FetchPOstatus`;
+};

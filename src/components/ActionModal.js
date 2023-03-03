@@ -4,14 +4,15 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { AddAccounts } from "../resources/pages/admin/components/ModalContent";
-import ManageItems from "./ManageItems";
 
+import { FaCogs } from "react-icons/fa";
+import ManageItems from "./ManageItems";
 const style = {
   position: "absolute",
-  top: "50%",
+  top: "30%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "auto",
+  width: "40%",
   bgcolor: "background.paper",
   borderRadius: "5px",
   boxShadow: 24,
@@ -40,7 +41,50 @@ export default function ActionModal({
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography>Manage Items</Typography>
+          <Typography
+            style={{
+              fontSize: "16px",
+              textTransform: "uppercase",
+              color: "#61876E",
+            }}
+          >
+            Advanced Options <FaCogs />
+          </Typography>
+
+          <span style={{ fontSize: "12px" }}>Manage All items at once</span>
+
+          <Box></Box>
+
+          <div
+            style={{
+              position: "absolute",
+              bottom: "10px",
+              right: "20px",
+              margin: "5px",
+            }}
+          >
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => {
+                setopenModal(false);
+              }}
+            >
+              Close
+            </Button>
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => {
+                setopenModal(false);
+              }}
+              style={{ marginLeft: "10px" }}
+            >
+              Apply to All
+            </Button>
+          </div>
+
+          <Box></Box>
         </Box>
       </Modal>
     </div>

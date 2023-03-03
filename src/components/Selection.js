@@ -10,7 +10,6 @@ export const Selection = ({ setSelection, selection }) => {
   const navigate = useNavigate();
   const [load, setLoad] = useState(false);
   const proceed = async () => {
-    console.log(selection);
     setLoad(true);
     const result = await SetViewed({
       selection: selection,

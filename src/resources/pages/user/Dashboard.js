@@ -23,10 +23,12 @@ function Dashboard({ usertype }) {
   const [selection, setSelection] = useState([]);
   const [columnchoice, setColumnChoice] = useState(defaultcolumns);
   const [recent, setRecent] = useState([]);
+
   const [recentfilter, setRecentfilter] = useState(false);
   const fetch = async () => {
     const res = await FetchPurchaseOrder();
     setData(res.data.data);
+
     if (res.data.refresh == 1) {
       window.location.reload();
     }
