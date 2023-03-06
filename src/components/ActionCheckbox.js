@@ -4,7 +4,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
-import { Radio, RadioGroup, Stack, TextField, Input } from "@mui/material";
+import { FormLabel, Stack, TextField, Input } from "@mui/material";
 import { useState, useRef } from "react";
 
 export default function ActionCheckbox({ setSelected, setRemarks }) {
@@ -21,7 +21,6 @@ export default function ActionCheckbox({ setSelected, setRemarks }) {
     });
   };
 
-  const { cancelled, undelivered, extended } = state;
   return (
     <Box sx={{ transition: "ease-in-out .4s" }}>
       <FormLabel id="demo-row-radio-buttons-group-label">
@@ -33,7 +32,7 @@ export default function ActionCheckbox({ setSelected, setRemarks }) {
       >
         <Stack>
           <FormControlLabel
-            value="Cancelled"
+            value="cancel"
             control={<Radio />}
             label="Mark as Cancelled"
             onClick={(e) => {
@@ -42,7 +41,7 @@ export default function ActionCheckbox({ setSelected, setRemarks }) {
             }}
           />
           <FormControlLabel
-            value="Undelivered"
+            value="undeliver"
             control={<Radio />}
             label="Mark as Undelivered"
             onClick={(e) => {
@@ -52,7 +51,7 @@ export default function ActionCheckbox({ setSelected, setRemarks }) {
           />
 
           <FormControlLabel
-            value="Extend"
+            value="extend"
             control={<Radio />}
             label="Extend"
             onClick={(e) => {
@@ -62,7 +61,7 @@ export default function ActionCheckbox({ setSelected, setRemarks }) {
           />
 
           <FormControlLabel
-            value="Delivered"
+            value="deliver"
             control={<Radio />}
             label="Mark as Delivered"
             onClick={(e) => {
@@ -71,7 +70,7 @@ export default function ActionCheckbox({ setSelected, setRemarks }) {
             }}
           />
           <FormControlLabel
-            value="Remarks"
+            value="remarks"
             control={<Radio />}
             label="Create a Remarks"
             onClick={(e) => {

@@ -10,13 +10,14 @@ import { GetPOstatus } from "../../../app/controllers/request/UserRequest";
 import { TransSkeleton } from "../../../components/TransSkeleton";
 import ActionModal from "../../../components/ActionModal";
 import { FaCogs } from "react-icons/fa";
+
 const Action = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const selection = location.state;
   const [openModal, setopenModal] = useState(false);
   const [trans, setTrans] = useState([]);
-  const applyall = () => {};
+
   const fetch = async () => {
     const fetchrecent = await GetPOstatus({});
     setTrans(fetchrecent.data.data);

@@ -6,6 +6,8 @@ import Modal from "@mui/material/Modal";
 import { AddAccounts } from "../resources/pages/admin/components/ModalContent";
 import ActionCheckbox from "./ActionCheckbox";
 import { notify, question } from "./Sweetalert";
+import { CustomAccordion } from "./CustomAccordion";
+import { SetStatus } from "../app/controllers/request/UserRequest";
 
 import { FaCogs } from "react-icons/fa";
 import ManageItems from "./ManageItems";
@@ -35,9 +37,17 @@ export default function ActionModal({
   const handleClose = () => setOpen(false);
   const [selected, setSelected] = useState();
   const [remarks, setRemarks] = useState();
+
   const handleApplytoall = async () => {
-    console.log(remarks);
+    const res = await SetStatus({
+      selection: selection,
+      selected: selected,
+      typeofaction: "Updateall",
+    });
   };
+
+  console.log(selected);
+
   return (
     <div>
       {Modalbtn}
