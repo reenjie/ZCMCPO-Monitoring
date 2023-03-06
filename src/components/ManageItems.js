@@ -1,50 +1,42 @@
 import React from "react";
 import { Typography, Stack, Button } from "@mui/material";
 import { question } from "../components/Sweetalert";
-function ManageItems() {
-  const cancel = () => {
-    question({
-      title: "Are you sure",
-      message:
-        "mark transaction as cancelled?" + "\n" + "You cannot revert changes!",
-      type: "warning",
-      btndanger: false,
-      // action: Action,
+import { SetStatus } from "../app/controllers/request/UserRequest";
+function ManageItems({ id }) {
+  const cancel = async () => {
+    const res = await SetStatus({
+      id: id,
+      typeofaction: "cancel",
     });
   };
-  const undeliver = () => {
-    question({
-      title: "Are you sure",
-      message:
-        "mark transaction as undelivered?" +
-        "\n" +
-        " You cannot revert changes!",
-      type: "warning",
-      btndanger: false,
-      // action: Action,
+
+  const undeliver = async () => {
+    const res = await SetStatus({
+      id: id,
+      typeofaction: "undeliver",
     });
   };
-  const extend = () => {
-    question({
-      title: "Are you sure",
-      message:
-        "mark transaction as extended?" + "\n" + "You cannot revert changes!",
-      type: "warning",
-      btndanger: false,
-      // action: Action,
+
+  const extend = async () => {
+    const res = await SetStatus({
+      id: id,
+      typeofaction: "extend",
     });
   };
-  const deliver = () => {
-    question({
-      title: "Are you sure",
-      message:
-        "mark transaction as delivered?" + "\n" + "You cannot revert changes!",
-      type: "warning",
-      btndanger: false,
-      // action: Action,
+
+  const deliver = async () => {
+    const res = await SetStatus({
+      id: id,
+      typeofaction: "deliver",
     });
   };
-  const remarks = () => {};
+
+  const remarks = async () => {
+    const res = await SetStatus({
+      id: id,
+      typeofaction: "remarks",
+    });
+  };
   return (
     <div>
       <div className="">
@@ -61,14 +53,30 @@ function ManageItems() {
           <Button
             sx={{ width: "200px", backgroundColor: "#BE0000" }}
             variant="contained"
-            onClick={cancel}
+            onClick={() => {
+              question({
+                title: "Are you sure",
+                message: "you want to cancel transaction?",
+                type: "warning",
+                btndanger: false,
+                action: cancel,
+              });
+            }}
           >
             Cancelled
           </Button>
           <Button
             sx={{ width: "200px", backgroundColor: "#FF8E00" }}
             variant="contained"
-            onClick={undeliver}
+            onClick={() => {
+              question({
+                title: "Are you sure",
+                message: "you want to cancel transaction?",
+                type: "warning",
+                btndanger: false,
+                action: undeliver,
+              });
+            }}
           >
             Undelivered
           </Button>
@@ -78,21 +86,45 @@ function ManageItems() {
               backgroundColor: "#FFCC29",
             }}
             variant="contained"
-            onClick={extend}
+            onClick={() => {
+              question({
+                title: "Are you sure",
+                message: "you want to cancel transaction?",
+                type: "warning",
+                btndanger: false,
+                action: extend,
+              });
+            }}
           >
             Extended
           </Button>
           <Button
             sx={{ width: "200px", backgroundColor: "#61B15A" }}
             variant="contained"
-            onClick={deliver}
+            onClick={() => {
+              question({
+                title: "Are you sure",
+                message: "you want to cancel transaction?",
+                type: "warning",
+                btndanger: false,
+                action: deliver,
+              });
+            }}
           >
             Delivered
           </Button>
           <Button
             sx={{ width: "200px", backgroundColor: "#2C786C" }}
             variant="contained"
-            onClick={remarks}
+            onClick={() => {
+              question({
+                title: "Are you sure",
+                message: "you want to cancel transaction?",
+                type: "warning",
+                btndanger: false,
+                action: remarks,
+              });
+            }}
           >
             Remarks
           </Button>

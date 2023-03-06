@@ -55,7 +55,7 @@ const Action = () => {
             borderRadius: "5px",
           }}
         >
-          Managing Item{selection.length >= 2 ? "s" : ""}{" "}
+          Managing Item{selection && selection.length >= 2 ? "s" : ""}{" "}
           <CiCircleList style={{ paddingTop: "2px" }} />
           <ActionModal
             Modalbtn={

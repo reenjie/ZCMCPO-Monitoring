@@ -55,3 +55,7 @@ export const FetchRecentUri = () => {
 export const GetPOstatusUri = () => {
   return `${api}/FetchPOstatus`;
 };
+
+export const SetStatusUri = () => {
+  return `${api}/SetStatus`;
+};

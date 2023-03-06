@@ -33,7 +33,7 @@ export default function BasicCard({
     <>
       <Card
         sx={{
-          minWidth: 250,
+          minWidth: "23%",
           m: 1,
           minHeight: 90,
         }}

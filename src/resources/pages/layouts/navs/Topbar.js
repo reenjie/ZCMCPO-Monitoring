@@ -47,7 +47,7 @@ function Topbar({ SidebarNav, view }) {
           </div>
         )}
       </div>
-      <a className="logout" href="#" onClick={logout}>
+      <a className="logout" href="javascript:void(0)" onClick={logout}>
         Logout{" "}
         <i className="icon">
           <AiOutlineLogout />
