@@ -1,11 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import FormLabel from "@mui/material/FormLabel";
-import FormControl from "@mui/material/FormControl";
-import FormGroup from "@mui/material/FormGroup";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormHelperText from "@mui/material/FormHelperText";
-import Checkbox from "@mui/material/Checkbox";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
 export default function ActionCheckbox() {
   const [state, setState] = React.useState({
@@ -26,63 +25,17 @@ export default function ActionCheckbox() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-        <FormLabel component="legend">Choose Transaction</FormLabel>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={cancelled}
-                onChange={handleChange}
-                name="cancelled"
-              />
-            }
-            label="Cancelled"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={undelivered}
-                onChange={handleChange}
-                name="undelivered"
-              />
-            }
-            label="Undelivered"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={extended}
-                onChange={handleChange}
-                name="extended"
-              />
-            }
-            label="Cancelled"
-          />
-        </FormGroup>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={undelivered}
-              onChange={handleChange}
-              name="undelivered"
-            />
-          }
-          label="Extended"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={undelivered}
-              onChange={handleChange}
-              name="undelivered"
-            />
-          }
-          label="Delivered"
-        />
-        <FormHelperText sx={{ color: "red" }}>
-          Choose only one transaction!
-        </FormHelperText>
+      <FormControl>
+        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+        <RadioGroup
+          aria-labelledby="demo-radio-buttons-group-label"
+          defaultValue="female"
+          name="radio-buttons-group"
+        >
+          <FormControlLabel value="female" control={<Radio />} label="Female" />
+          <FormControlLabel value="male" control={<Radio />} label="Male" />
+          <FormControlLabel value="other" control={<Radio />} label="Other" />
+        </RadioGroup>
       </FormControl>
       {/* <FormControl
         required
