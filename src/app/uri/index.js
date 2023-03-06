@@ -59,3 +59,7 @@ export const GetPOstatusUri = () => {
 export const SetStatusUri = () => {
   return `${api}/SetStatus`;
 };
+
+export const SetEmailedDateUri = () => {
+  return `${api}/setEmaileddate`;
+};

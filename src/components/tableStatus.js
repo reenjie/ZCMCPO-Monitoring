@@ -41,6 +41,8 @@ export default function TableStatus({ trans, id }) {
           <span className="CustomBadge danger">Cancelled</span>
         ) : status == 4 ? (
           <span className="CustomBadge success">Completed</span>
+        ) : status == 5 ? (
+          <span className="CustomBadge warning">Extended</span>
         ) : (
           ""
         )}
@@ -50,12 +52,13 @@ export default function TableStatus({ trans, id }) {
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
-            <TableRow>
+            <TableRow style={{ backgroundColor: "#E1EEDD" }}>
               <TableCell>Extended</TableCell>
               <TableCell align="center">Extended Times</TableCell>
+              <TableCell align="center">Emailed </TableCell>
               <TableCell align="center">Due </TableCell>
               <TableCell align="center">Extended </TableCell>
-              <TableCell align="center">Emailed </TableCell>
+
               <TableCell align="center">Delivered </TableCell>
               <TableCell align="center">Completed </TableCell>
               <TableCell align="center">Cancelled </TableCell>
@@ -64,7 +67,70 @@ export default function TableStatus({ trans, id }) {
           <TableBody>
             <TableRow>
               <TableCell component="th" scope="row">
-                <FiCheckCircle style={{ color: "#658864" }} /> yes
+                {extendedCount >= 1 && (
+                  <>
+                    {" "}
+                    <FiCheckCircle style={{ color: "#658864" }} /> yes
+                  </>
+                )}
+              </TableCell>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {extendedCount}
+              </TableCell>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {emailed_date}
+              </TableCell>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {duration_date}
+              </TableCell>
+
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {DueDate}
+              </TableCell>
+
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {delivered_date}
+              </TableCell>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {completed_date}
+              </TableCell>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {cancelled_date}
               </TableCell>
             </TableRow>
           </TableBody>

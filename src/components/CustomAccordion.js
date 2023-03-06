@@ -27,6 +27,15 @@ export const CustomAccordion = ({
   index,
   data,
   trans,
+  cancel,
+  undeliver,
+  extend,
+  deliver,
+  remarks,
+  load,
+  setLoad,
+  setRefresh,
+  Terms,
 }) => {
   const [expand, setExpand] = useState(false);
 
@@ -96,7 +105,19 @@ export const CustomAccordion = ({
             </Card>
           </Grid>
           <Grid item md={4}>
-            <ManageItems id={id} />
+            <ManageItems
+              id={id}
+              trans={trans}
+              cancel={cancel}
+              undeliver={undeliver}
+              extend={extend}
+              deliver={deliver}
+              remarks={remarks}
+              load={load}
+              setLoad={setLoad}
+              setRefresh={setRefresh}
+              Terms={Terms}
+            />
           </Grid>
         </Grid>
       </AccordionDetails>
