@@ -26,15 +26,31 @@ export default function ActionCheckbox() {
   return (
     <Box sx={{ display: "flex" }}>
       <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
           defaultValue="female"
           name="radio-buttons-group"
         >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
+          <FormControlLabel
+            value="female"
+            control={<Radio />}
+            label="Undelivered"
+          />
+          <FormControlLabel
+            value="female"
+            control={<Radio />}
+            label="Cancelled"
+          />
+          <FormControlLabel
+            value="female"
+            control={<Radio />}
+            label="Extended"
+          />
+          <FormControlLabel
+            value="female"
+            control={<Radio />}
+            label="Delivered"
+          />
         </RadioGroup>
       </FormControl>
       {/* <FormControl

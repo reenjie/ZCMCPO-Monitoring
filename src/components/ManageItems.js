@@ -5,12 +5,46 @@ function ManageItems() {
   const cancel = () => {
     question({
       title: "Are you sure",
-      message: "you want to cancel transaction?",
+      message:
+        "mark transaction as cancelled?" + "\n" + "You cannot revert changes!",
       type: "warning",
       btndanger: false,
       // action: Action,
     });
   };
+  const undeliver = () => {
+    question({
+      title: "Are you sure",
+      message:
+        "mark transaction as undelivered?" +
+        "\n" +
+        " You cannot revert changes!",
+      type: "warning",
+      btndanger: false,
+      // action: Action,
+    });
+  };
+  const extend = () => {
+    question({
+      title: "Are you sure",
+      message:
+        "mark transaction as extended?" + "\n" + "You cannot revert changes!",
+      type: "warning",
+      btndanger: false,
+      // action: Action,
+    });
+  };
+  const deliver = () => {
+    question({
+      title: "Are you sure",
+      message:
+        "mark transaction as delivered?" + "\n" + "You cannot revert changes!",
+      type: "warning",
+      btndanger: false,
+      // action: Action,
+    });
+  };
+  const remarks = () => {};
   return (
     <div>
       <div className="">
@@ -34,6 +68,7 @@ function ManageItems() {
           <Button
             sx={{ width: "200px", backgroundColor: "#FF8E00" }}
             variant="contained"
+            onClick={undeliver}
           >
             Undelivered
           </Button>
@@ -43,18 +78,21 @@ function ManageItems() {
               backgroundColor: "#FFCC29",
             }}
             variant="contained"
+            onClick={extend}
           >
             Extended
           </Button>
           <Button
             sx={{ width: "200px", backgroundColor: "#61B15A" }}
             variant="contained"
+            onClick={deliver}
           >
             Delivered
           </Button>
           <Button
             sx={{ width: "200px", backgroundColor: "#2C786C" }}
             variant="contained"
+            onClick={remarks}
           >
             Remarks
           </Button>
