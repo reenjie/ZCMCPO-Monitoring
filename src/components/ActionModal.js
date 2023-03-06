@@ -5,9 +5,11 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { AddAccounts } from "../resources/pages/admin/components/ModalContent";
 import ActionCheckbox from "./ActionCheckbox";
+import { notify, question } from "./Sweetalert";
 
 import { FaCogs } from "react-icons/fa";
 import ManageItems from "./ManageItems";
+import { useState } from "react";
 const style = {
   position: "absolute",
   top: "50%",
@@ -26,11 +28,16 @@ export default function ActionModal({
   setFetch,
   setopenModal,
   openModal,
+  selection,
 }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const [selected, setSelected] = useState();
+  const [remarks, setRemarks] = useState();
+  const handleApplytoall = async () => {
+    console.log(remarks);
+  };
   return (
     <div>
       {Modalbtn}
@@ -56,8 +63,8 @@ export default function ActionModal({
             Perform actions on all items.
           </span>
 
-          <Box>
-            <ActionCheckbox />
+          <Box p={5}>
+            <ActionCheckbox setSelected={setSelected} setRemarks={setRemarks} />
           </Box>
 
           <div
@@ -73,6 +80,7 @@ export default function ActionModal({
               size="small"
               onClick={() => {
                 setopenModal(false);
+                setSelected();
               }}
             >
               Close
@@ -81,7 +89,22 @@ export default function ActionModal({
               variant="contained"
               size="small"
               onClick={() => {
-                setopenModal(false);
+                // setopenModal(false);
+                if (selected) {
+                  question({
+                    title: "Are you sure?",
+                    message: "Changes will be saved to all items selected",
+                    type: "warning",
+                    btndanger: false,
+                    action: handleApplytoall,
+                  });
+                } else {
+                  notify({
+                    type: "error",
+                    title: "No Selection!",
+                    message: "Please Select in the Options First",
+                  });
+                }
               }}
               style={{ marginLeft: "10px" }}
             >

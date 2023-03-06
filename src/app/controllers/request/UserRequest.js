@@ -4,6 +4,7 @@ import {
   SetNewtoViewedUri,
   FetchRecentUri,
   GetPOstatusUri,
+  SetStatusUri,
 } from "../../uri";
 import axios from "axios";
 
@@ -25,4 +26,8 @@ export const FetchRecent = async (data) => {
 
 export const GetPOstatus = async (data) => {
   return await axios.post(GetPOstatusUri(), data);
+};
+
+export const SetStatus = async (data) => {
+  return await axios.post(SetStatusUri(), data);
 };

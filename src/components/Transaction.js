@@ -15,23 +15,24 @@ export default function Transaction({ selection, trans }) {
   return (
     <Main>
       <div>
-        {selection.map((row, key) => {
-          const { id, data } = row;
+        {selection &&
+          selection.map((row, key) => {
+            const { id, data } = row;
 
-          const { PONo, description, PODate } = data[0];
-          return (
-            <CustomAccordion
-              key={key}
-              index={key}
-              PONo={PONo}
-              id={id}
-              description={description}
-              PODate={PODate}
-              data={data[0]}
-              trans={trans}
-            />
-          );
-        })}
+            const { PONo, description, PODate } = data[0];
+            return (
+              <CustomAccordion
+                key={key}
+                index={key}
+                PONo={PONo}
+                id={id}
+                description={description}
+                PODate={PODate}
+                data={data[0]}
+                trans={trans}
+              />
+            );
+          })}
       </div>
     </Main>
   );

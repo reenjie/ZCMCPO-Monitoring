@@ -96,7 +96,7 @@ export const CustomAccordion = ({
             </Card>
           </Grid>
           <Grid item md={4}>
-            <ManageItems />
+            <ManageItems id={id} />
           </Grid>
         </Grid>
       </AccordionDetails>
