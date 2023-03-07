@@ -6,11 +6,21 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Alert } from "@mui/material";
+import {
+  Alert,
+  TextField,
+  Box,
+  FormControl,
+  InputLabel,
+  Input,
+} from "@mui/material";
 import { FiCheckCircle } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import "../assets/css/dashboard.css";
+import { notify } from "./Sweetalert";
+
+import "react-toastify/dist/ReactToastify.css";
 export default function TableStatus({ trans, id }) {
   const [loaded, setLoaded] = useState(false);
 
@@ -49,7 +59,7 @@ export default function TableStatus({ trans, id }) {
       </div>
       <h5>Status</h5>
       <br />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} id="tablestatus">
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow style={{ backgroundColor: "#E1EEDD" }}>
@@ -80,7 +90,7 @@ export default function TableStatus({ trans, id }) {
                 style={{ fontWeight: "bold" }}
                 align="center"
               >
-                {extendedCount}
+                {extendedCount >= 1 ? extendedCount : ""}
               </TableCell>
               <TableCell
                 component="th"
@@ -88,7 +98,23 @@ export default function TableStatus({ trans, id }) {
                 style={{ fontWeight: "bold" }}
                 align="center"
               >
-                {emailed_date}
+                {emailed_date != null && (
+                  <Input
+                    id="component-simple"
+                    defaultValue="Composed TextField"
+                    type="date"
+                    value={emailed_date}
+                    style={{
+                      fontWeight: "Bold",
+                      fontSize: "14px",
+                    }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      //notifyUser();
+                    }}
+                    readOnly
+                  />
+                )}
               </TableCell>
               <TableCell
                 component="th"
@@ -96,7 +122,25 @@ export default function TableStatus({ trans, id }) {
                 style={{ fontWeight: "bold" }}
                 align="center"
               >
-                {duration_date}
+                {DueDate && (
+                  <FormControl variant="standard">
+                    <Input
+                      id="component-simple"
+                      defaultValue="Composed TextField"
+                      type="date"
+                      value={DueDate}
+                      style={{
+                        fontWeight: "Bold",
+                        fontSize: "14px",
+                        color: "#F55050",
+                      }}
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                        //notifyUser();
+                      }}
+                    />
+                  </FormControl>
+                )}
               </TableCell>
 
               <TableCell
@@ -105,7 +149,25 @@ export default function TableStatus({ trans, id }) {
                 style={{ fontWeight: "bold" }}
                 align="center"
               >
-                {DueDate}
+                {duration_date && (
+                  <FormControl variant="standard">
+                    <Input
+                      id="component-simple"
+                      defaultValue="Composed TextField"
+                      type="date"
+                      value={duration_date}
+                      style={{
+                        fontWeight: "Bold",
+                        fontSize: "14px",
+                        color: "#F0A04B",
+                      }}
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                        //notifyUser();
+                      }}
+                    />
+                  </FormControl>
+                )}
               </TableCell>
 
               <TableCell
@@ -114,7 +176,24 @@ export default function TableStatus({ trans, id }) {
                 style={{ fontWeight: "bold" }}
                 align="center"
               >
-                {delivered_date}
+                {delivered_date != null && (
+                  <Input
+                    id="component-simple"
+                    defaultValue="Composed TextField"
+                    type="date"
+                    value={delivered_date}
+                    style={{
+                      fontWeight: "Bold",
+                      fontSize: "14px",
+                      color: "#1F8A70",
+                    }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      //notifyUser();
+                    }}
+                    readOnly
+                  />
+                )}
               </TableCell>
               <TableCell
                 component="th"
@@ -130,7 +209,24 @@ export default function TableStatus({ trans, id }) {
                 style={{ fontWeight: "bold" }}
                 align="center"
               >
-                {cancelled_date}
+                {cancelled_date != null && (
+                  <Input
+                    id="component-simple"
+                    defaultValue="Composed TextField"
+                    type="date"
+                    value={cancelled_date}
+                    style={{
+                      fontWeight: "Bold",
+                      fontSize: "14px",
+                      color: "#F55050",
+                    }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      //notifyUser();
+                    }}
+                    readOnly
+                  />
+                )}
               </TableCell>
             </TableRow>
           </TableBody>

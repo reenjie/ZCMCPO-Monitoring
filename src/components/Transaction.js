@@ -16,6 +16,7 @@ export default function Transaction({
   load,
   setLoad,
   setRefresh,
+  UndoActions,
 }) {
   const [expanded, setExpanded] = React.useState(false);
 
@@ -50,6 +51,7 @@ export default function Transaction({
                 setLoad={setLoad}
                 setRefresh={setRefresh}
                 Terms={Terms}
+                UndoActions={UndoActions}
               />
             );
           })}

@@ -63,3 +63,7 @@ export const SetStatusUri = () => {
 export const SetEmailedDateUri = () => {
   return `${api}/setEmaileddate`;
 };
+
+export const UndoActionUri = () => {
+  return `${api}/UndoAction`;
+};

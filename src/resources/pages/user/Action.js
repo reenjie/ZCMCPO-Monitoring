@@ -6,11 +6,16 @@ import { Button } from "@mui/material";
 import Transaction from "../../../components/Transaction";
 import { CiCircleList } from "react-icons/ci";
 import { useLocation, useNavigate } from "react-router-dom";
-import { GetPOstatus } from "../../../app/controllers/request/UserRequest";
+import {
+  GetPOstatus,
+  UndoAction,
+} from "../../../app/controllers/request/UserRequest";
 import { TransSkeleton } from "../../../components/TransSkeleton";
 import ActionModal from "../../../components/ActionModal";
 import { FaCogs } from "react-icons/fa";
 import { SetStatus } from "../../../app/controllers/request/UserRequest";
+import { notify } from "../../../components/Sweetalert";
+
 const Action = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,6 +36,9 @@ const Action = () => {
     setLoad(false);
   }, [refresh]);
 
+  const has_number = (string) => {
+    return /\d/.test(string);
+  };
   const action = async ({ id, type }) => {
     const res = await SetStatus({
       id: id,
@@ -50,18 +58,68 @@ const Action = () => {
     action({ id: id, type: "undeliver" });
   };
 
-  const extend = async (id, Terms) => {
-    const deliveryTerms = Terms.match(/\d+/g);
-    console.log(deliveryTerms[0]);
-    //action({ id: id, type: "extend" });
+  const extend = async (id, Terms, duration_date, extendedCount) => {
+    if (has_number(Terms)) {
+      const deliveryTerms = Terms.match(/\d+/g)[0];
+
+      const res = await SetStatus({
+        id: id,
+        typeofaction: "extend",
+        terms: deliveryTerms,
+        due: duration_date,
+        extendedCount: extendedCount,
+      });
+
+      if (res.status === 200) {
+        setRefresh(true);
+        notify({
+          type: "success",
+          title: "Extended!",
+          message: "Item/s was Extended Successfully!",
+        });
+      }
+    } else {
+      /* Save by default but modifiable Due. */
+
+      const res = await SetStatus({
+        id: id,
+        typeofaction: "extend",
+        terms: "default",
+        due: duration_date,
+        extendedCount: extendedCount,
+      });
+
+      if (res.status === 200) {
+        setRefresh(true);
+        notify({
+          type: "success",
+          title: "Extended!",
+          message: "Item/s Due was Extended Successfully!",
+        });
+      }
+    }
   };
 
   const deliver = async (id) => {
     action({ id: id, type: "deliver" });
+    notify({
+      type: "success",
+      title: "Items Marked!",
+      message: "Item/s was Marked Delivered!",
+    });
   };
 
   const remarks = async (id) => {
     action({ id: id, type: "remarks" });
+  };
+
+  const UndoActions = async (id) => {
+    const res = await UndoAction({
+      id: id,
+    });
+    if (res.status === 200) {
+      setRefresh(true);
+    }
   };
 
   return (
@@ -135,6 +193,7 @@ const Action = () => {
             load={load}
             setLoad={setLoad}
             setRefresh={setRefresh}
+            UndoActions={UndoActions}
           />
         ) : (
           <TransSkeleton />

@@ -36,9 +36,17 @@ export const CustomAccordion = ({
   setLoad,
   setRefresh,
   Terms,
+  UndoActions,
 }) => {
   const [expand, setExpand] = useState(false);
+  const formatString = (numberstring) => {
+    let formattedNumberString = Number(numberstring).toLocaleString();
+    return formattedNumberString;
+  };
 
+  const has_number = (string) => {
+    return /\d/.test(string);
+  };
   return (
     <Accordion
       defaultExpanded={index == 0 ? true : false}
@@ -91,7 +99,25 @@ export const CustomAccordion = ({
                     {x.id == "price" || x.id == "vatamt" || x.id == "totAmount"
                       ? "₱ "
                       : ""}
-                    {data[x.id]}
+                    {x.id == "price" ||
+                    x.id == "vatamt" ||
+                    x.id == "totAmount" ||
+                    x.id == "qty" ? (
+                      formatString(data[x.id])
+                    ) : x.id == "Terms" ? (
+                      has_number(data[x.id]) ? (
+                        data[x.id]
+                      ) : (
+                        <>
+                          <span> {data[x.id]} |</span>
+                          <span style={{ fontSize: "11px" }}>
+                            ( By Default: 15 Days Terms added)
+                          </span>
+                        </>
+                      )
+                    ) : (
+                      data[x.id]
+                    )}
                   </span>
                 </Typography>
               );
@@ -117,6 +143,7 @@ export const CustomAccordion = ({
               setLoad={setLoad}
               setRefresh={setRefresh}
               Terms={Terms}
+              UndoActions={UndoActions}
             />
           </Grid>
         </Grid>
