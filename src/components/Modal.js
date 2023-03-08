@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { AddAccounts } from "../resources/pages/admin/components/ModalContent";
+import { SetEmailedDate } from "./SetEmailedDate";
 
 const style = {
   position: "absolute",
@@ -23,6 +24,8 @@ export default function BasicModal({
   setFetch,
   setopenModal,
   openModal,
+  setRefresh,
+  Terms,
 }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -55,6 +58,13 @@ export default function BasicModal({
               data={ModalContent[0].userdata}
               handleClose={setopenModal}
               setFetch={setFetch}
+            />
+          ) : ModalContent[0].typeofcontent == "SetEmailedDate" ? (
+            <SetEmailedDate
+              id={ModalContent[0].data}
+              handleClose={setopenModal}
+              setRefresh={setRefresh}
+              Terms={Terms}
             />
           ) : (
             ""

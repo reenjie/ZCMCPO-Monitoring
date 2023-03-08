@@ -6,11 +6,21 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Alert } from "@mui/material";
+import {
+  Alert,
+  TextField,
+  Box,
+  FormControl,
+  InputLabel,
+  Input,
+} from "@mui/material";
 import { FiCheckCircle } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import "../assets/css/dashboard.css";
+import { notify } from "./Sweetalert";
+
+import "react-toastify/dist/ReactToastify.css";
 export default function TableStatus({ trans, id }) {
   const [loaded, setLoaded] = useState(false);
 
@@ -41,21 +51,24 @@ export default function TableStatus({ trans, id }) {
           <span className="CustomBadge danger">Cancelled</span>
         ) : status == 4 ? (
           <span className="CustomBadge success">Completed</span>
+        ) : status == 5 ? (
+          <span className="CustomBadge warning">Extended</span>
         ) : (
           ""
         )}
       </div>
       <h5>Status</h5>
       <br />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} id="tablestatus">
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
-            <TableRow>
+            <TableRow style={{ backgroundColor: "#E1EEDD" }}>
               <TableCell>Extended</TableCell>
               <TableCell align="center">Extended Times</TableCell>
+              <TableCell align="center">Emailed </TableCell>
               <TableCell align="center">Due </TableCell>
               <TableCell align="center">Extended </TableCell>
-              <TableCell align="center">Emailed </TableCell>
+
               <TableCell align="center">Delivered </TableCell>
               <TableCell align="center">Completed </TableCell>
               <TableCell align="center">Cancelled </TableCell>
@@ -64,7 +77,156 @@ export default function TableStatus({ trans, id }) {
           <TableBody>
             <TableRow>
               <TableCell component="th" scope="row">
-                <FiCheckCircle style={{ color: "#658864" }} /> yes
+                {extendedCount >= 1 && (
+                  <>
+                    {" "}
+                    <FiCheckCircle style={{ color: "#658864" }} /> yes
+                  </>
+                )}
+              </TableCell>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {extendedCount >= 1 ? extendedCount : ""}
+              </TableCell>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {emailed_date != null && (
+                  <Input
+                    id="component-simple"
+                    defaultValue="Composed TextField"
+                    type="date"
+                    value={emailed_date}
+                    style={{
+                      fontWeight: "Bold",
+                      fontSize: "14px",
+                    }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      //notifyUser();
+                    }}
+                    readOnly
+                  />
+                )}
+              </TableCell>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {DueDate && (
+                  <FormControl variant="standard">
+                    <Input
+                      id="component-simple"
+                      defaultValue="Composed TextField"
+                      type="date"
+                      value={DueDate}
+                      style={{
+                        fontWeight: "Bold",
+                        fontSize: "14px",
+                        color: "#F55050",
+                      }}
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                        //notifyUser();
+                      }}
+                    />
+                  </FormControl>
+                )}
+              </TableCell>
+
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {duration_date && (
+                  <FormControl variant="standard">
+                    <Input
+                      id="component-simple"
+                      defaultValue="Composed TextField"
+                      type="date"
+                      value={duration_date}
+                      style={{
+                        fontWeight: "Bold",
+                        fontSize: "14px",
+                        color: "#F0A04B",
+                      }}
+                      onChange={(e) => {
+                        console.log(e.target.value);
+                        //notifyUser();
+                      }}
+                    />
+                  </FormControl>
+                )}
+              </TableCell>
+
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {delivered_date != null && (
+                  <Input
+                    id="component-simple"
+                    defaultValue="Composed TextField"
+                    type="date"
+                    value={delivered_date}
+                    style={{
+                      fontWeight: "Bold",
+                      fontSize: "14px",
+                      color: "#1F8A70",
+                    }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      //notifyUser();
+                    }}
+                    readOnly
+                  />
+                )}
+              </TableCell>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {completed_date}
+              </TableCell>
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ fontWeight: "bold" }}
+                align="center"
+              >
+                {cancelled_date != null && (
+                  <Input
+                    id="component-simple"
+                    defaultValue="Composed TextField"
+                    type="date"
+                    value={cancelled_date}
+                    style={{
+                      fontWeight: "Bold",
+                      fontSize: "14px",
+                      color: "#F55050",
+                    }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      //notifyUser();
+                    }}
+                    readOnly
+                  />
+                )}
               </TableCell>
             </TableRow>
           </TableBody>

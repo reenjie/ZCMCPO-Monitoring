@@ -5,7 +5,19 @@ import { CustomAccordion } from "./CustomAccordion";
 import { useState } from "react";
 import { Button } from "@mui/material";
 
-export default function Transaction({ selection, trans }) {
+export default function Transaction({
+  selection,
+  trans,
+  cancel,
+  undeliver,
+  extend,
+  deliver,
+  remarks,
+  load,
+  setLoad,
+  setRefresh,
+  UndoActions,
+}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -19,7 +31,7 @@ export default function Transaction({ selection, trans }) {
           selection.map((row, key) => {
             const { id, data } = row;
 
-            const { PONo, description, PODate } = data[0];
+            const { PONo, description, PODate, Terms } = data[0];
             return (
               <CustomAccordion
                 key={key}
@@ -30,6 +42,16 @@ export default function Transaction({ selection, trans }) {
                 PODate={PODate}
                 data={data[0]}
                 trans={trans}
+                cancel={cancel}
+                undeliver={undeliver}
+                extend={extend}
+                deliver={deliver}
+                remarks={remarks}
+                load={load}
+                setLoad={setLoad}
+                setRefresh={setRefresh}
+                Terms={Terms}
+                UndoActions={UndoActions}
               />
             );
           })}

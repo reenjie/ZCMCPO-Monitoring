@@ -5,6 +5,8 @@ import {
   FetchRecentUri,
   GetPOstatusUri,
   SetStatusUri,
+  SetEmailedDateUri,
+  UndoActionUri,
 } from "../../uri";
 import axios from "axios";
 
@@ -30,4 +32,12 @@ export const GetPOstatus = async (data) => {
 
 export const SetStatus = async (data) => {
   return await axios.post(SetStatusUri(), data);
+};
+
+export const SetEmailed = async (data) => {
+  return await axios.post(SetEmailedDateUri(), data);
+};
+
+export const UndoAction = async (data) => {
+  return await axios.post(UndoActionUri(), data);
 };

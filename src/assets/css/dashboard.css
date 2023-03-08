@@ -42,6 +42,10 @@
   color: rgb(234, 236, 233);
 }
 
+.warning {
+  background-color: #ddaf31;
+  color: rgb(59, 59, 48);
+}
 .secondary {
   background-color: #767a7e;
   color: rgb(234, 236, 233);
@@ -49,4 +53,28 @@
 
 .notfound {
   width: 300px;
+}
+
+.customDuefield {
+  font-weight: bold;
+}
+
+#tablestatus::-webkit-scrollbar {
+  height: 10px;
+}
+
+/* Track */
+#tablestatus::-webkit-scrollbar-track {
+  background: #3b3c3d;
+}
+
+/* Handle */
+#tablestatus::-webkit-scrollbar-thumb {
+  background: #e1eedd;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+#tablestatus::-webkit-scrollbar-thumb:hover {
+  background: #bbc4b8;
 }
