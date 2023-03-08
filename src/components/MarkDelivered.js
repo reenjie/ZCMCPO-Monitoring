@@ -1,60 +1,29 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Button, TextField, FormControlLabel, Checkbox } from "@mui/material";
-import { SetEmailed } from "../app/controllers/request/UserRequest";
+import { SetDeliveredDate } from "../app/controllers/request/UserRequest";
 import { LoadingButton } from "@mui/lab";
 import { notify } from "./Sweetalert";
-export const SetEmailedDate = ({ id, handleClose, setRefresh, Terms }) => {
+export const MarkDelivered = ({ id, handleClose, setRefresh }) => {
   const [em, setEm] = useState();
   const [error, setError] = useState(false);
   const [load, setLoad] = useState(false);
   const [uncheck, setUncheck] = useState(false);
   const maxDate = new Date().toISOString().split("T")[0];
-  const day = useRef();
-  const check = useRef();
-
-  const has_number = (string) => {
-    return /\d/.test(string);
-  };
   const handleclick = async () => {
     setLoad(true);
     const save = async () => {
-      if (has_number(Terms)) {
-        const deliveryTerms = Terms.match(/\d+/g)[0];
-
-        const req = await SetEmailed({
-          emDate: em,
-          id: id,
-          terms: deliveryTerms,
+      const req = await SetDeliveredDate({
+        id: id,
+        em: em,
+      });
+      if (req.status === 200) {
+        setRefresh(true);
+        handleClose(false);
+        notify({
+          type: "success",
+          title: "Delivered Date Set!",
+          message: "Delivered Date Set Successfully!",
         });
-
-        if (req.status === 200) {
-          notify({
-            type: "success",
-            title: "Emailed Date Set!",
-            message: "Emailed Date Set Successfully!",
-          });
-          setLoad(false);
-          setRefresh(true);
-          handleClose(false);
-        }
-      } else {
-        /* Save by default but modifiable Due. */
-        const req = await SetEmailed({
-          emDate: em,
-          id: id,
-          terms: "default",
-        });
-
-        if (req.status === 200) {
-          notify({
-            type: "success",
-            title: "Emailed Date Set!",
-            message: "Emailed Date Set Successfully!",
-          });
-          setLoad(false);
-          setRefresh(true);
-          handleClose(false);
-        }
       }
     };
     if (em) {
@@ -67,7 +36,7 @@ export const SetEmailedDate = ({ id, handleClose, setRefresh, Terms }) => {
 
   return (
     <div style={{ width: "400px", height: "auto" }}>
-      <h4>Set Emailed Date</h4>
+      <h4 style={{ marginBottom: "20px" }}>Set Delivered Date</h4>
       <div style={{ marginBottom: "20px" }}>
         <TextField
           fullWidth
@@ -80,7 +49,6 @@ export const SetEmailedDate = ({ id, handleClose, setRefresh, Terms }) => {
             setEm(e.target.value);
             setError(false);
           }}
-          href={day}
           value={em}
           disabled={uncheck}
           inputProps={{
@@ -127,17 +95,19 @@ export const SetEmailedDate = ({ id, handleClose, setRefresh, Terms }) => {
             setError(false);
           }}
           size="small"
+          color="error"
         >
           Close
         </Button>
         <LoadingButton
           sx={{ marginLeft: "5px" }}
-          onClick={handleclick}
           variant="contained"
+          color="success"
           size="small"
           loading={load}
+          onClick={handleclick}
         >
-          Save Changes
+          Set Delivered
         </LoadingButton>
       </div>
     </div>

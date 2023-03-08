@@ -6,6 +6,7 @@ import Modal from "@mui/material/Modal";
 import { AddAccounts } from "../resources/pages/admin/components/ModalContent";
 import ActionCheckbox from "./ActionCheckbox";
 import { notify, question } from "./Sweetalert";
+import { Applytoall } from "../app/controllers/request/UserRequest";
 
 import { FaCogs } from "react-icons/fa";
 import ManageItems from "./ManageItems";
@@ -29,15 +30,28 @@ export default function ActionModal({
   setopenModal,
   openModal,
   selection,
+  setRefresh,
 }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [selected, setSelected] = useState();
   const [remarks, setRemarks] = useState();
-  const handleApplytoall = async () => {
-    console.log(remarks);
+  const [clicked, setClicked] = useState();
+  const [emd, setEmd] = useState();
+  const [error, setError] = useState(false);
+
+  const SaveEmail = async () => {
+    const req = await Applytoall({
+      emaildate: emd,
+      selection: selection,
+    });
+
+    if (req.status === 200) {
+      setRefresh(true);
+    }
   };
+
   return (
     <div>
       {Modalbtn}
@@ -64,7 +78,16 @@ export default function ActionModal({
           </span>
 
           <Box p={5}>
-            <ActionCheckbox setSelected={setSelected} setRemarks={setRemarks} />
+            <ActionCheckbox
+              setSelected={setSelected}
+              setRemarks={setRemarks}
+              clicked={clicked}
+              setClicked={setClicked}
+              emd={emd}
+              setEmd={setEmd}
+              error={error}
+              setError={setError}
+            />
           </Box>
 
           <div
@@ -81,6 +104,7 @@ export default function ActionModal({
               onClick={() => {
                 setopenModal(false);
                 setSelected();
+                setError(false);
               }}
             >
               Close
@@ -90,21 +114,31 @@ export default function ActionModal({
               size="small"
               onClick={() => {
                 // setopenModal(false);
-                if (selected) {
-                  question({
-                    title: "Are you sure?",
-                    message: "Changes will be saved to all items selected",
-                    type: "warning",
-                    btndanger: false,
-                    action: handleApplytoall,
-                  });
-                } else {
-                  notify({
-                    type: "error",
-                    title: "No Selection!",
-                    message: "Please Select in the Options First",
-                  });
+                switch (clicked) {
+                  case "emaileddate":
+                    if (emd) {
+                      SaveEmail();
+                    } else {
+                      setError(true);
+                    }
+
+                    break;
                 }
+                // if (selected) {
+                //   question({
+                //     title: "Are you sure?",
+                //     message: "Changes will be saved to all items selected",
+                //     type: "warning",
+                //     btndanger: false,
+                //     action: handleApplytoall,
+                //   });
+                // } else {
+                //   notify({
+                //     type: "error",
+                //     title: "No Selection!",
+                //     message: "Please Select in the Options First",
+                //   });
+                // }
               }}
               style={{ marginLeft: "10px" }}
             >

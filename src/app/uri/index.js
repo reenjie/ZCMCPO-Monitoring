@@ -67,3 +67,15 @@ export const SetEmailedDateUri = () => {
 export const UndoActionUri = () => {
   return `${api}/UndoAction`;
 };
+
+export const UpdateDueUri = () => {
+  return `${api}/UpdateDue`;
+};
+
+export const SetDeliveredDateURI = () => {
+  return `${api}/SetDeliveredDate`;
+};
+
+export const ApplytoallUri = () => {
+  return `${api}/Applytoall`;
+};
