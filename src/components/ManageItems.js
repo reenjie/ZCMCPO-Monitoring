@@ -18,6 +18,7 @@ function ManageItems({
   UndoActions,
   extendDis,
   setExtenddis,
+  MarkCompleted,
 }) {
   const {
     extendedCount,
@@ -63,6 +64,11 @@ function ManageItems({
     }
   };
 
+  const handleComplete = () => {
+    MarkCompleted(id);
+    setLoad(true);
+    setLoader("completed");
+  };
   const extendTerms = () => {
     const thisday = new Date();
     const isoString = thisday.toISOString();
@@ -127,24 +133,6 @@ function ManageItems({
             setRefresh={setRefresh}
             Terms={Terms}
           />
-
-          {/* <LoadingButton
-            variant="contained"
-            color="success"
-            onClick={() => {
-              question({
-                title: "Are you sure",
-                message: "you want to cancel transaction?",
-                type: "warning",
-                btndanger: false,
-                action: handleDeliver,
-              });
-            }}
-         
-            loading={loader == "deliver" ? load : false}
-          >
-         
-          </LoadingButton> */}
 
           <BasicModal
             openModal={openModal1}
@@ -268,13 +256,7 @@ function ManageItems({
               });
             }}
             disabled={
-              status == 3
-                ? true
-                : emailed_date == null
-                ? true
-                : delivered_date == null
-                ? false
-                : true
+              status == 3 ? true : delivered_date == null ? false : true
             }
             loading={loader == "cancel" ? load : false}
           >
@@ -313,25 +295,26 @@ function ManageItems({
             remarks={remarks}
           />
 
-          {delivered_date != null && (
+          {delivered_date != null && completed_date == null && (
             <>
-              <Button
+              <LoadingButton
                 variant="contained"
                 color="success"
                 onClick={() => {
                   question({
                     title: "Are you sure",
-                    message: "you want to cancel transaction?",
+                    message: "you want to Mark this transaction as Completed?",
                     type: "warning",
                     btndanger: false,
-                    // action: remarks,
+                    action: handleComplete,
                   });
                 }}
+                loading={loader == "completed" ? load : false}
               >
                 <div style={{ display: "flex" }}>
                   <h5>Mark as Completed</h5>
                 </div>
-              </Button>
+              </LoadingButton>
             </>
           )}
 

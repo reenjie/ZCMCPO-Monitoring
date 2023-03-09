@@ -40,6 +40,7 @@ export const CustomAccordion = ({
   UpdateDates,
   extendDis,
   setExtenddis,
+  MarkCompleted,
 }) => {
   const [expand, setExpand] = useState(false);
   const formatString = (numberstring) => {
@@ -156,6 +157,7 @@ export const CustomAccordion = ({
               UndoActions={UndoActions}
               extendDis={extendDis}
               setExtenddis={setExtenddis}
+              MarkCompleted={MarkCompleted}
             />
           </Grid>
         </Grid>

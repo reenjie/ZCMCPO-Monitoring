@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   GetPOstatus,
   UndoAction,
+  MarkComplete,
 } from "../../../app/controllers/request/UserRequest";
 import { TransSkeleton } from "../../../components/TransSkeleton";
 import ActionModal from "../../../components/ActionModal";
@@ -134,6 +135,16 @@ const Action = () => {
     }
   };
 
+  const MarkCompleted = async (id) => {
+    const req = await MarkComplete({
+      id: id,
+    });
+
+    if (req.status === 200) {
+      setRefresh(true);
+    }
+  };
+
   return (
     <div>
       <UserLayout SidebarNav={UserSidebar} view={true} />
@@ -211,6 +222,7 @@ const Action = () => {
             UpdateDates={UpdateDates}
             extendDis={extendDis}
             setExtenddis={setExtenddis}
+            MarkCompleted={MarkCompleted}
           />
         ) : (
           <TransSkeleton />

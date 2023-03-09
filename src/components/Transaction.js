@@ -20,6 +20,7 @@ export default function Transaction({
   UpdateDates,
   setExtenddis,
   extendDis,
+  MarkCompleted,
 }) {
   const [expanded, setExpanded] = React.useState(false);
 
@@ -58,6 +59,7 @@ export default function Transaction({
                 UpdateDates={UpdateDates}
                 extendDis={extendDis}
                 setExtenddis={setExtenddis}
+                MarkCompleted={MarkCompleted}
               />
             );
           })}

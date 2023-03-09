@@ -10,6 +10,7 @@ import {
   UpdateDueUri,
   SetDeliveredDateURI,
   ApplytoallUri,
+  MarkCompleteURI,
 } from "../../uri";
 import axios from "axios";
 
@@ -55,4 +56,8 @@ export const SetDeliveredDate = async (data) => {
 
 export const Applytoall = async (data) => {
   return await axios.post(ApplytoallUri(), data);
+};
+
+export const MarkComplete = async (data) => {
+  return await axios.post(MarkCompleteURI(), data);
 };

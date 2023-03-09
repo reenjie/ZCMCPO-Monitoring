@@ -79,3 +79,7 @@ export const SetDeliveredDateURI = () => {
 export const ApplytoallUri = () => {
   return `${api}/Applytoall`;
 };
+
+export const MarkCompleteURI = () => {
+  return `${api}/MarkComplete`;
+};

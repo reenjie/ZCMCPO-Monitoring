@@ -24,6 +24,8 @@ export default function ActionCheckbox({
   setEmd,
   error,
   setError,
+  emd1,
+  setEmd1,
 }) {
   const [state, setState] = React.useState({
     cancelled: true,
@@ -42,7 +44,7 @@ export default function ActionCheckbox({
 
   const { cancelled, undelivered, extended } = state;
   return (
-    <Box sx={{ transition: "ease-in-out .4s" }}>
+    <Box sx={{ transition: "ease-in-out .4s", fontSize: "13px" }}>
       <FormLabel id="demo-row-radio-buttons-group-label">
         Choose Transaction
       </FormLabel>
@@ -59,6 +61,7 @@ export default function ActionCheckbox({
               setSelected(e.target.value);
               setClicked(e.target.value);
             }}
+            style={{ color: "#3E54AC" }}
           />
           {clicked == "emaileddate" && (
             <Box p={1}>
@@ -113,6 +116,7 @@ export default function ActionCheckbox({
               setSelected(e.target.value);
               setClicked(e.target.value);
             }}
+            style={{ color: "#F16767" }}
           />
           <FormControlLabel
             value="Undelivered"
@@ -122,6 +126,7 @@ export default function ActionCheckbox({
               setSelected(e.target.value);
               setClicked(e.target.value);
             }}
+            style={{ color: "#F16767" }}
           />
 
           <FormControlLabel
@@ -132,6 +137,7 @@ export default function ActionCheckbox({
               setSelected(e.target.value);
               setClicked(e.target.value);
             }}
+            style={{ color: "#F0A04B" }}
           />
 
           <FormControlLabel
@@ -142,7 +148,65 @@ export default function ActionCheckbox({
               setSelected(e.target.value);
               setClicked(e.target.value);
             }}
+            style={{ color: "#03C988" }}
           />
+
+          <FormControlLabel
+            value="Complete"
+            control={<Radio />}
+            label="Mark as Completed"
+            onClick={(e) => {
+              setSelected(e.target.value);
+              setClicked(e.target.value);
+            }}
+            style={{ color: "#03C988" }}
+          />
+
+          {clicked == "Delivered" && (
+            <Box p={1}>
+              <TextField
+                fullWidth
+                id="outlined-basic"
+                variant="outlined"
+                type={"date"}
+                error={error}
+                style={{ marginBottom: "5px" }}
+                onChange={(e) => {
+                  setEmd1(e.target.value);
+                }}
+                value={emd1}
+                inputProps={{
+                  max: maxDate,
+                }}
+                disabled={uncheck}
+              />
+
+              {error && (
+                <span style={{ color: "#F16767", fontSize: "12px" }}>
+                  Please provide a Date
+                </span>
+              )}
+              <br />
+              <FormControlLabel
+                onClick={(e) => {
+                  if (e.target.checked == true) {
+                    //uncheck
+                    const thisday = new Date();
+                    const isoString = thisday.toISOString();
+                    const formattedDate = isoString.substring(0, 10);
+                    setEmd1(formattedDate);
+                    setUncheck(true);
+                    setError(false);
+                  } else {
+                    setEmd1("");
+                    setUncheck(false);
+                  }
+                }}
+                control={<Checkbox />}
+                label="Today"
+              />
+            </Box>
+          )}
           <FormControlLabel
             value="Remarks"
             control={<Radio />}
@@ -151,6 +215,7 @@ export default function ActionCheckbox({
               setSelected(e.target.value);
               setClicked(e.target.value);
             }}
+            style={{ color: "#3E54AC" }}
           />
           {clicked == "Remarks" && (
             <Box p={1}>
@@ -165,6 +230,17 @@ export default function ActionCheckbox({
               />
             </Box>
           )}
+
+          <FormControlLabel
+            value="Undo"
+            control={<Radio />}
+            label="Undo"
+            onClick={(e) => {
+              setSelected(e.target.value);
+              setClicked(e.target.value);
+            }}
+            style={{ color: "#F16767" }}
+          />
         </Stack>
       </RadioGroup>
     </Box>

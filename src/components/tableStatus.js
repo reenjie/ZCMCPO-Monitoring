@@ -145,6 +145,7 @@ export default function TableStatus({
                         UpdateDates(id, e.target.value, "DueDate");
                         setExtenddis(false);
                       }}
+                      readOnly={completed_date || cancelled_date ? true : false}
                     />
                   </FormControl>
                 )}
@@ -172,6 +173,7 @@ export default function TableStatus({
                         UpdateDates(id, e.target.value, "duration_date");
                         setExtenddis(false);
                       }}
+                      readOnly={completed_date || cancelled_date ? true : false}
                     />
                   </FormControl>
                 )}
@@ -208,7 +210,24 @@ export default function TableStatus({
                 style={{ fontWeight: "bold" }}
                 align="center"
               >
-                {completed_date}
+                {completed_date && (
+                  <Input
+                    id="component-simple"
+                    defaultValue="Composed TextField"
+                    type="date"
+                    value={completed_date}
+                    style={{
+                      fontWeight: "Bold",
+                      fontSize: "14px",
+                      color: "#1F8A70",
+                    }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      //notifyUser();
+                    }}
+                    readOnly
+                  />
+                )}
               </TableCell>
               <TableCell
                 component="th"
@@ -243,7 +262,7 @@ export default function TableStatus({
         <>
           <br />
           <h5>Remarks :</h5>
-          <span style={{ fontSize: "15px" }}>{remarks}</span>
+          <span style={{ fontSize: "15px", color: "#F55050" }}>{remarks}</span>
         </>
       )}
     </>
