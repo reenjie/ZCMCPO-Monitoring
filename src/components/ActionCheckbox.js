@@ -7,7 +7,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import { FormLabel, Stack, TextField, Input } from "@mui/material";
 import { useState, useRef } from "react";
 
-export default function ActionCheckbox({ setSelected, setRemarks }) {
+export default function ActionCheckbox({ id, setSelected, setRemarks }) {
   const [state, setState] = React.useState({
     cancelled: true,
     undelivered: false,
@@ -23,14 +23,21 @@ export default function ActionCheckbox({ setSelected, setRemarks }) {
 
   return (
     <Box sx={{ transition: "ease-in-out .4s" }}>
-      <FormLabel id="demo-row-radio-buttons-group-label">
-        Choose Transaction
-      </FormLabel>
+      <FormLabel id={id}>Choose Transaction</FormLabel>
       <RadioGroup
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
       >
         <Stack>
+          <FormControlLabel
+            value="email"
+            control={<Radio />}
+            label="Set Emailed Date"
+            onClick={(e) => {
+              setSelected(e.target.value);
+              setClicked(e.target.value);
+            }}
+          />
           <FormControlLabel
             value="cancel"
             control={<Radio />}

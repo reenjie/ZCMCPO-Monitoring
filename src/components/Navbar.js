@@ -5,7 +5,7 @@ import Logo from "../assets/image/zcmc_logo.png";
 function Navbar() {
   return (
     <div>
-      <Grid container sx={{ width: "100%" }}>
+      <Grid container sx={{ width: "90%" }}>
         <Grid item xl={10} lg={10} sx={{ height: "60px", mt: 2 }}>
           <Box display="flex">
             <img src={Logo} height={60} />
@@ -33,9 +33,38 @@ function Navbar() {
           <Link
             href="/login"
             underline="none"
-            sx={{ height: "50px", mx: 3, fontSize: "25px", color: "green" }}
+            sx={{
+              height: "50px",
+              mx: 3,
+              fontSize: "25px",
+              color: "green",
+            }}
           >
-            Login
+            HOME
+          </Link>
+          <Link
+            href="/login"
+            underline="none"
+            sx={{
+              height: "50px",
+              mx: 3,
+              fontSize: "25px",
+              color: "green",
+            }}
+          >
+            LOGIN
+          </Link>
+          <Link
+            href="/login"
+            underline="none"
+            sx={{
+              height: "50px",
+              mx: 3,
+              fontSize: "25px",
+              color: "green",
+            }}
+          >
+            ABOUT
           </Link>
         </Grid>
       </Grid>

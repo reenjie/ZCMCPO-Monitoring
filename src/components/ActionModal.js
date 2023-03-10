@@ -3,14 +3,10 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { AddAccounts } from "../resources/pages/admin/components/ModalContent";
 import ActionCheckbox from "./ActionCheckbox";
 import { notify, question } from "./Sweetalert";
-import { CustomAccordion } from "./CustomAccordion";
 import { SetStatus } from "../app/controllers/request/UserRequest";
-
 import { FaCogs } from "react-icons/fa";
-import ManageItems from "./ManageItems";
 import { useState } from "react";
 const style = {
   position: "absolute",
@@ -25,6 +21,7 @@ const style = {
 };
 
 export default function ActionModal({
+  id,
   Modalbtn,
   ModalContent,
   setFetch,
@@ -38,21 +35,23 @@ export default function ActionModal({
   const [selected, setSelected] = useState();
   const [remarks, setRemarks] = useState();
 
+  console.log(id);
+
   const handleApplytoall = async () => {
     const res = await SetStatus({
-      selection: selection,
-      selected: selected,
       typeofaction: "Updateall",
+      selection: id,
+      selected: selected,
+      // typeofaction: "Updateall",
     });
   };
-
-  console.log(selected);
-
+  console.log(selection);
   return (
     <div>
       {Modalbtn}
 
       <Modal
+        id={id}
         open={openModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"

@@ -24,7 +24,7 @@ const Action = () => {
   const [trans, setTrans] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [load, setLoad] = useState(false);
-  const applyall = () => {};
+
   const fetch = async () => {
     const fetchrecent = await GetPOstatus({});
     setTrans(fetchrecent.data.data);
@@ -154,6 +154,7 @@ const Action = () => {
           Managing Item{selection && selection.length >= 2 ? "s" : ""}{" "}
           <CiCircleList style={{ paddingTop: "2px" }} />
           <ActionModal
+            selection={selection}
             Modalbtn={
               <Button
                 color="success"

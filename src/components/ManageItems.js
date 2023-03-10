@@ -36,6 +36,7 @@ function ManageItems({
     setLoad(true);
     setLoader("cancel");
   };
+  console.log(id);
   const handleUndeliver = () => {
     undeliver(id);
     setLoad(true);
