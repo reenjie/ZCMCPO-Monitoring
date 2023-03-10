@@ -24,6 +24,11 @@ function Dashboard({ usertype }) {
   const [columnchoice, setColumnChoice] = useState(defaultcolumns);
   const [recent, setRecent] = useState([]);
 
+  const [emailed, setEmailed] = useState(new Date());
+  const [delivered, setDelivered] = useState(new Date());
+  const [completed, setCompleted] = useState(new Date());
+  const [due, setDue] = useState(new Date());
+
   const [recentfilter, setRecentfilter] = useState(false);
   const fetch = async () => {
     const res = await FetchPurchaseOrder();
@@ -39,6 +44,8 @@ function Dashboard({ usertype }) {
   useEffect(() => {
     fetch();
   }, []);
+
+  console.log(emailed);
 
   const handleSelection = (e) => {
     const id = e.target.value;
@@ -102,6 +109,14 @@ function Dashboard({ usertype }) {
               setRecentfilter={setRecentfilter}
               recent={recent}
               recentfilter={recentfilter}
+              emailed={emailed}
+              setEmailed={setEmailed}
+              delivered={delivered}
+              setDelivered={setDelivered}
+              completed={completed}
+              setCompleted={setCompleted}
+              due={due}
+              setDue={setDue}
             />
           </Container>
         </div>

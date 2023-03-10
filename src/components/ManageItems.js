@@ -4,6 +4,8 @@ import { notify, question } from "../components/Sweetalert";
 import { LoadingButton } from "@mui/lab";
 import BasicModal from "./Modal";
 import { FaCogs } from "react-icons/fa";
+import { BiLoaderCircle } from "react-icons/bi";
+import { RotatingLines } from "react-loader-spinner";
 function ManageItems({
   id,
   cancel,
@@ -29,7 +31,7 @@ function ManageItems({
     completed_date,
     cancelled_date,
     DueDate,
-    DueDate1,
+    confirmation,
     status,
     remarks,
   } = trans.filter((x) => x.FK_PoID == id)[0];
@@ -214,7 +216,7 @@ function ManageItems({
                   title: "Action Denied",
                   message: "The due date is now overdue.",
                 }).then(() => {
-                  setExtenddis(true);
+                  //setExtenddis(true);
                 });
               } else {
                 question({
@@ -294,38 +296,64 @@ function ManageItems({
             Terms={Terms}
             remarks={remarks}
           />
+          {!confirmation &&
+            delivered_date != null &&
+            completed_date == null && (
+              <>
+                <LoadingButton
+                  variant="contained"
+                  color="success"
+                  onClick={() => {
+                    question({
+                      title: "Are you sure",
+                      message:
+                        "you want to Mark this transaction as Completed?",
+                      type: "warning",
+                      btndanger: false,
+                      action: handleComplete,
+                    });
+                  }}
+                  loading={loader == "completed" ? load : false}
+                >
+                  <div style={{ display: "flex" }}>
+                    <h5>Mark as Completed</h5>
+                  </div>
+                </LoadingButton>
+              </>
+            )}
 
-          {delivered_date != null && completed_date == null && (
+          {confirmation == 1 ? (
             <>
-              <LoadingButton
-                variant="contained"
-                color="success"
-                onClick={() => {
-                  question({
-                    title: "Are you sure",
-                    message: "you want to Mark this transaction as Completed?",
-                    type: "warning",
-                    btndanger: false,
-                    action: handleComplete,
-                  });
+              <div
+                style={{
+                  padding: "5px",
+                  fontSize: "14px",
+                  textAlign: "center",
+                  color: "#DC3535",
+                  alignSelf: "center",
                 }}
-                loading={loader == "completed" ? load : false}
               >
                 <div style={{ display: "flex" }}>
-                  <h5>Mark as Completed</h5>
+                  <span>Waiting for Confirmation </span>
+                  <RotatingLines
+                    strokeColor="grey"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    width="20"
+                    visible={true}
+                  />
                 </div>
-              </LoadingButton>
+              </div>
             </>
-          )}
-
-          {delivered_date != null || cancelled_date != null ? (
+          ) : delivered_date != null || cancelled_date != null ? (
             <Button
               variant="contained"
               color="error"
               onClick={() => {
                 question({
                   title: "Are you sure",
-                  message: "you want to redo actions?",
+                  message:
+                    "you want to redo actions? , Your request will not be granted until you receive confirmation and wait for it.",
                   type: "warning",
                   btndanger: false,
                   action: undo,

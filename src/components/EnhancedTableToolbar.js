@@ -23,7 +23,6 @@ import { CiViewList } from "react-icons/ci";
 import { CustomView } from "./CustomView";
 export const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
-  const [value, setValue] = useState("");
   const [openCustom, setOpenCustom] = useState(false);
 
   const supplier = [
@@ -189,24 +188,32 @@ export const EnhancedTableToolbar = (props) => {
                     }
                   />
                   <CustomDatePicker
-                    value={value}
-                    setValue={setValue}
+                    value={props.emailed}
+                    setValue={props.setEmailed}
                     label="Emailed Date"
+                    setSort={props.setSort}
+                    sort={props.sort}
                   />
                   <CustomDatePicker
-                    value={value}
-                    setValue={setValue}
+                    value={props.delivered}
+                    setValue={props.setDelivered}
                     label="Delivered Date"
+                    setSort={props.setSort}
+                    sort={props.sort}
                   />
                   <CustomDatePicker
-                    value={value}
-                    setValue={setValue}
+                    value={props.completed}
+                    setValue={props.setCompleted}
                     label="Completed Date"
+                    setSort={props.setSort}
+                    sort={props.sort}
                   />
                   <CustomDatePicker
-                    value={value}
-                    setValue={setValue}
+                    value={props.due}
+                    setValue={props.setDue}
                     label="Due Date"
+                    setSort={props.setSort}
+                    sort={props.sort}
                   />
                 </Box>
               </Box>

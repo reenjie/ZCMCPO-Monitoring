@@ -41,6 +41,14 @@ export default function CustomPaginationActionsTable({
   recentfilter,
   setRecent,
   setRecentfilter,
+  emailed,
+  setEmailed,
+  delivered,
+  setDelivered,
+  completed,
+  setCompleted,
+  due,
+  setDue,
 }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -131,6 +139,14 @@ export default function CustomPaginationActionsTable({
             setRecent={setRecent}
             setRecentfilter={setRecentfilter}
             recentfilter={recentfilter}
+            emailed={emailed}
+            setEmailed={setEmailed}
+            delivered={delivered}
+            setDelivered={setDelivered}
+            completed={completed}
+            setCompleted={setCompleted}
+            due={due}
+            setDue={setDue}
           />
         </Box>
       ) : (
