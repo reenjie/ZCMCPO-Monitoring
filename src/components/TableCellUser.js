@@ -32,58 +32,65 @@ export const TableCellUser = ({
   };
   return (
     <TableCell key={columnid} align={columnalign}>
-      {columnid == "PK_posID" ? (
-        <Checkbox
-          value={value}
-          checked={
-            selection.length >= 1
-              ? selection.filter((x) => x.id == value).length >= 1
-                ? true
+      <h4 style={{ fontWeight: "normal" }}>
+        {columnid == "PK_posID" ? (
+          <Checkbox
+            value={value}
+            checked={
+              selection.length >= 1
+                ? selection.filter((x) => x.id == value).length >= 1
+                  ? true
+                  : false
                 : false
-              : false
-          }
-          onChange={handleSelection}
-        />
-      ) : columnid == "status_" ? (
-        <></>
-      ) : columnid == "action" ? (
-        <>
-          <Tooltip title="View">
-            <LoadingButton
-              variant="text"
-              size="small"
-              loading={load}
-              color="info"
-              onClick={viewed}
-            >
-              <MdOutlineRemoveRedEye style={{ fontSize: "18px" }} />
-            </LoadingButton>
-          </Tooltip>
-        </>
-      ) : columnid == "PONo" ? (
-        <div>
-          {row.newtag == 1 ? (
-            /* badge success */
-            <div className="CustomBadge success" style={{ marginRight: "5px" }}>
-              New
-            </div>
-          ) : (
-            ""
-          )}
+            }
+            onChange={handleSelection}
+          />
+        ) : columnid == "status_" ? (
+          <></>
+        ) : columnid == "action" ? (
+          <>
+            <Tooltip title="View">
+              <LoadingButton
+                variant="text"
+                size="small"
+                loading={load}
+                color="info"
+                onClick={viewed}
+              >
+                <MdOutlineRemoveRedEye style={{ fontSize: "18px" }} />
+              </LoadingButton>
+            </Tooltip>
+          </>
+        ) : columnid == "PONo" ? (
+          <div>
+            {row.newtag == 1 ? (
+              /* badge success */
+              <div
+                className="CustomBadge success"
+                style={{ marginRight: "5px" }}
+              >
+                New
+              </div>
+            ) : (
+              ""
+            )}
 
-          <span
-            style={{
-              fontWeight: "bold",
-              color: "#F16767",
-            }}
-          >
-            {" "}
-            {value}
-          </span>
-        </div>
-      ) : (
-        Bolderized(value)
-      )}
+            <span
+              style={{
+                fontWeight: "bold",
+                color: "#F16767",
+              }}
+            >
+              {" "}
+              {value}
+            </span>
+          </div>
+        ) : (
+          Bolderized(value)
+        )}
+      </h4>
     </TableCell>
   );
 };
+
+/* FVLDp6&m */

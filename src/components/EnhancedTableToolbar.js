@@ -102,6 +102,9 @@ export const EnhancedTableToolbar = (props) => {
         setRecent={props.setRecent}
         closedrawer={props.setOpendrawer}
         recentfilter={props.recentfilter}
+        setCardShow={props.setCardShow}
+        setBorderC={props.setBorderC}
+        cardShow={props.cardShow}
       />
 
       {numSelected > 0 ? (
@@ -181,6 +184,10 @@ export const EnhancedTableToolbar = (props) => {
                   />
                   <CustomButton
                     label="Extension"
+                    setSort={props.setSort}
+                    sort={props.sort}
+                    closeDrawer={props.setOpendrawer}
+                    setscuFilter={props.setscuFilter}
                     Icon={
                       <BiTimeFive
                         style={{ marginLeft: "2px", fontSize: "17px" }}
@@ -226,7 +233,7 @@ export const EnhancedTableToolbar = (props) => {
                     props.setOpendrawer(false);
                   }}
                 >
-                  Close <SlClose style={{ marginLeft: "3px" }} />
+                  <h4> Close</h4> <SlClose style={{ marginLeft: "3px" }} />
                 </Button>
                 {!props.scuFilter && (
                   <Button
@@ -251,7 +258,8 @@ export const EnhancedTableToolbar = (props) => {
                       }
                     }}
                   >
-                    Proceed <FiCheckCircle style={{ marginLeft: "3px" }} />
+                    <h4> Proceed </h4>
+                    <FiCheckCircle style={{ marginLeft: "3px" }} />
                   </Button>
                 )}
               </Box>

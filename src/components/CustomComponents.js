@@ -50,6 +50,7 @@ export const CustomSelect = ({ label, data, sort, setSort }) => {
                 {
                   labelled: label,
                   value: newValue,
+                  table: "select",
                 },
               ]);
               return;
@@ -58,6 +59,7 @@ export const CustomSelect = ({ label, data, sort, setSort }) => {
                 {
                   labelled: label,
                   value: newValue,
+                  table: "select",
                 },
               ]);
               return;
@@ -77,6 +79,9 @@ export const CustomButton = ({
   setOpenCustom,
   setRecentfilter,
   closeDrawer,
+  sort,
+  setSort,
+  setscuFilter,
 }) => {
   return (
     <FormControl
@@ -94,6 +99,16 @@ export const CustomButton = ({
           } else if (label === "Recent") {
             setRecentfilter(true);
             closeDrawer(false);
+          } else if (label === "Extension") {
+            setSort([
+              {
+                labelled: label,
+                value: "Extended Item/s",
+                table: "search",
+              },
+            ]);
+            closeDrawer(false);
+            setscuFilter(true);
           }
         }}
       >
@@ -128,6 +143,7 @@ export const CustomDatePicker = ({ value, setValue, label, sort, setSort }) => {
         {
           labelled: label,
           value: date.toISOString().split("T")[0],
+          table: "dateandtime",
         },
       ]);
       return;
@@ -136,6 +152,7 @@ export const CustomDatePicker = ({ value, setValue, label, sort, setSort }) => {
         {
           labelled: label,
           value: date.toISOString().split("T")[0],
+          table: "dateandtime",
         },
       ]);
       return;

@@ -20,7 +20,7 @@ import React, { useEffect, useState } from "react";
 import { EnhancedTableToolbar } from "./EnhancedTableToolbar";
 import notf from "../assets/image/notfound.jpg";
 import { AiOutlineClockCircle } from "react-icons/ai";
-
+import { RotatingLines } from "react-loader-spinner";
 import "../assets/css/dashboard.css";
 
 export default function CustomPaginationActionsTable({
@@ -49,6 +49,12 @@ export default function CustomPaginationActionsTable({
   setCompleted,
   due,
   setDue,
+  cardShow,
+  setCardShow,
+  cardCont,
+  setCardcont,
+  borderC,
+  setBorderC,
 }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -59,6 +65,7 @@ export default function CustomPaginationActionsTable({
   const [sort, setSort] = useState([]);
   const [scuFilter, setscuFilter] = useState(false);
   const [SCUData, setSCUdata] = useState([]);
+  const [loaderf, setLoaderf] = useState(false);
 
   const filter = async () => {
     const result = await FetchAdvanceSortSCU({
@@ -68,6 +75,7 @@ export default function CustomPaginationActionsTable({
   };
   useEffect(() => {
     filter();
+    loadsearch();
   }, [sort]);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -89,20 +97,35 @@ export default function CustomPaginationActionsTable({
       return value;
     }
   };
+  const loadsearch = () => {
+    setLoaderf(false);
+    setTimeout(() => {
+      setLoaderf(true);
+    }, 3000);
+  };
 
   const contentSearch = () => {
     if (tabletype == "dashboard") {
       if (rows[0]) {
         if (search) {
+          setCardShow(false);
+          setRecentfilter(false);
           return rows[0].filter((x) => x.PONo == search);
         }
 
         if (scuFilter) {
+          setRecentfilter(false);
+          setCardShow(false);
           return SCUData;
         }
 
         if (recentfilter) {
+          setCardShow(false);
           return recent;
+        }
+
+        if (cardShow) {
+          return cardCont;
         }
 
         return rows[0];
@@ -115,9 +138,19 @@ export default function CustomPaginationActionsTable({
         : [];
     }
   };
+  const cardborder = () => {
+    return cardShow ? `20px solid ${borderC}` : "transparent";
+  };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <Paper
+      sx={{
+        width: "100%",
+        overflow: "hidden",
+        borderLeft: cardborder(),
+        transition: "all ease-in-out 0.4s",
+      }}
+    >
       {tabletype == "dashboard" ? (
         <Box p={3}>
           <EnhancedTableToolbar
@@ -147,11 +180,15 @@ export default function CustomPaginationActionsTable({
             setCompleted={setCompleted}
             due={due}
             setDue={setDue}
+            setCardShow={setCardShow}
+            setBorderC={setBorderC}
+            cardShow={cardShow}
           />
         </Box>
       ) : (
         ""
       )}
+
       {scuFilter
         ? sort.length >= 1 && (
             <Box p={5}>
@@ -199,7 +236,9 @@ export default function CustomPaginationActionsTable({
       {selection.length >= 1 && (
         <Selection selection={selection} setSelection={setSelection} />
       )}
-      <TableContainer sx={{ maxHeight: 640 }}>
+      <TableContainer
+        sx={{ maxHeight: 640, transition: "all ease-in-out 0.4s" }}
+      >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -269,7 +308,19 @@ export default function CustomPaginationActionsTable({
                   colSpan={columns.length}
                 >
                   <img src={notf} className="notfound" />
-                  <h3>NO DATA FOUND</h3>
+                  <h3>
+                    {loaderf ? (
+                      "No Data Found"
+                    ) : (
+                      <RotatingLines
+                        strokeColor="grey"
+                        strokeWidth="5"
+                        animationDuration="0.75"
+                        width="40"
+                        visible={true}
+                      />
+                    )}
+                  </h3>
                 </TableCell>
               </TableRow>
             )}

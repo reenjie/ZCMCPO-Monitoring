@@ -83,3 +83,7 @@ export const ApplytoallUri = () => {
 export const MarkCompleteURI = () => {
   return `${api}/MarkComplete`;
 };
+
+export const cardCountUri = () => {
+  return `${api}/cardCount`;
+};

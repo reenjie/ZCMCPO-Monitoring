@@ -12,6 +12,7 @@ import { AdminSidebar } from "../layouts/navs/NavData";
 import {
   FetchPurchaseOrder,
   FetchRecent,
+  cardCount,
 } from "../../../app/controllers/request/UserRequest";
 import { Autocomplete, Box, TextField } from "@mui/material";
 import CustomPaginationActionsTable from "../../../components/Table";
@@ -23,11 +24,16 @@ function Dashboard({ usertype }) {
   const [selection, setSelection] = useState([]);
   const [columnchoice, setColumnChoice] = useState(defaultcolumns);
   const [recent, setRecent] = useState([]);
+  const [Countofcards, setCountofCards] = useState([]);
 
   const [emailed, setEmailed] = useState(new Date());
   const [delivered, setDelivered] = useState(new Date());
   const [completed, setCompleted] = useState(new Date());
   const [due, setDue] = useState(new Date());
+
+  const [cardShow, setCardShow] = useState(false);
+  const [cardCont, setCardcont] = useState([]);
+  const [borderC, setBorderC] = useState("");
 
   const [recentfilter, setRecentfilter] = useState(false);
   const fetch = async () => {
@@ -40,17 +46,18 @@ function Dashboard({ usertype }) {
 
     const fetchrecent = await FetchRecent({});
     setRecent(fetchrecent.data.data);
+
+    const fetchcountcard = await cardCount({});
+    setCountofCards(fetchcountcard.data.data);
   };
   useEffect(() => {
     fetch();
   }, []);
 
-  console.log(emailed);
-
   const handleSelection = (e) => {
     const id = e.target.value;
     const row = data.filter((x) => x.PK_posID == id);
-
+    setCardShow(false);
     if (selection.length >= 1) {
       for (let { id: Rowid } of selection) {
         if (id === Rowid) {
@@ -91,7 +98,15 @@ function Dashboard({ usertype }) {
       <Main>
         <div>
           <Container maxWidth="xl">
-            <Status />
+            <Status
+              Countofcards={Countofcards}
+              cardShow={cardShow}
+              setCardShow={setCardShow}
+              cardCont={cardCont}
+              setCardcont={setCardcont}
+              borderC={borderC}
+              setBorderC={setBorderC}
+            />
           </Container>
 
           <Container maxWidth="xl" sx={{ py: 5 }}>
@@ -117,6 +132,12 @@ function Dashboard({ usertype }) {
               setCompleted={setCompleted}
               due={due}
               setDue={setDue}
+              cardShow={cardShow}
+              setCardShow={setCardShow}
+              cardCont={cardCont}
+              setCardcont={setCardcont}
+              borderC={borderC}
+              setBorderC={setBorderC}
             />
           </Container>
         </div>

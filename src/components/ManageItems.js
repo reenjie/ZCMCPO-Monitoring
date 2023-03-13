@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, Stack, Button } from "@mui/material";
+import { Typography, Stack, Button, Box } from "@mui/material";
 import { notify, question } from "../components/Sweetalert";
 import { LoadingButton } from "@mui/lab";
 import BasicModal from "./Modal";
@@ -332,9 +332,13 @@ function ManageItems({
                   color: "#DC3535",
                   alignSelf: "center",
                 }}
+                fullWidth
               >
                 <div style={{ display: "flex" }}>
-                  <span>Waiting for Confirmation </span>
+                  <h4>
+                    {" "}
+                    <h5> ** UNDOING ACTIONS **</h5> Waiting for Confirmation{" "}
+                  </h4>
                   <RotatingLines
                     strokeColor="grey"
                     strokeWidth="5"
