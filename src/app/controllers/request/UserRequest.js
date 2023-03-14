@@ -12,6 +12,7 @@ import {
   ApplytoallUri,
   MarkCompleteURI,
   cardCountUri,
+  filterRecentUri,
 } from "../../uri";
 import axios from "axios";
 
@@ -65,4 +66,8 @@ export const MarkComplete = async (data) => {
 
 export const cardCount = async (data) => {
   return await axios.post(cardCountUri(), data);
+};
+
+export const filterRecent = async (data) => {
+  return await axios.post(filterRecentUri(), data);
 };

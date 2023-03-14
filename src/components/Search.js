@@ -11,6 +11,7 @@ import { LoadingButton } from "@mui/lab";
 import swal from "sweetalert";
 import { SetViewed } from "../app/controllers/request/UserRequest";
 import { MdOutlineCancel } from "react-icons/md";
+import { getCookie } from "../app/hooks/Cookie";
 export default function Search({
   search,
   setSearch,
@@ -27,6 +28,7 @@ export default function Search({
   setCardShow,
   setBorderC,
   cardShow,
+  Auth,
 }) {
   const [autoinfo, setAutoinfo] = useState("");
   const navigate = useNavigate();
@@ -55,8 +57,18 @@ export default function Search({
       const result = await SetViewed({
         selection: selected,
       });
+
       if (result.status == 200) {
-        navigate("/manage", { state: selected });
+        if (selected.length == 0) {
+          setLoad(false);
+          swal({
+            title: "No Data",
+            text: "There is nothing to show",
+            icon: "info",
+          });
+        } else {
+          navigate("/manage", { state: selected });
+        }
       }
     } else {
       swal({
@@ -118,81 +130,84 @@ export default function Search({
             }}
           />
         </Button>
-        <Badge
-          badgeContent={contentSearch().length}
-          overlap="rectangular"
-          color="error"
-          max={contentSearch().length}
-        >
-          <LoadingButton
-            variant={
-              search
-                ? contentSearch().length >= 1
+
+        {getCookie().token.role == 2 && (
+          <Badge
+            badgeContent={contentSearch().length}
+            overlap="rectangular"
+            color="error"
+            max={contentSearch().length}
+          >
+            <LoadingButton
+              variant={
+                search
+                  ? contentSearch().length >= 1
+                    ? "contained"
+                    : "text"
+                  : scuFilter
+                  ? "contained"
+                  : recentfilter
+                  ? "contained"
+                  : cardShow
                   ? "contained"
                   : "text"
-                : scuFilter
-                ? "contained"
-                : recentfilter
-                ? "contained"
-                : cardShow
-                ? "contained"
-                : "text"
-            }
-            size="medium"
-            className="secondary"
-            color={
-              search
-                ? contentSearch().length >= 1
+              }
+              size="medium"
+              className="secondary"
+              color={
+                search
+                  ? contentSearch().length >= 1
+                    ? "primary"
+                    : "warning"
+                  : scuFilter
+                  ? "primary"
+                  : recentfilter
+                  ? "primary"
+                  : cardShow
                   ? "primary"
                   : "warning"
-                : scuFilter
-                ? "primary"
-                : recentfilter
-                ? "primary"
-                : cardShow
-                ? "primary"
-                : "warning"
-            }
-            sx={
-              search
-                ? contentSearch().length >= 1
-                  ? { cursor: "pointer" }
+              }
+              sx={
+                search
+                  ? contentSearch().length >= 1
+                    ? { cursor: "pointer" }
+                    : { color: "gray" }
+                  : scuFilter
+                  ? { color: "white" }
+                  : recentfilter
+                  ? { color: "white" }
+                  : cardShow
+                  ? { color: "white" }
                   : { color: "gray" }
-                : scuFilter
-                ? { color: "white" }
-                : recentfilter
-                ? { color: "white" }
-                : cardShow
-                ? { color: "white" }
-                : { color: "gray" }
-            }
-            disabled={
-              search
-                ? contentSearch().length >= 1
+              }
+              disabled={
+                search
+                  ? contentSearch().length >= 1
+                    ? false
+                    : true
+                  : scuFilter
+                  ? false
+                  : recentfilter
+                  ? false
+                  : cardShow
                   ? false
                   : true
-                : scuFilter
-                ? false
-                : recentfilter
-                ? false
-                : cardShow
-                ? false
-                : true
-            }
-            style={{ marginRight: "5px", marginBottom: "5px" }}
-            loading={load}
-            onClick={selectall}
-          >
-            <h4> Select All</h4>
-            <CiSquarePlus
-              style={{
-                marginLeft: "5px",
-                fontSize: "18px",
-                fontWeight: "Bold",
-              }}
-            />
-          </LoadingButton>
-        </Badge>
+              }
+              style={{ marginRight: "5px", marginBottom: "5px" }}
+              loading={load}
+              onClick={selectall}
+            >
+              <h4> Select All</h4>
+              <CiSquarePlus
+                style={{
+                  marginLeft: "5px",
+                  fontSize: "18px",
+                  fontWeight: "Bold",
+                }}
+              />
+            </LoadingButton>
+          </Badge>
+        )}
       </div>
     </div>
   );

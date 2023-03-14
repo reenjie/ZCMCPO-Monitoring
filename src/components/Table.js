@@ -9,10 +9,13 @@ import TableRow from "@mui/material/TableRow";
 import { useAuth } from "../app/hooks/ContextHooks";
 import { Badge } from "@mui/icons-material";
 import { TableCellAccount } from "./TableCellAccount";
-import { FetchAdvanceSortSCU } from "../app/controllers/request/UserRequest";
+import {
+  FetchAdvanceSortSCU,
+  filterRecent,
+} from "../app/controllers/request/UserRequest";
 import { TableCellUser } from "./TableCellUser";
 import { Selection } from "./Selection";
-import { Box, Chip } from "@mui/material";
+import { Box, Chip, TextField, Button } from "@mui/material";
 import "../assets/css/admin.css";
 
 import React, { useEffect, useState } from "react";
@@ -22,6 +25,7 @@ import notf from "../assets/image/notfound.jpg";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { RotatingLines } from "react-loader-spinner";
 import "../assets/css/dashboard.css";
+import { VscClearAll } from "react-icons/vsc";
 
 export default function CustomPaginationActionsTable({
   columns,
@@ -66,6 +70,11 @@ export default function CustomPaginationActionsTable({
   const [scuFilter, setscuFilter] = useState(false);
   const [SCUData, setSCUdata] = useState([]);
   const [loaderf, setLoaderf] = useState(false);
+  const maxDate = new Date().toISOString().split("T")[0];
+
+  const [loadrecent, setLoadrecent] = useState([]);
+  const [lrecenttoggle, setlrecenttoggle] = useState(false);
+  const [sel, setSel] = useState();
 
   const filter = async () => {
     const result = await FetchAdvanceSortSCU({
@@ -121,7 +130,8 @@ export default function CustomPaginationActionsTable({
 
         if (recentfilter) {
           setCardShow(false);
-          return recent;
+
+          return lrecenttoggle ? loadrecent : recent;
         }
 
         if (cardShow) {
@@ -143,8 +153,8 @@ export default function CustomPaginationActionsTable({
   };
 
   return (
-    <Paper
-      sx={{
+    <div
+      style={{
         width: "100%",
         overflow: "hidden",
         borderLeft: cardborder(),
@@ -183,6 +193,7 @@ export default function CustomPaginationActionsTable({
             setCardShow={setCardShow}
             setBorderC={setBorderC}
             cardShow={cardShow}
+            Auth={Auth}
           />
         </Box>
       ) : (
@@ -231,6 +242,44 @@ export default function CustomPaginationActionsTable({
               <AiOutlineClockCircle />
             </span>
           </span>
+          <Box>
+            <h5>Select-Date</h5>
+            <div style={{ display: "flex" }}>
+              <TextField
+                type={"date"}
+                size="small"
+                inputProps={{
+                  max: maxDate,
+                }}
+                onChange={async (e) => {
+                  setSel(e.currentTarget.value);
+                  const filterDate = {
+                    filterDate: e.currentTarget.value,
+                  };
+                  //filterRecent
+                  const req = await filterRecent({
+                    data: filterDate,
+                  });
+
+                  setLoadrecent(req.data.data);
+                  setlrecenttoggle(true);
+                }}
+                value={sel}
+              ></TextField>
+
+              <Button
+                onClick={() => {
+                  setlrecenttoggle(false);
+                  setSel("");
+                }}
+                color="error"
+                variant="contained"
+                size="small"
+              >
+                Clear Filter <VscClearAll style={{ fontSize: "20px" }} />
+              </Button>
+            </div>
+          </Box>
         </Box>
       )}
       {selection.length >= 1 && (
@@ -336,6 +385,6 @@ export default function CustomPaginationActionsTable({
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </div>
   );
 }

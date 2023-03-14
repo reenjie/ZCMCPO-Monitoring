@@ -4,6 +4,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { SetViewed } from "../app/controllers/request/UserRequest";
 import { LoadingButton } from "@mui/lab";
+import { getCookie } from "../app/hooks/Cookie";
 export const TableCellUser = ({
   columnid,
   columnalign,
@@ -34,32 +35,40 @@ export const TableCellUser = ({
     <TableCell key={columnid} align={columnalign}>
       <h4 style={{ fontWeight: "normal" }}>
         {columnid == "PK_posID" ? (
-          <Checkbox
-            value={value}
-            checked={
-              selection.length >= 1
-                ? selection.filter((x) => x.id == value).length >= 1
-                  ? true
-                  : false
-                : false
-            }
-            onChange={handleSelection}
-          />
+          <>
+            {getCookie().token.role == 2 && (
+              <Checkbox
+                value={value}
+                checked={
+                  selection.length >= 1
+                    ? selection.filter((x) => x.id == value).length >= 1
+                      ? true
+                      : false
+                    : false
+                }
+                onChange={handleSelection}
+              />
+            )}
+          </>
         ) : columnid == "status_" ? (
           <></>
         ) : columnid == "action" ? (
           <>
-            <Tooltip title="View">
-              <LoadingButton
-                variant="text"
-                size="small"
-                loading={load}
-                color="info"
-                onClick={viewed}
-              >
-                <MdOutlineRemoveRedEye style={{ fontSize: "18px" }} />
-              </LoadingButton>
-            </Tooltip>
+            {getCookie().token.role == 2 ? (
+              <Tooltip title="View">
+                <LoadingButton
+                  variant="text"
+                  size="small"
+                  loading={load}
+                  color="info"
+                  onClick={viewed}
+                >
+                  <MdOutlineRemoveRedEye style={{ fontSize: "18px" }} />
+                </LoadingButton>
+              </Tooltip>
+            ) : (
+              <h6 style={{ color: "grey" }}>No action Required</h6>
+            )}
           </>
         ) : columnid == "PONo" ? (
           <div>

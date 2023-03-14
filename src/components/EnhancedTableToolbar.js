@@ -21,6 +21,7 @@ import {
 import { FaSort } from "react-icons/fa";
 import { CiViewList } from "react-icons/ci";
 import { CustomView } from "./CustomView";
+import { getCookie } from "../app/hooks/Cookie";
 export const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
   const [openCustom, setOpenCustom] = useState(false);
@@ -86,7 +87,7 @@ export const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Purchased Order Status
+          <h3>Purchased Order Status</h3>
         </Typography>
       )}
       <Search
@@ -170,30 +171,36 @@ export const EnhancedTableToolbar = (props) => {
                       />
                     }
                   />
-                  <h6 style={{ color: "grey" }}>Transaction</h6>
-                  <CustomButton
-                    label="Recent"
-                    setRecent={props.setRecent}
-                    setRecentfilter={props.setRecentfilter}
-                    closeDrawer={props.setOpendrawer}
-                    Icon={
-                      <BiTimeFive
-                        style={{ marginLeft: "2px", fontSize: "17px" }}
+
+                  {getCookie().token.role == 2 && (
+                    <div>
+                      <h6 style={{ color: "grey" }}>Transaction</h6>
+                      <CustomButton
+                        label="Recent"
+                        setRecent={props.setRecent}
+                        setRecentfilter={props.setRecentfilter}
+                        closeDrawer={props.setOpendrawer}
+                        Icon={
+                          <BiTimeFive
+                            style={{ marginLeft: "2px", fontSize: "17px" }}
+                          />
+                        }
                       />
-                    }
-                  />
-                  <CustomButton
-                    label="Extension"
-                    setSort={props.setSort}
-                    sort={props.sort}
-                    closeDrawer={props.setOpendrawer}
-                    setscuFilter={props.setscuFilter}
-                    Icon={
-                      <BiTimeFive
-                        style={{ marginLeft: "2px", fontSize: "17px" }}
+                      <CustomButton
+                        label="Extension"
+                        setSort={props.setSort}
+                        sort={props.sort}
+                        closeDrawer={props.setOpendrawer}
+                        setscuFilter={props.setscuFilter}
+                        Icon={
+                          <BiTimeFive
+                            style={{ marginLeft: "2px", fontSize: "17px" }}
+                          />
+                        }
                       />
-                    }
-                  />
+                    </div>
+                  )}
+
                   <CustomDatePicker
                     value={props.emailed}
                     setValue={props.setEmailed}

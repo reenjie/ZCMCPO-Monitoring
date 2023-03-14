@@ -92,9 +92,7 @@ export default function BasicCard({
             <Typography
               sx={{ fontSize: 20, textAlign: "center", mt: 1 }}
               gutterBottom
-            >
-              {aboutdesc}
-            </Typography>
+            ></Typography>
           </Box>
         </CardContent>
       </Card>
