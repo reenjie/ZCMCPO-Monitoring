@@ -12,13 +12,13 @@ function Footer() {
       <div className="mid">FOLLOW US</div>
       <div className="mids">
         <Button>
-          <BsFacebook size={30} color={"#f0a04b"} />
+          <BsFacebook size={30} color={"#FFED00"} />
         </Button>
         <Button>
-          <MdOutlineEmail size={30} color={"#f0a04b"} />
+          <MdOutlineEmail size={30} color={"#FFED00"} />
         </Button>
         <Button>
-          <BsGlobe size={30} color={"#f0a04b"} />
+          <BsGlobe size={30} color={"#FFED00"} />
         </Button>
       </div>
       <div className="bot">

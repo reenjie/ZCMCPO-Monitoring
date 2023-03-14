@@ -29,7 +29,12 @@ function About() {
             <CardContent>
               <img src={Report} height={300} />
               <Typography
-                sx={{ textAlign: "center", fontSize: "30px", fontWeight: 600 }}
+                sx={{
+                  textAlign: "center",
+                  fontSize: "30px",
+                  fontWeight: 600,
+                  color: "green",
+                }}
               >
                 Data optimization
               </Typography>
@@ -45,12 +50,22 @@ function About() {
         </Grid>
         <Grid item xl={4} lg={6} xs={12}>
           <Card
-            sx={{ justifyContent: "center", my: 5, mx: 3, height: "35rem" }}
+            sx={{
+              justifyContent: "center",
+              my: 5,
+              mx: 3,
+              height: "35rem",
+            }}
           >
             <CardContent>
               <img src={Data} height={300} />{" "}
               <Typography
-                sx={{ textAlign: "center", fontSize: "30px", fontWeight: 600 }}
+                sx={{
+                  textAlign: "center",
+                  fontSize: "30px",
+                  fontWeight: 600,
+                  color: "green",
+                }}
               >
                 Real-Time Monitoring System
               </Typography>
@@ -69,7 +84,12 @@ function About() {
             <CardContent>
               <img src={View} height={300} />
               <Typography
-                sx={{ textAlign: "center", fontSize: "30px", fontWeight: 600 }}
+                sx={{
+                  textAlign: "center",
+                  fontSize: "30px",
+                  fontWeight: 600,
+                  color: "green",
+                }}
               >
                 Proactive Maintenance
               </Typography>
