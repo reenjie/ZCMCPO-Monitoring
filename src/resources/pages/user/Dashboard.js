@@ -14,6 +14,8 @@ import {
   FetchRecent,
   cardCount,
 } from "../../../app/controllers/request/UserRequest";
+import { getCookie } from "../../../app/hooks/Cookie";
+import { FetchUserData } from "../../../app/controllers/auth/AuthController";
 import { Autocomplete, Box, TextField } from "@mui/material";
 import CustomPaginationActionsTable from "../../../components/Table";
 import { defaultcolumns } from "../../../data/CustomViewData";
@@ -36,6 +38,7 @@ function Dashboard({ usertype }) {
   const [borderC, setBorderC] = useState("");
 
   const [recentfilter, setRecentfilter] = useState(false);
+
   const fetch = async () => {
     const res = await FetchPurchaseOrder();
     setData(res.data.data);

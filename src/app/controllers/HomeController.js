@@ -20,7 +20,10 @@ export const AdminCheckAuth = () => {
 
   useEffect(() => {
     if (checkCookie()) {
-      const res = FetchUserData(getCookie().token.token)
+      const res = FetchUserData({
+        token: getCookie().token.token,
+        role: getCookie().token.role,
+      })
         .then(function (response) {})
         .catch(function (error) {
           NoteExpired();
@@ -39,7 +42,10 @@ export const UserCheckAuth = () => {
 
   useEffect(() => {
     if (checkCookie()) {
-      const res = FetchUserData(getCookie().token.token)
+      const res = FetchUserData({
+        token: getCookie().token.token,
+        role: getCookie().token.role,
+      })
         .then(function (response) {})
         .catch(function (error) {
           clearCookie();

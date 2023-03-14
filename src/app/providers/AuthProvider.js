@@ -6,7 +6,10 @@ export const AuthProvider = ({ children }) => {
   const [Auth, setAuth] = useState([]);
 
   const fetch = async () => {
-    const res = await FetchUserData(getCookie().token.token)
+    const res = await FetchUserData({
+      token: getCookie().token.token,
+      role: getCookie().token.role,
+    })
       .then(function (response) {
         setAuth({ user: response.data.data[0] });
       })

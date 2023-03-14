@@ -87,3 +87,7 @@ export const MarkCompleteURI = () => {
 export const cardCountUri = () => {
   return `${api}/cardCount`;
 };
+
+export const filterRecentUri = () => {
+  return `${api}/filterRecent`;
+};

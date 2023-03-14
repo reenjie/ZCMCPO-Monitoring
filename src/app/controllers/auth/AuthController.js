@@ -8,10 +8,8 @@ export const Signin = async (username, password) => {
   });
 };
 
-export const FetchUserData = async (token) => {
-  return await axios.post(FetchAuthUser(), {
-    token: token,
-  });
+export const FetchUserData = async (data) => {
+  return await axios.post(FetchAuthUser(), data);
 };
 
 export const FetchRoles = async () => {
