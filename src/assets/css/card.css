@@ -5,3 +5,13 @@
   z-index: -1;
   background: #000;
 }
+
+.cards {
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.cards:hover {
+  transition: all ease-out 0.3s;
+  border: 2px solid #ffebb7;
+}

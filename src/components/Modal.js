@@ -5,6 +5,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { AddAccounts } from "../resources/pages/admin/components/ModalContent";
 import { SetEmailedDate } from "./SetEmailedDate";
+import { MarkDelivered } from "./MarkDelivered";
+import { SetRemarks } from "./SetRemarks";
 
 const style = {
   position: "absolute",
@@ -26,6 +28,7 @@ export default function BasicModal({
   openModal,
   setRefresh,
   Terms,
+  remarks,
 }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -65,6 +68,19 @@ export default function BasicModal({
               handleClose={setopenModal}
               setRefresh={setRefresh}
               Terms={Terms}
+            />
+          ) : ModalContent[0].typeofcontent == "markReceived" ? (
+            <MarkDelivered
+              handleClose={setopenModal}
+              id={ModalContent[0].data}
+              setRefresh={setRefresh}
+            />
+          ) : ModalContent[0].typeofcontent == "setRemarks" ? (
+            <SetRemarks
+              handleClose={setopenModal}
+              id={ModalContent[0].data}
+              setRefresh={setRefresh}
+              remarks={remarks}
             />
           ) : (
             ""

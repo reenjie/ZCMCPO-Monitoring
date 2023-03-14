@@ -23,7 +23,6 @@ import { CiViewList } from "react-icons/ci";
 import { CustomView } from "./CustomView";
 export const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
-  const [value, setValue] = useState("");
   const [openCustom, setOpenCustom] = useState(false);
 
   const supplier = [
@@ -103,6 +102,9 @@ export const EnhancedTableToolbar = (props) => {
         setRecent={props.setRecent}
         closedrawer={props.setOpendrawer}
         recentfilter={props.recentfilter}
+        setCardShow={props.setCardShow}
+        setBorderC={props.setBorderC}
+        cardShow={props.cardShow}
       />
 
       {numSelected > 0 ? (
@@ -182,6 +184,10 @@ export const EnhancedTableToolbar = (props) => {
                   />
                   <CustomButton
                     label="Extension"
+                    setSort={props.setSort}
+                    sort={props.sort}
+                    closeDrawer={props.setOpendrawer}
+                    setscuFilter={props.setscuFilter}
                     Icon={
                       <BiTimeFive
                         style={{ marginLeft: "2px", fontSize: "17px" }}
@@ -189,24 +195,32 @@ export const EnhancedTableToolbar = (props) => {
                     }
                   />
                   <CustomDatePicker
-                    value={value}
-                    setValue={setValue}
+                    value={props.emailed}
+                    setValue={props.setEmailed}
                     label="Emailed Date"
+                    setSort={props.setSort}
+                    sort={props.sort}
                   />
                   <CustomDatePicker
-                    value={value}
-                    setValue={setValue}
+                    value={props.delivered}
+                    setValue={props.setDelivered}
                     label="Delivered Date"
+                    setSort={props.setSort}
+                    sort={props.sort}
                   />
                   <CustomDatePicker
-                    value={value}
-                    setValue={setValue}
+                    value={props.completed}
+                    setValue={props.setCompleted}
                     label="Completed Date"
+                    setSort={props.setSort}
+                    sort={props.sort}
                   />
                   <CustomDatePicker
-                    value={value}
-                    setValue={setValue}
+                    value={props.due}
+                    setValue={props.setDue}
                     label="Due Date"
+                    setSort={props.setSort}
+                    sort={props.sort}
                   />
                 </Box>
               </Box>
@@ -219,7 +233,7 @@ export const EnhancedTableToolbar = (props) => {
                     props.setOpendrawer(false);
                   }}
                 >
-                  Close <SlClose style={{ marginLeft: "3px" }} />
+                  <h4> Close</h4> <SlClose style={{ marginLeft: "3px" }} />
                 </Button>
                 {!props.scuFilter && (
                   <Button
@@ -244,7 +258,8 @@ export const EnhancedTableToolbar = (props) => {
                       }
                     }}
                   >
-                    Proceed <FiCheckCircle style={{ marginLeft: "3px" }} />
+                    <h4> Proceed </h4>
+                    <FiCheckCircle style={{ marginLeft: "3px" }} />
                   </Button>
                 )}
               </Box>

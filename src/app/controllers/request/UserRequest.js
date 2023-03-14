@@ -7,6 +7,11 @@ import {
   SetStatusUri,
   SetEmailedDateUri,
   UndoActionUri,
+  UpdateDueUri,
+  SetDeliveredDateURI,
+  ApplytoallUri,
+  MarkCompleteURI,
+  cardCountUri,
 } from "../../uri";
 import axios from "axios";
 
@@ -40,4 +45,24 @@ export const SetEmailed = async (data) => {
 
 export const UndoAction = async (data) => {
   return await axios.post(UndoActionUri(), data);
+};
+
+export const UpdateDue = async (data) => {
+  return await axios.post(UpdateDueUri(), data);
+};
+
+export const SetDeliveredDate = async (data) => {
+  return await axios.post(SetDeliveredDateURI(), data);
+};
+
+export const Applytoall = async (data) => {
+  return await axios.post(ApplytoallUri(), data);
+};
+
+export const MarkComplete = async (data) => {
+  return await axios.post(MarkCompleteURI(), data);
+};
+
+export const cardCount = async (data) => {
+  return await axios.post(cardCountUri(), data);
 };

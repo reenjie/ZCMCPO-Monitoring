@@ -17,6 +17,10 @@ export default function Transaction({
   setLoad,
   setRefresh,
   UndoActions,
+  UpdateDates,
+  setExtenddis,
+  extendDis,
+  MarkCompleted,
 }) {
   const [expanded, setExpanded] = React.useState(false);
 
@@ -52,6 +56,10 @@ export default function Transaction({
                 setRefresh={setRefresh}
                 Terms={Terms}
                 UndoActions={UndoActions}
+                UpdateDates={UpdateDates}
+                extendDis={extendDis}
+                setExtenddis={setExtenddis}
+                MarkCompleted={MarkCompleted}
               />
             );
           })}

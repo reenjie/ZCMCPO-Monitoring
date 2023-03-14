@@ -10,6 +10,7 @@ import { useNavigate } from "react-router";
 import { LoadingButton } from "@mui/lab";
 import swal from "sweetalert";
 import { SetViewed } from "../app/controllers/request/UserRequest";
+import { MdOutlineCancel } from "react-icons/md";
 export default function Search({
   search,
   setSearch,
@@ -23,6 +24,9 @@ export default function Search({
   setRecent,
   closedrawer,
   recentfilter,
+  setCardShow,
+  setBorderC,
+  cardShow,
 }) {
   const [autoinfo, setAutoinfo] = useState("");
   const navigate = useNavigate();
@@ -89,23 +93,29 @@ export default function Search({
         )}
       />
 
-      <div style={{ float: "right" }}>
+      <div style={{ float: "right", marginTop: "10px" }}>
         <Button
           variant="text"
           size="medium"
           color="info"
-          style={{ marginRight: "7px", marginBottom: "5px" }}
+          style={{ marginRight: "7px", marginBottom: "5px", color: "#FF597B" }}
           onClick={() => {
             setSearch("");
             setAutoinfo("");
             setscuFilter(false);
             setSort([]);
             setRecentfilter(false);
+            setCardShow(false);
+            setBorderC("");
           }}
         >
-          Clear Search{" "}
-          <CiEraser
-            style={{ marginLeft: "5px", fontSize: "18px", fontWeight: "Bold" }}
+          <h4> Clear </h4>
+          <MdOutlineCancel
+            style={{
+              marginLeft: "5px",
+              fontSize: "18px",
+              fontWeight: "Bold",
+            }}
           />
         </Button>
         <Badge
@@ -124,6 +134,8 @@ export default function Search({
                 ? "contained"
                 : recentfilter
                 ? "contained"
+                : cardShow
+                ? "contained"
                 : "text"
             }
             size="medium"
@@ -137,6 +149,8 @@ export default function Search({
                 ? "primary"
                 : recentfilter
                 ? "primary"
+                : cardShow
+                ? "primary"
                 : "warning"
             }
             sx={
@@ -147,6 +161,8 @@ export default function Search({
                 : scuFilter
                 ? { color: "white" }
                 : recentfilter
+                ? { color: "white" }
+                : cardShow
                 ? { color: "white" }
                 : { color: "gray" }
             }
@@ -159,13 +175,15 @@ export default function Search({
                 ? false
                 : recentfilter
                 ? false
+                : cardShow
+                ? false
                 : true
             }
             style={{ marginRight: "5px", marginBottom: "5px" }}
             loading={load}
             onClick={selectall}
           >
-            Select All
+            <h4> Select All</h4>
             <CiSquarePlus
               style={{
                 marginLeft: "5px",

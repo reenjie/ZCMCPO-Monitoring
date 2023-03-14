@@ -28,64 +28,66 @@ export default function BasicCard({
   bgcolor1,
   color,
   color1,
-  aboutdesc,
-  backgroundColor,
+  data,
+  setCardcont,
+  setBorderC,
+  setCardShow,
 }) {
+  const handleCLick = () => {
+    setCardcont(data);
+    setCardShow(true);
+    setBorderC(color1);
+  };
   return (
     <>
       <Card
         sx={{
           minWidth: "23%",
           m: 1,
-          minHeight: 90,
+          minHeight: 100,
         }}
-        backgroundColor={backgroundColor}
-        style={style}
+        border="10px solid green"
+        className="cards"
+        onClick={data ? handleCLick : null}
       >
         <CardContent sx={{ margin: 0, padding: 0 }}>
           <Grid container xl={12} spacing={6} pt={1} pb={0}>
             <Grid item xl={6}>
-              <Box sx={{ height: "50px", ml: 1 }} backgroundColor={bgcolor1}>
-                {icon}
-              </Box>
-            </Grid>
-            <Grid item xl={6}>
               <Box>
                 <Typography
                   color={color1}
-                  sx={{ fontSize: 35, fontWeight: 600 }}
+                  sx={{ fontSize: 35, fontWeight: 900, marginLeft: "20px" }}
                 >
                   {" "}
-                  {description}
+                  <h4> {description}</h4>
                 </Typography>
+              </Box>
+            </Grid>
+            <Grid item xl={6}>
+              <Box
+                sx={{ ml: 1, width: "50px", float: "right" }}
+                backgroundColor={bgcolor1}
+              >
+                {icon}
               </Box>
             </Grid>
           </Grid>
           <Box
-            borderRadius={1}
             borderTopLeftRadius={0}
             borderBottomLeftRadius={0}
             backgroundColor={color1}
-            p={0.5}
+            p={1}
+            borderTop={"4px solid #FDD36A"}
           >
             <Typography
               sx={{
                 fontWeight: 400,
-                fontSize: "18px",
+                fontSize: "20px",
                 textAlign: "center",
                 color: "#fff",
               }}
             >
-              {title}
-            </Typography>
-          </Box>
-          <Box bgcolor={bgcolor} sx={{ w: "100%" }}>
-            {" "}
-            <Typography
-              sx={{ fontSize: 14, textAlign: "center", mt: 1 }}
-              gutterBottom
-            >
-              {desc}
+              <h6> {title}</h6>
             </Typography>
             <Typography
               sx={{ fontSize: 20, textAlign: "center", mt: 1 }}

@@ -37,6 +37,10 @@ export const CustomAccordion = ({
   setRefresh,
   Terms,
   UndoActions,
+  UpdateDates,
+  extendDis,
+  setExtenddis,
+  MarkCompleted,
 }) => {
   const [expand, setExpand] = useState(false);
   const formatString = (numberstring) => {
@@ -49,7 +53,7 @@ export const CustomAccordion = ({
   };
   return (
     <Accordion
-      defaultExpanded={index == 0 ? true : false}
+      defaultExpanded={true}
       sx={{
         borderLeft: "15px solid #4E944F ",
         borderRight: "15px solid #4E944F ",
@@ -126,7 +130,14 @@ export const CustomAccordion = ({
 
             <Card variant="outlined" sx={{ marginTop: "7px" }}>
               <Box p={2}>
-                <TableStatus trans={trans} id={data.PK_posID} />
+                <TableStatus
+                  trans={trans}
+                  id={data.PK_posID}
+                  setRefresh={setRefresh}
+                  UpdateDates={UpdateDates}
+                  extendDis={extendDis}
+                  setExtenddis={setExtenddis}
+                />
               </Box>
             </Card>
           </Grid>
@@ -144,6 +155,9 @@ export const CustomAccordion = ({
               setRefresh={setRefresh}
               Terms={Terms}
               UndoActions={UndoActions}
+              extendDis={extendDis}
+              setExtenddis={setExtenddis}
+              MarkCompleted={MarkCompleted}
             />
           </Grid>
         </Grid>

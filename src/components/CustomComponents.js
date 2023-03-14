@@ -50,6 +50,7 @@ export const CustomSelect = ({ label, data, sort, setSort }) => {
                 {
                   labelled: label,
                   value: newValue,
+                  table: "select",
                 },
               ]);
               return;
@@ -58,6 +59,7 @@ export const CustomSelect = ({ label, data, sort, setSort }) => {
                 {
                   labelled: label,
                   value: newValue,
+                  table: "select",
                 },
               ]);
               return;
@@ -77,6 +79,9 @@ export const CustomButton = ({
   setOpenCustom,
   setRecentfilter,
   closeDrawer,
+  sort,
+  setSort,
+  setscuFilter,
 }) => {
   return (
     <FormControl
@@ -94,6 +99,16 @@ export const CustomButton = ({
           } else if (label === "Recent") {
             setRecentfilter(true);
             closeDrawer(false);
+          } else if (label === "Extension") {
+            setSort([
+              {
+                labelled: label,
+                value: "Extended Item/s",
+                table: "search",
+              },
+            ]);
+            closeDrawer(false);
+            setscuFilter(true);
           }
         }}
       >
@@ -103,16 +118,53 @@ export const CustomButton = ({
   );
 };
 
-export const CustomDatePicker = ({ value, setValue, label }) => {
+export const CustomDatePicker = ({ value, setValue, label, sort, setSort }) => {
+  const handleDateChange = (date) => {
+    setValue(date.toISOString().split("T")[0]);
+    if (sort.length >= 1) {
+      for (let { labelled } of sort) {
+        if (labelled === label) {
+          const update = {
+            labelled: label,
+            value: date.toISOString().split("T")[0],
+          };
+          const index = sort.findIndex((item) =>
+            item.labelled.toLowerCase().includes(label.toLowerCase())
+          );
+          const updatedItems = [...sort];
+          updatedItems[index] = update;
+          setSort(updatedItems);
+          return;
+        }
+      }
+
+      setSort([
+        ...sort,
+        {
+          labelled: label,
+          value: date.toISOString().split("T")[0],
+          table: "dateandtime",
+        },
+      ]);
+      return;
+    } else {
+      setSort([
+        {
+          labelled: label,
+          value: date.toISOString().split("T")[0],
+          table: "dateandtime",
+        },
+      ]);
+      return;
+    }
+  };
   return (
     <FormControl fullWidth size="small" sx={{ marginTop: "10px" }}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           label={label}
           value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
+          onChange={handleDateChange}
           renderInput={(params) => (
             <TextField
               size="small"
@@ -122,6 +174,7 @@ export const CustomDatePicker = ({ value, setValue, label }) => {
               {...params}
             />
           )}
+          format="yyyy-MM-dd"
         />
       </LocalizationProvider>
     </FormControl>

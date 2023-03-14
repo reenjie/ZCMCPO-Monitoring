@@ -9,11 +9,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   GetPOstatus,
   UndoAction,
+  MarkComplete,
 } from "../../../app/controllers/request/UserRequest";
 import { TransSkeleton } from "../../../components/TransSkeleton";
 import ActionModal from "../../../components/ActionModal";
 import { FaCogs } from "react-icons/fa";
-import { SetStatus } from "../../../app/controllers/request/UserRequest";
+import {
+  SetStatus,
+  UpdateDue,
+} from "../../../app/controllers/request/UserRequest";
 import { notify } from "../../../components/Sweetalert";
 
 const Action = () => {
@@ -24,7 +28,8 @@ const Action = () => {
   const [trans, setTrans] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [load, setLoad] = useState(false);
-
+  const [extendDis, setExtenddis] = useState(false);
+  const applyall = () => {};
   const fetch = async () => {
     const fetchrecent = await GetPOstatus({});
     setTrans(fetchrecent.data.data);
@@ -113,11 +118,29 @@ const Action = () => {
     action({ id: id, type: "remarks" });
   };
 
-  const UndoActions = async (id) => {
+  const UndoActions = async (id, untype) => {
     const res = await UndoAction({
       id: id,
+      untype: untype,
     });
     if (res.status === 200) {
+      setRefresh(true);
+    }
+  };
+
+  const UpdateDates = async (id, dates, entity) => {
+    const req = await UpdateDue({ id: id, dates: dates, entity: entity });
+    if (req.status === 200) {
+      setRefresh(true);
+    }
+  };
+
+  const MarkCompleted = async (id) => {
+    const req = await MarkComplete({
+      id: id,
+    });
+
+    if (req.status === 200) {
       setRefresh(true);
     }
   };
@@ -170,6 +193,7 @@ const Action = () => {
             }
             openModal={openModal}
             setopenModal={setopenModal}
+            setRefresh={setRefresh}
           />
         </span>
 
@@ -195,6 +219,10 @@ const Action = () => {
             setLoad={setLoad}
             setRefresh={setRefresh}
             UndoActions={UndoActions}
+            UpdateDates={UpdateDates}
+            extendDis={extendDis}
+            setExtenddis={setExtenddis}
+            MarkCompleted={MarkCompleted}
           />
         ) : (
           <TransSkeleton />

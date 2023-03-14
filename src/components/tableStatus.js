@@ -21,7 +21,14 @@ import "../assets/css/dashboard.css";
 import { notify } from "./Sweetalert";
 
 import "react-toastify/dist/ReactToastify.css";
-export default function TableStatus({ trans, id }) {
+export default function TableStatus({
+  trans,
+  id,
+  setRefresh,
+  UpdateDates,
+  extendDis,
+  setExtenddis,
+}) {
   const [loaded, setLoaded] = useState(false);
 
   const {
@@ -135,9 +142,10 @@ export default function TableStatus({ trans, id }) {
                         color: "#F55050",
                       }}
                       onChange={(e) => {
-                        console.log(e.target.value);
-                        //notifyUser();
+                        UpdateDates(id, e.target.value, "DueDate");
+                        setExtenddis(false);
                       }}
+                      readOnly={completed_date || cancelled_date ? true : false}
                     />
                   </FormControl>
                 )}
@@ -162,9 +170,10 @@ export default function TableStatus({ trans, id }) {
                         color: "#F0A04B",
                       }}
                       onChange={(e) => {
-                        console.log(e.target.value);
-                        //notifyUser();
+                        UpdateDates(id, e.target.value, "duration_date");
+                        setExtenddis(false);
                       }}
+                      readOnly={completed_date || cancelled_date ? true : false}
                     />
                   </FormControl>
                 )}
@@ -201,7 +210,24 @@ export default function TableStatus({ trans, id }) {
                 style={{ fontWeight: "bold" }}
                 align="center"
               >
-                {completed_date}
+                {completed_date && (
+                  <Input
+                    id="component-simple"
+                    defaultValue="Composed TextField"
+                    type="date"
+                    value={completed_date}
+                    style={{
+                      fontWeight: "Bold",
+                      fontSize: "14px",
+                      color: "#1F8A70",
+                    }}
+                    onChange={(e) => {
+                      console.log(e.target.value);
+                      //notifyUser();
+                    }}
+                    readOnly
+                  />
+                )}
               </TableCell>
               <TableCell
                 component="th"
@@ -232,6 +258,13 @@ export default function TableStatus({ trans, id }) {
           </TableBody>
         </Table>
       </TableContainer>
+      {remarks != null && (
+        <>
+          <br />
+          <h5>Remarks :</h5>
+          <span style={{ fontSize: "15px", color: "#F55050" }}>{remarks}</span>
+        </>
+      )}
     </>
   );
 }
