@@ -1,8 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
-.about {
-  background-color: #5d9c59;
-}
+
 .footer {
   background-color: #1a4d2e;
-  height: 15rem;
+  height: 10rem;
+}
+.top {
+  background-color: #f0a04b;
+  font-weight: 400;
+  font-size: 15px;
+}
+.mid {
+  color: #c7e8ca;
+  font-size: 20px;
+  text-align: center;
+}
+.mids {
+  color: #c7e8ca;
+  display: flex;
+  justify-content: center;
+}
+.bot {
+  color: #c7e8ca;
+  text-align: center;
 }

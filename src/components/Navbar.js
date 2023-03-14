@@ -28,7 +28,7 @@ function Navbar() {
           xl={2}
           lg={2}
           underline="none"
-          sx={{ height: "60px", my: 4 }}
+          sx={{ height: "60px", my: 4, justifyContent: "right" }}
         >
           <Link
             href="/login"
