@@ -28,6 +28,8 @@ export default function BasicCard({
   bgcolor1,
   color,
   color1,
+  aboutdesc,
+  backgroundColor,
 }) {
   return (
     <>
@@ -37,7 +39,7 @@ export default function BasicCard({
           m: 1,
           minHeight: 90,
         }}
-        border="10px solid green"
+        backgroundColor={backgroundColor}
         style={style}
       >
         <CardContent sx={{ margin: 0, padding: 0 }}>
@@ -84,6 +86,12 @@ export default function BasicCard({
               gutterBottom
             >
               {desc}
+            </Typography>
+            <Typography
+              sx={{ fontSize: 20, textAlign: "center", mt: 1 }}
+              gutterBottom
+            >
+              {aboutdesc}
             </Typography>
           </Box>
         </CardContent>
