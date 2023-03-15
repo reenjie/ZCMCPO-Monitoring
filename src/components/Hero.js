@@ -5,9 +5,9 @@ import "../assets/css/user.css";
 
 function Hero() {
   return (
-    <div classname="hero">
+    <div className="hero">
       <Grid container sx={{ width: "100%", mt: 5 }}>
-        <Grid item xl={6} lg={6} xs={12}>
+        <Grid item xl={6} lg={6} md={12} xs={12}>
           <Box
             sx={{
               fontSize: "40px",
@@ -35,10 +35,10 @@ function Hero() {
         </Grid>
         <Grid item xl={6} lg={6} xs={12}>
           {" "}
-          <Box>
+          <div className="heroimage">
             {" "}
             <img src={Home} height={500}></img>
-          </Box>
+          </div>
         </Grid>
       </Grid>
     </div>

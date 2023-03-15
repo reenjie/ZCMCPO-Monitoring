@@ -85,7 +85,7 @@ export const CustomAccordion = ({
         }}
       >
         <Grid container spacing={15}>
-          <Grid item md={7}>
+          <Grid item md={6}>
             {AccordionData.map((x) => {
               return (
                 <Typography
@@ -127,7 +127,8 @@ export const CustomAccordion = ({
               );
             })}
             <Divider orientation="vertical" flexItem />
-
+          </Grid>
+          <Grid item md={6}>
             <Card variant="outlined" sx={{ marginTop: "7px" }}>
               <Box p={2}>
                 <TableStatus
@@ -140,25 +141,28 @@ export const CustomAccordion = ({
                 />
               </Box>
             </Card>
-          </Grid>
-          <Grid item md={4}>
-            <ManageItems
-              id={id}
-              trans={trans}
-              cancel={cancel}
-              undeliver={undeliver}
-              extend={extend}
-              deliver={deliver}
-              remarks={remarks}
-              load={load}
-              setLoad={setLoad}
-              setRefresh={setRefresh}
-              Terms={Terms}
-              UndoActions={UndoActions}
-              extendDis={extendDis}
-              setExtenddis={setExtenddis}
-              MarkCompleted={MarkCompleted}
-            />
+            <Grid container>
+              <Grid item md={10}>
+                {" "}
+                <ManageItems
+                  id={id}
+                  trans={trans}
+                  cancel={cancel}
+                  undeliver={undeliver}
+                  extend={extend}
+                  deliver={deliver}
+                  remarks={remarks}
+                  load={load}
+                  setLoad={setLoad}
+                  setRefresh={setRefresh}
+                  Terms={Terms}
+                  UndoActions={UndoActions}
+                  extendDis={extendDis}
+                  setExtenddis={setExtenddis}
+                  MarkCompleted={MarkCompleted}
+                />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </AccordionDetails>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, Stack, Button, Box } from "@mui/material";
+import { Typography, Stack, Button, Box, Grid } from "@mui/material";
 import { notify, question } from "../components/Sweetalert";
 import { LoadingButton } from "@mui/lab";
 import BasicModal from "./Modal";
@@ -94,14 +94,15 @@ function ManageItems({
   const [openModal2, setopenModal2] = useState(false);
 
   return (
-    <div>
-      <div className="" style={{ padding: 100 }}>
+    <div className="" style={{ padding: 10, display: "flex" }}>
+      <Grid container>
         <Typography
           sx={{
             fontSize: 16,
             textTransform: "uppercase",
             marginBottom: "20px",
             fontWeight: "bold",
+            m: 2,
           }}
         >
           Action <FaCogs style={{ fontSize: "18px" }} />
@@ -246,6 +247,10 @@ function ManageItems({
               <h5>Extend</h5>
             </div>
           </LoadingButton>
+        </Stack>
+      </Grid>
+      <Grid container>
+        <Stack spacing={1.5} sx={{ mt: 7 }}>
           <LoadingButton
             variant="contained"
             color="error"
@@ -373,7 +378,7 @@ function ManageItems({
             ""
           )}
         </Stack>
-      </div>
+      </Grid>
     </div>
   );
 }
