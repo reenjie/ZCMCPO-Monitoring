@@ -14,10 +14,14 @@ import {
   cardCountUri,
   filterRecentUri,
 } from "../../uri";
+import { getCookie } from "../../hooks/Cookie";
 import axios from "axios";
 
 export const FetchPurchaseOrder = async (data) => {
-  return await axios.post(FetchPurchaseOrderUri(), data);
+  return await axios.post(FetchPurchaseOrderUri(), {
+    data: data,
+    token: getCookie().token.token,
+  });
 };
 
 export const FetchAdvanceSortSCU = async (data) => {
@@ -25,7 +29,10 @@ export const FetchAdvanceSortSCU = async (data) => {
 };
 
 export const SetViewed = async (data) => {
-  return await axios.post(SetNewtoViewedUri(), data);
+  return await axios.post(SetNewtoViewedUri(), {
+    data: data,
+    token: getCookie().token.token,
+  });
 };
 
 export const FetchRecent = async (data) => {
@@ -37,31 +44,52 @@ export const GetPOstatus = async (data) => {
 };
 
 export const SetStatus = async (data) => {
-  return await axios.post(SetStatusUri(), data);
+  return await axios.post(SetStatusUri(), {
+    data: data,
+    token: getCookie().token.token,
+  });
 };
 
 export const SetEmailed = async (data) => {
-  return await axios.post(SetEmailedDateUri(), data);
+  return await axios.post(SetEmailedDateUri(), {
+    data: data,
+    token: getCookie().token.token,
+  });
 };
 
 export const UndoAction = async (data) => {
-  return await axios.post(UndoActionUri(), data);
+  return await axios.post(UndoActionUri(), {
+    data: data,
+    token: getCookie().token.token,
+  });
 };
 
 export const UpdateDue = async (data) => {
-  return await axios.post(UpdateDueUri(), data);
+  return await axios.post(UpdateDueUri(), {
+    data: data,
+    token: getCookie().token.token,
+  });
 };
 
 export const SetDeliveredDate = async (data) => {
-  return await axios.post(SetDeliveredDateURI(), data);
+  return await axios.post(SetDeliveredDateURI(), {
+    data: data,
+    token: getCookie().token.token,
+  });
 };
 
 export const Applytoall = async (data) => {
-  return await axios.post(ApplytoallUri(), data);
+  return await axios.post(ApplytoallUri(), {
+    data: data,
+    token: getCookie().token.token,
+  });
 };
 
 export const MarkComplete = async (data) => {
-  return await axios.post(MarkCompleteURI(), data);
+  return await axios.post(MarkCompleteURI(), {
+    data: data,
+    token: getCookie().token.token,
+  });
 };
 
 export const cardCount = async (data) => {

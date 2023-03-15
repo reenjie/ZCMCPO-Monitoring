@@ -5,7 +5,7 @@ import Login from "../resources/pages/auth/Login";
 import PageNotFound from "../resources/pages/PageNotFound";
 import Accounts from "../resources/pages/admin/Accounts";
 import Settings from "../resources/pages/admin/Settings";
-
+import { Auditlog } from "../resources/pages/admin/Auditlog";
 import {
   AdminCheckAuth,
   RedirectIfAuthenticated,
@@ -22,6 +22,7 @@ function Web() {
       <Route element={<AdminCheckAuth />}>
         <Route path="/admin" element={<Dashboard usertype="admin" />}></Route>
         <Route path="/admin/Accounts" element={<Accounts />}></Route>
+        <Route path="/admin/AuditLogs" element={<Auditlog />}></Route>
         <Route
           path="/admin/Settings"
           element={<Settings usertype="admin" />}

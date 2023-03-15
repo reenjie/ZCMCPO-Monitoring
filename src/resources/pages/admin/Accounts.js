@@ -78,40 +78,45 @@ const Accounts = ({ Roles, Data }) => {
     <div>
       <AdminLayout SidebarNav={AdminSidebar} />
       <Main>
-        <h3>Accounts</h3>
-        <BasicModal
-          setFetch={setFetch}
-          Modalbtn={
-            <Button
-              variant="contained"
-              style={{ paddingLeft: "20px" }}
-              color="success"
-              onClick={() => {
-                setopenModal(true);
-              }}
-            >
-              Add <IoIosAddCircle />
-            </Button>
-          }
-          ModalContent={[
-            {
-              typeofcontent: "AddAccount",
-              data: roles,
-            },
-          ]}
-          openModal={openModal}
-          setopenModal={setopenModal}
-        />
-
-        <CustomPaginationActionsTable
-          tabletype="accounts"
-          columns={columns}
-          rows={rows}
-          setFetch={setFetch}
-          openModal={openModal}
-          setopenModal={setopenModal}
-          roles={roles}
-        />
+        <Grid container spacing={2} mt={2}>
+          <Grid xs={6} md={2}></Grid>
+          <Grid xs={6} md={8}>
+            <h3>Accounts</h3>
+            <BasicModal
+              setFetch={setFetch}
+              Modalbtn={
+                <Button
+                  variant="contained"
+                  style={{ paddingLeft: "20px" }}
+                  color="success"
+                  onClick={() => {
+                    setopenModal(true);
+                  }}
+                >
+                  Add <IoIosAddCircle />
+                </Button>
+              }
+              ModalContent={[
+                {
+                  typeofcontent: "AddAccount",
+                  data: roles,
+                },
+              ]}
+              openModal={openModal}
+              setopenModal={setopenModal}
+            />
+            <CustomPaginationActionsTable
+              tabletype="accounts"
+              columns={columns}
+              rows={rows}
+              setFetch={setFetch}
+              openModal={openModal}
+              setopenModal={setopenModal}
+              roles={roles}
+            />
+          </Grid>
+          <Grid xs={6} md={2}></Grid>
+        </Grid>
       </Main>
     </div>
   );

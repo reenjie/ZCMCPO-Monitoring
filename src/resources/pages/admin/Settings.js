@@ -30,7 +30,10 @@ function Settings({ usertype }) {
   const [created, setCreated] = useState(null);
 
   const fetchUser = async () => {
-    const res = await FetchUserData(getCookie().token.token);
+    const res = await FetchUserData({
+      token: getCookie().token.token,
+      role: getCookie().token.role,
+    });
 
     setName(res.data.data[0].name);
     setEmail(res.data.data[0].email);
@@ -83,7 +86,6 @@ function Settings({ usertype }) {
   };
   return (
     <div>
-      {console.log(usertype)}
       {usertype == "admin" ? (
         <AdminLayout SidebarNav={AdminSidebar} />
       ) : (
@@ -93,7 +95,7 @@ function Settings({ usertype }) {
         <Grid container spacing={2} mt={2}>
           <Grid xs={6} md={2}></Grid>
           <Grid xs={6} md={8}>
-            <Paper elevation={3} sx={{ padding: "10px" }}>
+            <Paper elevation={3} sx={{ padding: "20px" }}>
               <h3>Account Settings</h3>
               <h6 style={{ color: "gray" }}> Manage Profile </h6>
               <h5>Email</h5>

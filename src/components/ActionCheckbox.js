@@ -116,18 +116,19 @@ export default function ActionCheckbox({
             style={{ color: "#F16767" }}
           />
           <FormControlLabel
-            value="undeliver"
+            value="Undelivered"
             control={<Radio />}
             label="Mark as Undelivered"
             onClick={(e) => {
               setSelected(e.target.value);
               setClicked(e.target.value);
+              console.log(e.target.value);
             }}
             style={{ color: "#F16767" }}
           />
 
           <FormControlLabel
-            value="extend"
+            value="Extend"
             control={<Radio />}
             label="Extend"
             onClick={(e) => {
@@ -138,7 +139,7 @@ export default function ActionCheckbox({
           />
 
           <FormControlLabel
-            value="deliver"
+            value="Delivered"
             control={<Radio />}
             label="Mark as Delivered"
             onClick={(e) => {
@@ -205,7 +206,7 @@ export default function ActionCheckbox({
             </Box>
           )}
           <FormControlLabel
-            value="remarks"
+            value="Remarks"
             control={<Radio />}
             label="Create a Remarks"
             onClick={(e) => {

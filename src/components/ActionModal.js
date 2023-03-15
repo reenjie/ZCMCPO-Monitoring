@@ -127,13 +127,22 @@ export default function ActionModal({
   };
 
   const SaveRemarks = async () => {
-    const req = await Applytoall({
-      data: remarks,
-      selection: selection,
-      ttype: "saveRemarks",
-    });
-    if (req.status === 200) {
-      alert();
+    if (remarks == "") {
+      notify({
+        type: "error",
+        title: "Remarks Required",
+        message: "Please input remarks",
+      });
+    } else {
+      const req = await Applytoall({
+        data: remarks,
+        selection: selection,
+        ttype: "saveRemarks",
+      });
+      if (req.status === 200) {
+        alert();
+        setRemarks("");
+      }
     }
   };
 

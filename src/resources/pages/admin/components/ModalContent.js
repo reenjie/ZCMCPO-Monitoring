@@ -14,6 +14,7 @@ import {
   UpdateUserData,
 } from "../../../../app/controllers/request/AdminRequest";
 import { notify } from "../../../../components/Sweetalert";
+import { getCookie } from "../../../../app/hooks/Cookie";
 export const AddAccounts = ({ handleClose, roles, setFetch, action, data }) => {
   const [fname, setfName] = useState(action == "edit" ? data.name : "");
   const [lname, setlName] = useState("");
@@ -42,6 +43,7 @@ export const AddAccounts = ({ handleClose, roles, setFetch, action, data }) => {
               name: fname,
               username: username,
               pass: pass,
+              token: getCookie().token.token,
             });
 
             if (update.status == 200) {
@@ -66,6 +68,7 @@ export const AddAccounts = ({ handleClose, roles, setFetch, action, data }) => {
           name: fname,
           username: username,
           pass: null,
+          token: getCookie().token.token,
         });
 
         if (update.status == 200) {
@@ -98,6 +101,7 @@ export const AddAccounts = ({ handleClose, roles, setFetch, action, data }) => {
           username: username,
           srole: srole,
           pass: pass,
+          token: getCookie().token.token,
         });
         if (save.status == 200) {
           handleClose(false);

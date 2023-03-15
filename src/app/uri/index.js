@@ -91,3 +91,11 @@ export const cardCountUri = () => {
 export const filterRecentUri = () => {
   return `${api}/filterRecent`;
 };
+
+export const logoutUserURi = () => {
+  return `${api}/logoutUser`;
+};
+
+export const fetchlogsUri = () => {
+  return `${api}/fetchlogs`;
+};
