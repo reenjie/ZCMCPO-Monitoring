@@ -1,4 +1,4 @@
-import { Box, Grid, ImageList, TextField, Link } from "@mui/material";
+import { Box, Grid, ImageList, TextField, Link, Button } from "@mui/material";
 import React from "react";
 import Logo from "../assets/image/zcmc_logo.png";
 
@@ -52,8 +52,9 @@ function Navbar() {
               color: "green",
             }}
           >
-            LOGIN
+            ABOUT
           </Link>
+
           <Link
             href="/login"
             underline="none"
@@ -64,7 +65,7 @@ function Navbar() {
               color: "green",
             }}
           >
-            ABOUT
+            Login
           </Link>
         </Grid>
       </Grid>
