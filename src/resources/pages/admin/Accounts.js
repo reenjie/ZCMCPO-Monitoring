@@ -83,6 +83,8 @@ const Accounts = ({ Roles, Data }) => {
           setFetch={setFetch}
           Modalbtn={
             <Button
+              variant="contained"
+              style={{ paddingLeft: "20px" }}
               color="success"
               onClick={() => {
                 setopenModal(true);

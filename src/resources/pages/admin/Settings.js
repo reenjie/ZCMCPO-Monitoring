@@ -90,31 +90,30 @@ function Settings({ usertype }) {
         <UserLayout SidebarNav={UserSidebar} />
       )}
       <Main>
-        <h3>Settings</h3>
-
         <Grid container spacing={2} mt={2}>
-          <Grid xs={6} md={6}>
+          <Grid xs={6} md={2}></Grid>
+          <Grid xs={6} md={8}>
             <Paper elevation={3} sx={{ padding: "10px" }}>
-              <h5>Account Settings</h5>
+              <h3>Account Settings</h3>
               <h6 style={{ color: "gray" }}> Manage Profile </h6>
+              <h5>Email</h5>
               <TextField
                 fullWidth
-                sx={{ marginTop: "10px" }}
+                sx={{ marginTop: "2px" }}
                 size="small"
                 id="outlined-basic"
-                label="Email"
                 variant="outlined"
                 type={"text"}
                 required
                 value={email}
                 disabled
-              />
+              ></TextField>
+              <h5>Name</h5>
               <TextField
                 fullWidth
-                sx={{ marginTop: "10px" }}
+                sx={{ marginTop: "2px" }}
                 size="small"
                 id="outlined-basic"
-                label="Name"
                 variant="outlined"
                 type={"text"}
                 value={name}
@@ -127,11 +126,10 @@ function Settings({ usertype }) {
               <Paper eleveation={3} sx={{ padding: "40px" }}>
                 <h6>Created At : {created}</h6>
               </Paper>
-            </Paper>
-          </Grid>
-          <Grid xs={6} md={6}>
-            <Paper elevation={3} sx={{ padding: "10px" }}>
-              <h6 style={{ color: "gray" }}>Change Password </h6>
+
+              <h6 style={{ color: "gray", marginTop: "20px" }}>
+                Change Password{" "}
+              </h6>
               <form method="post" onSubmit={handleChangePass}>
                 {save && (
                   <Alert severity="success">
@@ -215,6 +213,7 @@ function Settings({ usertype }) {
               </form>
             </Paper>
           </Grid>
+          <Grid xs={6} md={2}></Grid>
         </Grid>
       </Main>
     </div>

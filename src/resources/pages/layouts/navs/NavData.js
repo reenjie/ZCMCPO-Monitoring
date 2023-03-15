@@ -1,4 +1,4 @@
-import { AiOutlineDashboard } from "react-icons/ai";
+import { AiOutlineDashboard, AiFillCode } from "react-icons/ai";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { FaCogs } from "react-icons/fa";
 
@@ -14,6 +14,12 @@ export const AdminSidebar = [
     title: "Accounts",
     icon: <RiAccountCircleLine />,
     link: "/admin/Accounts",
+  },
+
+  {
+    title: "Audit Logs",
+    icon: <AiFillCode />,
+    link: "/admin/e",
   },
   {
     title: "Settings",

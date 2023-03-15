@@ -14,6 +14,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useState } from "react";
 import { FetchRecent } from "../app/controllers/request/UserRequest";
+import { addDays } from "date-fns";
 export const CustomSelect = ({ label, data, sort, setSort }) => {
   const [val, setVal] = useState();
   return (
@@ -119,14 +120,14 @@ export const CustomButton = ({
 };
 
 export const CustomDatePicker = ({ value, setValue, label, sort, setSort }) => {
-  const handleDateChange = (date) => {
-    setValue(date.toISOString().split("T")[0]);
+  const handleDateChange = (e) => {
+    setValue(e.currentTarget.value);
     if (sort.length >= 1) {
       for (let { labelled } of sort) {
         if (labelled === label) {
           const update = {
             labelled: label,
-            value: date.toISOString().split("T")[0],
+            value: e.currentTarget.value,
           };
           const index = sort.findIndex((item) =>
             item.labelled.toLowerCase().includes(label.toLowerCase())
@@ -142,7 +143,7 @@ export const CustomDatePicker = ({ value, setValue, label, sort, setSort }) => {
         ...sort,
         {
           labelled: label,
-          value: date.toISOString().split("T")[0],
+          value: e.currentTarget.value,
           table: "dateandtime",
         },
       ]);
@@ -151,7 +152,7 @@ export const CustomDatePicker = ({ value, setValue, label, sort, setSort }) => {
       setSort([
         {
           labelled: label,
-          value: date.toISOString().split("T")[0],
+          value: e.currentTarget.value,
           table: "dateandtime",
         },
       ]);
@@ -160,23 +161,8 @@ export const CustomDatePicker = ({ value, setValue, label, sort, setSort }) => {
   };
   return (
     <FormControl fullWidth size="small" sx={{ marginTop: "10px" }}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          label={label}
-          value={value}
-          onChange={handleDateChange}
-          renderInput={(params) => (
-            <TextField
-              size="small"
-              id="outlined-basic"
-              label="Outlined"
-              variant="outlined"
-              {...params}
-            />
-          )}
-          format="yyyy-MM-dd"
-        />
-      </LocalizationProvider>
+      <h5 style={{ color: "grey" }}> {label}</h5>
+      <TextField type={"date"} onChange={handleDateChange}></TextField>
     </FormControl>
   );
 };
