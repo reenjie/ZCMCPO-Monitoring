@@ -19,7 +19,7 @@ export const AdminSidebar = [
   {
     title: "Audit Logs",
     icon: <AiFillCode />,
-    link: "/admin/e",
+    link: "/admin/AuditLogs",
   },
   {
     title: "Settings",

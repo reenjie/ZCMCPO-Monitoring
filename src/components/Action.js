@@ -6,6 +6,7 @@ import { DeleteUserData } from "../app/controllers/request/AdminRequest";
 import { question } from "./Sweetalert";
 import { LoadingButton } from "@mui/lab";
 import BasicModal from "./Modal";
+import { getCookie } from "../app/hooks/Cookie";
 
 export const Edit = ({ data, tabletype, setFetch, roles }) => {
   const [openModal, setopenModal] = useState(false);
@@ -56,6 +57,7 @@ export const Delete = ({ data, tabletype, setFetch }) => {
           setLoad(true);
           const res = await DeleteUserData({
             id: data.dataid,
+            token: getCookie().token.token,
           });
           if (res.status == 200) {
             setFetch(true);
