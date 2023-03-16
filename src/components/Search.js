@@ -11,7 +11,8 @@ import { LoadingButton } from "@mui/lab";
 import swal from "sweetalert";
 import { SetViewed } from "../app/controllers/request/UserRequest";
 import { MdOutlineCancel } from "react-icons/md";
-import { getCookie } from "../app/hooks/Cookie";
+import { Authorize_Personnel } from "../app/controllers/Authorize";
+import { manage } from "../app/controllers/Authorize";
 export default function Search({
   search,
   setSearch,
@@ -67,7 +68,7 @@ export default function Search({
             icon: "info",
           });
         } else {
-          navigate("/manage", { state: selected });
+          navigate(manage(), { state: selected });
         }
       }
     } else {
@@ -131,7 +132,7 @@ export default function Search({
           />
         </Button>
 
-        {getCookie().token.role == 2 && (
+        {Authorize_Personnel() && (
           <Badge
             badgeContent={contentSearch().length}
             overlap="rectangular"

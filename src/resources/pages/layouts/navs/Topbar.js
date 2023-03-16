@@ -1,14 +1,24 @@
 import React from "react";
 import "../../../../assets/css/admin.css";
 import { AiOutlineLogout } from "react-icons/ai";
-import { clearCookie } from "../../../../app/hooks/Cookie";
+import { clearCookie, getCookie } from "../../../../app/hooks/Cookie";
 import { question } from "../../../../components/Sweetalert";
 import { useLocation } from "react-router-dom";
-function Topbar({ SidebarNav, view }) {
+import { logoutUser } from "../../../../app/controllers/auth/AuthController";
+import { Badge } from "@mui/material";
+import { IoMdNotifications } from "react-icons/io";
+//ImNotification
+
+const Topbar = ({ SidebarNav, view }) => {
   const location = useLocation();
-  const Action = () => {
-    clearCookie();
-    window.location.reload();
+
+  const action = async () => {
+    const res = await logoutUser({ token: getCookie().token.token });
+
+    if (res.status === 200) {
+      clearCookie();
+      window.location.reload();
+    }
   };
   const logout = () => {
     question({
@@ -16,10 +26,15 @@ function Topbar({ SidebarNav, view }) {
       message: "you want to logout?",
       type: "warning",
       btndanger: false,
-      action: Action,
+      action: action,
     });
     // clearCookie();
     // window.location.reload();
+  };
+  const custombadge = {
+    fontSize: "20px",
+    marginLeft: "3px",
+    fontWeight: "bold",
   };
   return (
     <div className="topbar">
@@ -35,11 +50,20 @@ function Topbar({ SidebarNav, view }) {
                   <a
                     key={row.link}
                     href={row.link}
-                    className={location.pathname == row.link ? " active" : ""}
+                    className={location.pathname == row.link ? "active" : ""}
                   >
                     {" "}
                     <span className="icons">{row.icon}</span>{" "}
                     <span className="title">{row.title}</span>
+                    {location.pathname != "/Approval"
+                      ? row.title === "For Approval" && (
+                          <Badge
+                            sx={{ marginLeft: "18px" }}
+                            badgeContent={1}
+                            color="error"
+                          ></Badge>
+                        )
+                      : ""}
                   </a>
                 </>
               );
@@ -55,6 +79,6 @@ function Topbar({ SidebarNav, view }) {
       </a>
     </div>
   );
-}
+};
 
 export default Topbar;

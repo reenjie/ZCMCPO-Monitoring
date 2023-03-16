@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../layouts/AdminLayout";
-import { AdminSidebar } from "../layouts/navs/NavData";
+import { AdminSidebar, Supervisorsidebar } from "../../../data/NavData";
 import Main from "../layouts/navs/Main";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -10,8 +10,9 @@ import { FetchUserData } from "../../../app/controllers/auth/AuthController";
 import { getCookie } from "../../../app/hooks/Cookie";
 import { TextField, Button, FormControlLabel, Checkbox } from "@mui/material";
 import { useAuth } from "../../../app/hooks/ContextHooks";
-import { UserSidebar } from "../layouts/navs/UserNavData";
+import { UserSidebar } from "../../../data/NavData";
 import UserLayout from "../layouts/UserLayout";
+import SupervisorLayout from "../layouts/SupervisorLayout";
 import {
   ChangePassUserData,
   ChangeNameUserData,
@@ -30,7 +31,10 @@ function Settings({ usertype }) {
   const [created, setCreated] = useState(null);
 
   const fetchUser = async () => {
-    const res = await FetchUserData(getCookie().token.token);
+    const res = await FetchUserData({
+      token: getCookie().token.token,
+      role: getCookie().token.role,
+    });
 
     setName(res.data.data[0].name);
     setEmail(res.data.data[0].email);
@@ -83,9 +87,10 @@ function Settings({ usertype }) {
   };
   return (
     <div>
-      {console.log(usertype)}
       {usertype == "admin" ? (
         <AdminLayout SidebarNav={AdminSidebar} />
+      ) : usertype == "supervisor" ? (
+        <SupervisorLayout SidebarNav={Supervisorsidebar} />
       ) : (
         <UserLayout SidebarNav={UserSidebar} />
       )}
@@ -93,7 +98,7 @@ function Settings({ usertype }) {
         <Grid container spacing={2} mt={2}>
           <Grid xs={6} md={2}></Grid>
           <Grid xs={6} md={8}>
-            <Paper elevation={3} sx={{ padding: "10px" }}>
+            <Paper elevation={3} sx={{ padding: "20px" }}>
               <h3>Account Settings</h3>
               <h6 style={{ color: "gray" }}> Manage Profile </h6>
               <h5>Email</h5>

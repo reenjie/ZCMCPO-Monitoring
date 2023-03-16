@@ -26,6 +26,7 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import { RotatingLines } from "react-loader-spinner";
 import "../assets/css/dashboard.css";
 import { VscClearAll } from "react-icons/vsc";
+import moment from "moment/moment";
 
 export default function CustomPaginationActionsTable({
   columns,
@@ -140,12 +141,10 @@ export default function CustomPaginationActionsTable({
 
         return rows[0];
       }
+    } else if (tabletype == "auditlogs") {
+      return rows;
     } else {
-      return rows[0]
-        ? rows[0].data.filter((filter) =>
-            filter.name.toLowerCase().includes(search.toLowerCase())
-          )
-        : [];
+      return rows;
     }
   };
   const cardborder = () => {
@@ -309,44 +308,94 @@ export default function CustomPaginationActionsTable({
                 .map((row) => {
                   return (
                     <>
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.code}
-                      >
-                        {columns.map((column) => {
-                          const value = row[column.id];
+                      {tabletype == "auditlogs" ? (
+                        <>
+                          {row.map((x) => {
+                            return (
+                              <TableRow
+                                hover
+                                role="checkbox"
+                                tabIndex={-1}
+                                key={row.code}
+                              >
+                                {columns.map((column) => {
+                                  const value = x[column.id];
+                                  return (
+                                    <TableCell
+                                      align="center"
+                                      style={{ fontSize: "13px" }}
+                                    >
+                                      {column.id == "created_at"
+                                        ? moment(value).format(
+                                            " h:mm:ssa MMMM Do YYYY"
+                                          )
+                                        : value}
+                                    </TableCell>
+                                  );
+                                })}
+                              </TableRow>
+                            );
+                          })}
+                        </>
+                      ) : tabletype == "accounts" ? (
+                        <>
+                          {row.map((x) => {
+                            return (
+                              <TableRow
+                                hover
+                                role="checkbox"
+                                tabIndex={-1}
+                                key={row.code}
+                              >
+                                {columns.map((column) => {
+                                  const value = x[column.id];
+                                  return (
+                                    <TableCellAccount
+                                      column={column}
+                                      columnid={column.id}
+                                      columnalign={column.align}
+                                      columnformat={column.format}
+                                      value={value}
+                                      tabletype={tabletype}
+                                      setFetch={setFetch}
+                                      roles={roles}
+                                      row={x}
+                                      dataid={x.dataid}
+                                      Authuserid={Auth.user.id}
+                                    />
+                                  );
+                                })}
+                              </TableRow>
+                            );
+                          })}
+                        </>
+                      ) : (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row.code}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
 
-                          return tabletype == "dashboard" ? (
-                            /* All Dashboard */
-                            <TableCellUser
-                              columnid={column.id}
-                              columnalign={column.align}
-                              value={value}
-                              selection={selection}
-                              handleSelection={handleSelection}
-                              row={row}
-                              Bolderized={Bolderized}
-                            />
-                          ) : (
-                            /* Admin Accounts Table */
-                            <TableCellAccount
-                              column={column}
-                              columnid={column.id}
-                              columnalign={column.align}
-                              columnformat={column.format}
-                              value={value}
-                              tabletype={tabletype}
-                              setFetch={setFetch}
-                              roles={roles}
-                              row={row}
-                              dataid={row.dataid}
-                              Authuserid={Auth.user.id}
-                            />
-                          );
-                        })}
-                      </TableRow>
+                            return (
+                              tabletype == "dashboard" && (
+                                /* All Dashboard */
+                                <TableCellUser
+                                  columnid={column.id}
+                                  columnalign={column.align}
+                                  value={value}
+                                  selection={selection}
+                                  handleSelection={handleSelection}
+                                  row={row}
+                                  Bolderized={Bolderized}
+                                />
+                              )
+                            );
+                          })}
+                        </TableRow>
+                      )}
                     </>
                   );
                 })

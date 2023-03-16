@@ -22,6 +22,7 @@ import { FaSort } from "react-icons/fa";
 import { CiViewList } from "react-icons/ci";
 import { CustomView } from "./CustomView";
 import { getCookie } from "../app/hooks/Cookie";
+import { Authorize_Personnel } from "../app/controllers/Authorize";
 export const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
   const [openCustom, setOpenCustom] = useState(false);
@@ -172,7 +173,7 @@ export const EnhancedTableToolbar = (props) => {
                     }
                   />
 
-                  {getCookie().token.role == 2 && (
+                  {Authorize_Personnel() && (
                     <div>
                       <h6 style={{ color: "grey" }}>Transaction</h6>
                       <CustomButton

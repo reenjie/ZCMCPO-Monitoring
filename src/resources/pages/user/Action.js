@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../../../assets/css/action.css";
 import UserLayout from "../layouts/UserLayout";
-import { UserSidebar } from "../layouts/navs/UserNavData";
+import { UserSidebar, Supervisorsidebar } from "../../../data/NavData";
 import { Button } from "@mui/material";
 import Transaction from "../../../components/Transaction";
 import { CiCircleList } from "react-icons/ci";
 import { useLocation, useNavigate } from "react-router-dom";
+import SupervisorLayout from "../layouts/SupervisorLayout";
 import {
   GetPOstatus,
   UndoAction,
@@ -19,8 +20,9 @@ import {
   UpdateDue,
 } from "../../../app/controllers/request/UserRequest";
 import { notify } from "../../../components/Sweetalert";
+import { back } from "../../../app/controllers/Authorize";
 
-const Action = () => {
+const Action = ({ usertype }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const selection = location.state;
@@ -29,7 +31,7 @@ const Action = () => {
   const [refresh, setRefresh] = useState(false);
   const [load, setLoad] = useState(false);
   const [extendDis, setExtenddis] = useState(false);
-  const applyall = () => {};
+
   const fetch = async () => {
     const fetchrecent = await GetPOstatus({});
     setTrans(fetchrecent.data.data);
@@ -40,7 +42,7 @@ const Action = () => {
     setRefresh(false);
     setLoad(false);
   }, [refresh]);
-
+  console.log("awww");
   const has_number = (string) => {
     return /\d/.test(string);
   };
@@ -147,14 +149,18 @@ const Action = () => {
 
   return (
     <div>
-      <UserLayout SidebarNav={UserSidebar} view={true} />
+      {usertype == "supervisor" ? (
+        <SupervisorLayout SidebarNav={Supervisorsidebar} />
+      ) : (
+        <UserLayout SidebarNav={UserSidebar} view={true} />
+      )}
 
       <Button
         variant="contained"
         size="small"
         style={{ position: "absolute", top: "70px", left: "20px" }}
         onClick={() => {
-          navigate("/user");
+          navigate(back());
         }}
       >
         Back

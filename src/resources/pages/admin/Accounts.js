@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import AdminLayout from "../layouts/AdminLayout";
-import { AdminSidebar } from "../layouts/navs/NavData";
+import { AdminSidebar } from "../../../data/NavData";
 import Main from "../layouts/navs/Main";
 import CustomPaginationActionsTable from "../../../components/Table";
 import BasicModal from "../../../components/Modal";
@@ -25,8 +25,14 @@ const Accounts = ({ Roles, Data }) => {
 
   useEffect(() => {
     const fetchDatas = async () => {
-      setRoles(await FetchRoles());
-      setData(await FetchUserData());
+      const role = await FetchRoles();
+      if (role.status == 200) {
+        setRoles(role.data.data);
+      }
+      const fetc = await FetchUserData();
+      if (fetc.status == 200) {
+        setData(fetc.data.data);
+      }
     };
     fetchDatas();
     setFetch(false);
@@ -71,47 +77,52 @@ const Accounts = ({ Roles, Data }) => {
   // }
 
   //const rows = [createData("India", "IN", 1324171354, 3287263, 51715)];
-  const rows = [data.data];
-  // console.log();
+  const rows = [data];
+  console.log(data);
 
   return (
     <div>
       <AdminLayout SidebarNav={AdminSidebar} />
       <Main>
-        <h3>Accounts</h3>
-        <BasicModal
-          setFetch={setFetch}
-          Modalbtn={
-            <Button
-              variant="contained"
-              style={{ paddingLeft: "20px" }}
-              color="success"
-              onClick={() => {
-                setopenModal(true);
-              }}
-            >
-              Add <IoIosAddCircle />
-            </Button>
-          }
-          ModalContent={[
-            {
-              typeofcontent: "AddAccount",
-              data: roles,
-            },
-          ]}
-          openModal={openModal}
-          setopenModal={setopenModal}
-        />
-
-        <CustomPaginationActionsTable
-          tabletype="accounts"
-          columns={columns}
-          rows={rows}
-          setFetch={setFetch}
-          openModal={openModal}
-          setopenModal={setopenModal}
-          roles={roles}
-        />
+        <Grid container spacing={2} mt={2}>
+          <Grid xs={6} md={2}></Grid>
+          <Grid xs={6} md={8}>
+            <h3>Accounts</h3>
+            <BasicModal
+              setFetch={setFetch}
+              Modalbtn={
+                <Button
+                  variant="contained"
+                  style={{ paddingLeft: "20px" }}
+                  color="success"
+                  onClick={() => {
+                    setopenModal(true);
+                  }}
+                >
+                  Add <IoIosAddCircle />
+                </Button>
+              }
+              ModalContent={[
+                {
+                  typeofcontent: "AddAccount",
+                  data: roles,
+                },
+              ]}
+              openModal={openModal}
+              setopenModal={setopenModal}
+            />
+            <CustomPaginationActionsTable
+              tabletype="accounts"
+              columns={columns}
+              rows={rows}
+              setFetch={setFetch}
+              openModal={openModal}
+              setopenModal={setopenModal}
+              roles={roles}
+            />
+          </Grid>
+          <Grid xs={6} md={2}></Grid>
+        </Grid>
       </Main>
     </div>
   );
