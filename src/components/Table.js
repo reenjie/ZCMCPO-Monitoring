@@ -144,11 +144,7 @@ export default function CustomPaginationActionsTable({
     } else if (tabletype == "auditlogs") {
       return rows;
     } else {
-      return rows[0]
-        ? rows[0].data.filter((filter) =>
-            filter.name.toLowerCase().includes(search.toLowerCase())
-          )
-        : [];
+      return rows;
     }
   };
   const cardborder = () => {
@@ -341,6 +337,38 @@ export default function CustomPaginationActionsTable({
                             );
                           })}
                         </>
+                      ) : tabletype == "accounts" ? (
+                        <>
+                          {row.map((x) => {
+                            return (
+                              <TableRow
+                                hover
+                                role="checkbox"
+                                tabIndex={-1}
+                                key={row.code}
+                              >
+                                {columns.map((column) => {
+                                  const value = x[column.id];
+                                  return (
+                                    <TableCellAccount
+                                      column={column}
+                                      columnid={column.id}
+                                      columnalign={column.align}
+                                      columnformat={column.format}
+                                      value={value}
+                                      tabletype={tabletype}
+                                      setFetch={setFetch}
+                                      roles={roles}
+                                      row={x}
+                                      dataid={x.dataid}
+                                      Authuserid={Auth.user.id}
+                                    />
+                                  );
+                                })}
+                              </TableRow>
+                            );
+                          })}
+                        </>
                       ) : (
                         <TableRow
                           hover
@@ -351,32 +379,19 @@ export default function CustomPaginationActionsTable({
                           {columns.map((column) => {
                             const value = row[column.id];
 
-                            return tabletype == "dashboard" ? (
-                              /* All Dashboard */
-                              <TableCellUser
-                                columnid={column.id}
-                                columnalign={column.align}
-                                value={value}
-                                selection={selection}
-                                handleSelection={handleSelection}
-                                row={row}
-                                Bolderized={Bolderized}
-                              />
-                            ) : (
-                              /* Admin Accounts Table */
-                              <TableCellAccount
-                                column={column}
-                                columnid={column.id}
-                                columnalign={column.align}
-                                columnformat={column.format}
-                                value={value}
-                                tabletype={tabletype}
-                                setFetch={setFetch}
-                                roles={roles}
-                                row={row}
-                                dataid={row.dataid}
-                                //     Authuserid={Auth.user.id}
-                              />
+                            return (
+                              tabletype == "dashboard" && (
+                                /* All Dashboard */
+                                <TableCellUser
+                                  columnid={column.id}
+                                  columnalign={column.align}
+                                  value={value}
+                                  selection={selection}
+                                  handleSelection={handleSelection}
+                                  row={row}
+                                  Bolderized={Bolderized}
+                                />
+                              )
                             );
                           })}
                         </TableRow>

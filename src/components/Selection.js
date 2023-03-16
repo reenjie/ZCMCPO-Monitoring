@@ -5,6 +5,7 @@ import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
 import { SetViewed } from "../app/controllers/request/UserRequest";
+import { manage } from "../app/controllers/Authorize";
 
 export const Selection = ({ setSelection, selection }) => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export const Selection = ({ setSelection, selection }) => {
       selection: selection,
     });
     if (result.status == 200) {
-      navigate("/manage", { state: selection });
+      navigate(manage(), { state: selection });
     }
   };
 

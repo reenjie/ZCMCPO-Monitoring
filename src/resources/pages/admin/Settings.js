@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../layouts/AdminLayout";
-import { AdminSidebar } from "../layouts/navs/NavData";
+import { AdminSidebar, Supervisorsidebar } from "../../../data/NavData";
 import Main from "../layouts/navs/Main";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -10,8 +10,9 @@ import { FetchUserData } from "../../../app/controllers/auth/AuthController";
 import { getCookie } from "../../../app/hooks/Cookie";
 import { TextField, Button, FormControlLabel, Checkbox } from "@mui/material";
 import { useAuth } from "../../../app/hooks/ContextHooks";
-import { UserSidebar } from "../layouts/navs/UserNavData";
+import { UserSidebar } from "../../../data/NavData";
 import UserLayout from "../layouts/UserLayout";
+import SupervisorLayout from "../layouts/SupervisorLayout";
 import {
   ChangePassUserData,
   ChangeNameUserData,
@@ -88,6 +89,8 @@ function Settings({ usertype }) {
     <div>
       {usertype == "admin" ? (
         <AdminLayout SidebarNav={AdminSidebar} />
+      ) : usertype == "supervisor" ? (
+        <SupervisorLayout SidebarNav={Supervisorsidebar} />
       ) : (
         <UserLayout SidebarNav={UserSidebar} />
       )}

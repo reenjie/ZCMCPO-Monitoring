@@ -4,7 +4,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { SetViewed } from "../app/controllers/request/UserRequest";
 import { LoadingButton } from "@mui/lab";
-import { getCookie } from "../app/hooks/Cookie";
+import { Authorize_Personnel, manage } from "../app/controllers/Authorize";
 export const TableCellUser = ({
   columnid,
   columnalign,
@@ -28,15 +28,16 @@ export const TableCellUser = ({
       selection: selected,
     });
     if (result.status == 200) {
-      navigate("/manage", { state: selected });
+      navigate(manage(), { state: selected });
     }
   };
+
   return (
     <TableCell key={columnid} align={columnalign}>
       <h4 style={{ fontWeight: "normal" }}>
         {columnid == "PK_posID" ? (
           <>
-            {getCookie().token.role == 2 && (
+            {Authorize_Personnel() && (
               <Checkbox
                 value={value}
                 checked={
@@ -54,7 +55,7 @@ export const TableCellUser = ({
           <></>
         ) : columnid == "action" ? (
           <>
-            {getCookie().token.role == 2 ? (
+            {Authorize_Personnel() ? (
               <Tooltip title="View">
                 <LoadingButton
                   variant="text"

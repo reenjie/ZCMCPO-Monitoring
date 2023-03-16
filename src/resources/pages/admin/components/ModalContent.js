@@ -231,7 +231,7 @@ export const AddAccounts = ({ handleClose, roles, setFetch, action, data }) => {
                   }}
                   required
                 >
-                  {roles.data.data.map((row) => {
+                  {roles.map((row) => {
                     return <MenuItem value={row.id}>{row.roles}</MenuItem>;
                   })}
                 </Select>

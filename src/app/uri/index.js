@@ -99,3 +99,7 @@ export const logoutUserURi = () => {
 export const fetchlogsUri = () => {
   return `${api}/fetchlogs`;
 };
+
+export const fetchForapprovalURI = () => {
+  return `${api}/fetchForapproval`;
+};
