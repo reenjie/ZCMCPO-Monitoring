@@ -33,7 +33,7 @@ export default function Transaction({
       <div>
         {selection &&
           selection.map((row, key) => {
-            const { id, data } = row;
+            const { id, data, view = false } = row;
 
             const { PONo, description, PODate, Terms } = data[0];
             return (
@@ -60,6 +60,7 @@ export default function Transaction({
                 extendDis={extendDis}
                 setExtenddis={setExtenddis}
                 MarkCompleted={MarkCompleted}
+                view={view}
               />
             );
           })}

@@ -34,7 +34,9 @@ const Action = ({ usertype }) => {
 
   const fetch = async () => {
     const fetchrecent = await GetPOstatus({});
-    setTrans(fetchrecent.data.data);
+    if (fetchrecent.status == 200) {
+      setTrans(fetchrecent.data.data);
+    }
   };
 
   useEffect(() => {
@@ -42,7 +44,7 @@ const Action = ({ usertype }) => {
     setRefresh(false);
     setLoad(false);
   }, [refresh]);
-  console.log("awww");
+
   const has_number = (string) => {
     return /\d/.test(string);
   };
@@ -160,7 +162,7 @@ const Action = ({ usertype }) => {
         size="small"
         style={{ position: "absolute", top: "70px", left: "20px" }}
         onClick={() => {
-          navigate(back());
+          window.history.back();
         }}
       >
         Back
@@ -192,8 +194,9 @@ const Action = ({ usertype }) => {
                 onClick={() => {
                   setopenModal(true);
                 }}
+                disabled={selection[0].view}
               >
-                Advance Option{" "}
+                <h4> Advance Option </h4>
                 <FaCogs style={{ marginLeft: "3px", fontSize: "17px" }} />
               </Button>
             }

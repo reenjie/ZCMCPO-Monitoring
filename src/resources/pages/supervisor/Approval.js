@@ -4,59 +4,67 @@ import { Supervisorsidebar } from "../../../data/NavData";
 import Main from "../layouts/navs/Main";
 import { Grid } from "@mui/material";
 import CustomPaginationActionsTable from "../../../components/Table";
-import { fetchForapproval } from "../../../app/controllers/request/UserRequest";
+import {
+  fetchForapproval,
+  GetPOstatus,
+} from "../../../app/controllers/request/UserRequest";
 export const Approval = () => {
   const [data, setData] = useState([]);
+  const [po, setPo] = useState([]);
+  const [trans, setTrans] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
       const req = await fetchForapproval({});
       if (req.status == 200) {
         setData(req.data.data);
+        setPo(req.data.po);
       }
+
+      const fetchrecent = await GetPOstatus({});
+      setTrans(fetchrecent.data.data);
     };
     fetch();
   }, []);
 
-  console.log(data);
   const columns = [
     {
-      id: "username",
+      id: "requestby",
       label: "Username",
       minWidth: 170,
       align: "center",
       format: (value) => value.toLocaleString("en-US"),
     },
     {
-      id: "actiontype",
+      id: "actiontypes",
       label: "Action Type | Activities",
       minWidth: 170,
       align: "center",
       format: (value) => value.toLocaleString("en-US"),
     },
     {
-      id: "created_at",
+      id: "PONo",
       label: "PO#",
       minWidth: 170,
       align: "center",
       format: (value) => value.toLocaleString("en-US"),
     },
     {
-      id: "created_at",
+      id: "itemdesc",
       label: "Item Description",
       minWidth: 170,
       align: "center",
       format: (value) => value.toLocaleString("en-US"),
     },
     {
-      id: "created_at",
+      id: "action",
       label: "Action",
       minWidth: 170,
       align: "center",
       format: (value) => value.toLocaleString("en-US"),
     },
   ];
-  const rows = [];
+  const rows = [data];
   return (
     <div>
       <SupervisorLayout SidebarNav={Supervisorsidebar} />
@@ -70,6 +78,8 @@ export const Approval = () => {
               tabletype="Approvals"
               columns={columns}
               rows={rows}
+              po={po}
+              trans={trans}
             />
           </Grid>
           <Grid xs={6} md={2}></Grid>
