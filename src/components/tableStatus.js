@@ -67,7 +67,7 @@ export default function TableStatus({
       <h5>Status</h5>
       <br />
       <TableContainer component={Paper} id="tablestatus">
-        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+        <Table sx={{ width: 300 }} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow style={{ backgroundColor: "#E1EEDD" }}>
               <TableCell>Extended</TableCell>
