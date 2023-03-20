@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import AdminLayout from "../layouts/AdminLayout";
-import { AdminSidebar } from "../layouts/navs/NavData";
+import { AdminSidebar } from "../../../data/NavData";
 import Main from "../layouts/navs/Main";
 import CustomPaginationActionsTable from "../../../components/Table";
 import BasicModal from "../../../components/Modal";
@@ -25,8 +25,14 @@ const Accounts = ({ Roles, Data }) => {
 
   useEffect(() => {
     const fetchDatas = async () => {
-      setRoles(await FetchRoles());
-      setData(await FetchUserData());
+      const role = await FetchRoles();
+      if (role.status == 200) {
+        setRoles(role.data.data);
+      }
+      const fetc = await FetchUserData();
+      if (fetc.status == 200) {
+        setData(fetc.data.data);
+      }
     };
     fetchDatas();
     setFetch(false);
@@ -71,8 +77,8 @@ const Accounts = ({ Roles, Data }) => {
   // }
 
   //const rows = [createData("India", "IN", 1324171354, 3287263, 51715)];
-  const rows = [data.data];
-  // console.log();
+  const rows = [data];
+  console.log(data);
 
   return (
     <div>

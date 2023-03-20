@@ -13,6 +13,7 @@ import {
   MarkCompleteURI,
   cardCountUri,
   filterRecentUri,
+  fetchForapprovalURI,
 } from "../../uri";
 import { getCookie } from "../../hooks/Cookie";
 import axios from "axios";
@@ -98,4 +99,8 @@ export const cardCount = async (data) => {
 
 export const filterRecent = async (data) => {
   return await axios.post(filterRecentUri(), data);
+};
+
+export const fetchForapproval = async (data) => {
+  return await axios.post(fetchForapprovalURI(), data);
 };

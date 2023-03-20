@@ -5,6 +5,9 @@ import { clearCookie, getCookie } from "../../../../app/hooks/Cookie";
 import { question } from "../../../../components/Sweetalert";
 import { useLocation } from "react-router-dom";
 import { logoutUser } from "../../../../app/controllers/auth/AuthController";
+import { Badge } from "@mui/material";
+import { IoMdNotifications } from "react-icons/io";
+//ImNotification
 
 const Topbar = ({ SidebarNav, view }) => {
   const location = useLocation();
@@ -28,6 +31,11 @@ const Topbar = ({ SidebarNav, view }) => {
     // clearCookie();
     // window.location.reload();
   };
+  const custombadge = {
+    fontSize: "20px",
+    marginLeft: "3px",
+    fontWeight: "bold",
+  };
   return (
     <div className="topbar">
       <h1>P.O Monitoring System</h1>
@@ -42,11 +50,20 @@ const Topbar = ({ SidebarNav, view }) => {
                   <a
                     key={row.link}
                     href={row.link}
-                    className={location.pathname == row.link ? " active" : ""}
+                    className={location.pathname == row.link ? "active" : ""}
                   >
                     {" "}
                     <span className="icons">{row.icon}</span>{" "}
                     <span className="title">{row.title}</span>
+                    {location.pathname != "/Approval"
+                      ? row.title === "For Approval" && (
+                          <Badge
+                            sx={{ marginLeft: "18px" }}
+                            badgeContent={1}
+                            color="error"
+                          ></Badge>
+                        )
+                      : ""}
                   </a>
                 </>
               );

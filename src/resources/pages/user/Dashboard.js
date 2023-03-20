@@ -2,23 +2,22 @@ import { Grid, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Status from "./Status";
 import UserLayout from "../layouts/UserLayout";
-import { UserSidebar } from "../layouts/navs/UserNavData";
-import SummaryTable from "./SummaryTable";
-import Topbar from "../layouts/navs/Topbar";
 import { Container } from "@mui/system";
 import Main from "../layouts/navs/Main";
 import AdminLayout from "../layouts/AdminLayout";
-import { AdminSidebar } from "../layouts/navs/NavData";
+import {
+  AdminSidebar,
+  UserSidebar,
+  Supervisorsidebar,
+} from "../../../data/NavData";
 import {
   FetchPurchaseOrder,
   FetchRecent,
   cardCount,
 } from "../../../app/controllers/request/UserRequest";
-import { getCookie } from "../../../app/hooks/Cookie";
-import { FetchUserData } from "../../../app/controllers/auth/AuthController";
-import { Autocomplete, Box, TextField } from "@mui/material";
 import CustomPaginationActionsTable from "../../../components/Table";
 import { defaultcolumns } from "../../../data/CustomViewData";
+import SupervisorLayout from "../layouts/SupervisorLayout";
 
 function Dashboard({ usertype }) {
   const [data, setData] = useState([]);
@@ -94,6 +93,8 @@ function Dashboard({ usertype }) {
     <div>
       {usertype == "admin" ? (
         <AdminLayout SidebarNav={AdminSidebar} />
+      ) : usertype == "supervisor" ? (
+        <SupervisorLayout SidebarNav={Supervisorsidebar} />
       ) : (
         <UserLayout SidebarNav={UserSidebar} />
       )}

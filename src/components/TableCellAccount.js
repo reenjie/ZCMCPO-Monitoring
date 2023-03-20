@@ -37,6 +37,7 @@ export const TableCellAccount = ({
                   setFetch={setFetch}
                   roles={roles}
                 />
+
                 <Delete data={row} tabletype={tabletype} setFetch={setFetch} />
               </ButtonGroup>
             </Box>
