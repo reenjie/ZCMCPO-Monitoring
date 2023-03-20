@@ -103,3 +103,7 @@ export const fetchlogsUri = () => {
 export const fetchForapprovalURI = () => {
   return `${api}/fetchForapproval`;
 };
+
+export const approvedUndoURI = () => {
+  return `${api}/approvedUndo`;
+};

@@ -15,6 +15,7 @@ import {
 import Action from "../resources/pages/user/Action";
 import Dashboard from "../resources/pages/user/Dashboard";
 import { Approval } from "../resources/pages/supervisor/Approval";
+import { Evaluation } from "../resources/pages/user/Evaluation";
 function Web() {
   return (
     <Routes>
@@ -38,6 +39,7 @@ function Web() {
       <Route element={<UserCheckAuth />}>
         <Route path="/user" element={<Dashboard usertype="user" />}></Route>
         <Route path="/manage" element={<Action />}></Route>
+        <Route path="/user/Evaluation-Form" element={<Evaluation />}></Route>
         <Route
           path="/user/Settings"
           element={<Settings usertype="user" />}

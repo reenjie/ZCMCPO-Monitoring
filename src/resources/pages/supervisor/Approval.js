@@ -12,6 +12,7 @@ export const Approval = () => {
   const [data, setData] = useState([]);
   const [po, setPo] = useState([]);
   const [trans, setTrans] = useState([]);
+  const [fetch, setFetch] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
@@ -25,7 +26,8 @@ export const Approval = () => {
       setTrans(fetchrecent.data.data);
     };
     fetch();
-  }, []);
+    setFetch(false);
+  }, [fetch]);
 
   const columns = [
     {
@@ -80,6 +82,7 @@ export const Approval = () => {
               rows={rows}
               po={po}
               trans={trans}
+              setFetch={setFetch}
             />
           </Grid>
           <Grid xs={6} md={2}></Grid>

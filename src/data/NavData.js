@@ -2,6 +2,7 @@ import { AiOutlineDashboard, AiFillCode } from "react-icons/ai";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { FaCogs } from "react-icons/fa";
 import { BsCheckCircle } from "react-icons/bs";
+import { CiBoxList } from "react-icons/ci";
 
 /* Admin Link */
 
@@ -33,6 +34,11 @@ export const UserSidebar = [
     title: "Dashboard",
     icon: <AiOutlineDashboard />,
     link: "/user",
+  },
+  {
+    title: "Evaluation Form",
+    icon: <CiBoxList />,
+    link: "/user/Evaluation-Form",
   },
   {
     title: "Settings",

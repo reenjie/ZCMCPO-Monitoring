@@ -314,7 +314,12 @@ export default function CustomPaginationActionsTable({
                       {tabletype == "auditlogs" ? (
                         <TableAuditlogs row={row} columns={columns} />
                       ) : tabletype == "Approvals" ? (
-                        <TableApproval row={row} columns={columns} po={po} />
+                        <TableApproval
+                          row={row}
+                          columns={columns}
+                          po={po}
+                          setFetch={setFetch}
+                        />
                       ) : tabletype == "accounts" ? (
                         row.map((x) => {
                           return (

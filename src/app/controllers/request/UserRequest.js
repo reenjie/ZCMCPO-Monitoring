@@ -14,6 +14,7 @@ import {
   cardCountUri,
   filterRecentUri,
   fetchForapprovalURI,
+  approvedUndoURI,
 } from "../../uri";
 import { getCookie } from "../../hooks/Cookie";
 import axios from "axios";
@@ -103,4 +104,11 @@ export const filterRecent = async (data) => {
 
 export const fetchForapproval = async (data) => {
   return await axios.post(fetchForapprovalURI(), data);
+};
+
+export const approvedUndo = async (data) => {
+  return await axios.post(approvedUndoURI(), {
+    data: data,
+    token: getCookie().token.token,
+  });
 };

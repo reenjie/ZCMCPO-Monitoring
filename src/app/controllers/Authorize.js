@@ -10,7 +10,6 @@ export const Authorize_Personnel = () => {
   if (getCookie().token.role === 2 || getCookie().token.role === 4) {
     return true;
   }
-
   return false;
 };
 
@@ -31,4 +30,11 @@ export const back = () => {
   if (getCookie().token.role === 4) {
     return "/Dashboard";
   }
+};
+
+export const SupervisorAuth = () => {
+  if (getCookie().token.role === 4) {
+    return true;
+  }
+  return false;
 };

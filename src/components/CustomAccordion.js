@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionSummary,
@@ -13,12 +13,12 @@ import {
 } from "@mui/material";
 import "../../src/assets/css/action.css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
-import { useState } from "react";
-
 import ManageItems from "./ManageItems";
 import { AccordionData } from "../data/AccordionData";
 import TableStatus from "./tableStatus";
+import { LoadingButton } from "@mui/lab";
+import { approvedUndo } from "../app/controllers/request/UserRequest";
+import { question } from "./Sweetalert";
 export const CustomAccordion = ({
   id,
   PONo,
@@ -44,6 +44,7 @@ export const CustomAccordion = ({
   view,
 }) => {
   const [expand, setExpand] = useState(false);
+  const [loadbtn, setLoadbtn] = useState(false);
   const formatString = (numberstring) => {
     let formattedNumberString = Number(numberstring).toLocaleString();
     return formattedNumberString;
@@ -51,6 +52,17 @@ export const CustomAccordion = ({
 
   const has_number = (string) => {
     return /\d/.test(string);
+  };
+
+  const undoing = async () => {
+    setLoadbtn(true);
+    const req = await approvedUndo({
+      id: id,
+    });
+    if (req.status === 200) {
+      setRefresh(true);
+      window.history.back();
+    }
   };
   return (
     <Accordion
@@ -145,6 +157,25 @@ export const CustomAccordion = ({
             <Grid container>
               <Grid item md={10}>
                 {" "}
+                {view && (
+                  <LoadingButton
+                    loading={loadbtn}
+                    sx={{ marginTop: "10px" }}
+                    variant="contained"
+                    size="medium"
+                    onClick={(e) => {
+                      question({
+                        title: "Are you sure? ",
+                        message: "to allow undoing this actions.",
+                        type: "warning",
+                        btndanger: true,
+                        action: undoing,
+                      });
+                    }}
+                  >
+                    <h5>Approve</h5>
+                  </LoadingButton>
+                )}
                 {!view && (
                   <ManageItems
                     id={id}

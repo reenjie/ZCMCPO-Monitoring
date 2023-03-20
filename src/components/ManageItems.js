@@ -6,6 +6,8 @@ import BasicModal from "./Modal";
 import { FaCogs } from "react-icons/fa";
 import { BiLoaderCircle } from "react-icons/bi";
 import { RotatingLines } from "react-loader-spinner";
+import { SupervisorAuth } from "../app/controllers/Authorize";
+import { approvedUndo } from "../app/controllers/request/UserRequest";
 function ManageItems({
   id,
   cancel,
@@ -67,6 +69,15 @@ function ManageItems({
     }
   };
 
+  const undoing = async () => {
+    const req = await approvedUndo({
+      id: id,
+    });
+    if (req.status === 200) {
+      setRefresh(true);
+    }
+  };
+
   const handleComplete = () => {
     MarkCompleted(id);
     setLoad(true);
@@ -92,7 +103,9 @@ function ManageItems({
   const [openModal, setopenModal] = useState(false);
   const [openModal1, setopenModal1] = useState(false);
   const [openModal2, setopenModal2] = useState(false);
-
+  const message = SupervisorAuth()
+    ? ""
+    : "you want to redo actions? , Your request will not be granted until you receive confirmation and wait for it.";
   return (
     <div className="" style={{ padding: 10, display: "flex" }}>
       <Grid container>
@@ -302,6 +315,7 @@ function ManageItems({
             Terms={Terms}
             remarks={remarks}
           />
+
           {!confirmation &&
             delivered_date != null &&
             completed_date == null && (
@@ -330,30 +344,50 @@ function ManageItems({
 
           {confirmation == 1 ? (
             <>
-              <div
-                style={{
-                  padding: "5px",
-                  fontSize: "14px",
-                  textAlign: "center",
-                  color: "#DC3535",
-                  alignSelf: "center",
-                }}
-                fullWidth
-              >
-                <div style={{ display: "flex" }}>
-                  <h4>
-                    {" "}
-                    <h5> ** UNDOING ACTIONS **</h5> Waiting for Confirmation{" "}
-                  </h4>
-                  <RotatingLines
-                    strokeColor="grey"
-                    strokeWidth="5"
-                    animationDuration="0.75"
-                    width="20"
-                    visible={true}
-                  />
+              {SupervisorAuth() ? (
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={() => {
+                    question({
+                      title: "Are you sure",
+                      message: message,
+                      type: "warning",
+                      btndanger: false,
+                      action: undoing,
+                    });
+                  }}
+                >
+                  <div style={{ display: "flex" }}>
+                    <h5>Undo </h5>
+                  </div>
+                </Button>
+              ) : (
+                <div
+                  style={{
+                    padding: "5px",
+                    fontSize: "14px",
+                    textAlign: "center",
+                    color: "#DC3535",
+                    alignSelf: "center",
+                  }}
+                  fullWidth
+                >
+                  <div style={{ display: "flex" }}>
+                    <h4>
+                      {" "}
+                      <h5> ** UNDOING ACTIONS **</h5> Waiting for Confirmation{" "}
+                    </h4>
+                    <RotatingLines
+                      strokeColor="grey"
+                      strokeWidth="5"
+                      animationDuration="0.75"
+                      width="20"
+                      visible={true}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
             </>
           ) : delivered_date != null || cancelled_date != null ? (
             <Button
@@ -362,11 +396,10 @@ function ManageItems({
               onClick={() => {
                 question({
                   title: "Are you sure",
-                  message:
-                    "you want to redo actions? , Your request will not be granted until you receive confirmation and wait for it.",
+                  message: message,
                   type: "warning",
                   btndanger: false,
-                  action: undo,
+                  action: SupervisorAuth() ? undoing : undo,
                 });
               }}
             >

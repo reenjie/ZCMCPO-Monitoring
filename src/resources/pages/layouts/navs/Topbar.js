@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../../../assets/css/admin.css";
 import { AiOutlineLogout } from "react-icons/ai";
 import { clearCookie, getCookie } from "../../../../app/hooks/Cookie";
@@ -6,12 +6,22 @@ import { question } from "../../../../components/Sweetalert";
 import { useLocation } from "react-router-dom";
 import { logoutUser } from "../../../../app/controllers/auth/AuthController";
 import { Badge } from "@mui/material";
+import { fetchForapproval } from "../../../../app/controllers/request/UserRequest";
 import { IoMdNotifications } from "react-icons/io";
 //ImNotification
 
 const Topbar = ({ SidebarNav, view }) => {
   const location = useLocation();
-
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetch = async () => {
+      const req = await fetchForapproval({});
+      if (req.status == 200) {
+        setData(req.data.data);
+      }
+    };
+    fetch();
+  }, []);
   const action = async () => {
     const res = await logoutUser({ token: getCookie().token.token });
 
@@ -59,7 +69,7 @@ const Topbar = ({ SidebarNav, view }) => {
                       ? row.title === "For Approval" && (
                           <Badge
                             sx={{ marginLeft: "18px" }}
-                            badgeContent={1}
+                            badgeContent={data.length}
                             color="error"
                           ></Badge>
                         )
