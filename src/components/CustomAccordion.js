@@ -41,6 +41,7 @@ export const CustomAccordion = ({
   extendDis,
   setExtenddis,
   MarkCompleted,
+  view,
 }) => {
   const [expand, setExpand] = useState(false);
   const formatString = (numberstring) => {
@@ -144,23 +145,25 @@ export const CustomAccordion = ({
             <Grid container>
               <Grid item md={10}>
                 {" "}
-                <ManageItems
-                  id={id}
-                  trans={trans}
-                  cancel={cancel}
-                  undeliver={undeliver}
-                  extend={extend}
-                  deliver={deliver}
-                  remarks={remarks}
-                  load={load}
-                  setLoad={setLoad}
-                  setRefresh={setRefresh}
-                  Terms={Terms}
-                  UndoActions={UndoActions}
-                  extendDis={extendDis}
-                  setExtenddis={setExtenddis}
-                  MarkCompleted={MarkCompleted}
-                />
+                {!view && (
+                  <ManageItems
+                    id={id}
+                    trans={trans}
+                    cancel={cancel}
+                    undeliver={undeliver}
+                    extend={extend}
+                    deliver={deliver}
+                    remarks={remarks}
+                    load={load}
+                    setLoad={setLoad}
+                    setRefresh={setRefresh}
+                    Terms={Terms}
+                    UndoActions={UndoActions}
+                    extendDis={extendDis}
+                    setExtenddis={setExtenddis}
+                    MarkCompleted={MarkCompleted}
+                  />
+                )}
               </Grid>
             </Grid>
           </Grid>

@@ -27,6 +27,8 @@ import { RotatingLines } from "react-loader-spinner";
 import "../assets/css/dashboard.css";
 import { VscClearAll } from "react-icons/vsc";
 import moment from "moment/moment";
+import { TableAuditlogs } from "./TableAuditlogs";
+import { TableApproval } from "./TableApproval";
 
 export default function CustomPaginationActionsTable({
   columns,
@@ -60,6 +62,7 @@ export default function CustomPaginationActionsTable({
   setCardcont,
   borderC,
   setBorderC,
+  po,
 }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -309,66 +312,39 @@ export default function CustomPaginationActionsTable({
                   return (
                     <>
                       {tabletype == "auditlogs" ? (
-                        <>
-                          {row.map((x) => {
-                            return (
-                              <TableRow
-                                hover
-                                role="checkbox"
-                                tabIndex={-1}
-                                key={row.code}
-                              >
-                                {columns.map((column) => {
-                                  const value = x[column.id];
-                                  return (
-                                    <TableCell
-                                      align="center"
-                                      style={{ fontSize: "13px" }}
-                                    >
-                                      {column.id == "created_at"
-                                        ? moment(value).format(
-                                            " h:mm:ssa MMMM Do YYYY"
-                                          )
-                                        : value}
-                                    </TableCell>
-                                  );
-                                })}
-                              </TableRow>
-                            );
-                          })}
-                        </>
+                        <TableAuditlogs row={row} columns={columns} />
+                      ) : tabletype == "Approvals" ? (
+                        <TableApproval row={row} columns={columns} po={po} />
                       ) : tabletype == "accounts" ? (
-                        <>
-                          {row.map((x) => {
-                            return (
-                              <TableRow
-                                hover
-                                role="checkbox"
-                                tabIndex={-1}
-                                key={row.code}
-                              >
-                                {columns.map((column) => {
-                                  const value = x[column.id];
-                                  return (
-                                    <TableCellAccount
-                                      column={column}
-                                      columnid={column.id}
-                                      columnalign={column.align}
-                                      columnformat={column.format}
-                                      value={value}
-                                      tabletype={tabletype}
-                                      setFetch={setFetch}
-                                      roles={roles}
-                                      row={x}
-                                      dataid={x.dataid}
-                                      Authuserid={Auth.user.id}
-                                    />
-                                  );
-                                })}
-                              </TableRow>
-                            );
-                          })}
-                        </>
+                        row.map((x) => {
+                          return (
+                            <TableRow
+                              hover
+                              role="checkbox"
+                              tabIndex={-1}
+                              key={row.code}
+                            >
+                              {columns.map((column) => {
+                                const value = x[column.id];
+                                return (
+                                  <TableCellAccount
+                                    column={column}
+                                    columnid={column.id}
+                                    columnalign={column.align}
+                                    columnformat={column.format}
+                                    value={value}
+                                    tabletype={tabletype}
+                                    setFetch={setFetch}
+                                    roles={roles}
+                                    row={x}
+                                    dataid={x.dataid}
+                                    Authuserid={Auth.user.id}
+                                  />
+                                );
+                              })}
+                            </TableRow>
+                          );
+                        })
                       ) : (
                         <TableRow
                           hover
@@ -378,7 +354,6 @@ export default function CustomPaginationActionsTable({
                         >
                           {columns.map((column) => {
                             const value = row[column.id];
-
                             return (
                               tabletype == "dashboard" && (
                                 /* All Dashboard */
