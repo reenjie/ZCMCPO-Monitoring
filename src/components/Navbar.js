@@ -1,6 +1,8 @@
-import { Box, Grid, ImageList, TextField, Link, Button } from "@mui/material";
+import { Box, Grid, ImageList, TextField, Button } from "@mui/material";
 import React from "react";
 import Logo from "../assets/image/zcmc_logo.png";
+import DrawerComponent from "./DrawerComponent";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -23,51 +25,13 @@ function Navbar() {
             </Box>
           </Box>
         </Grid>
-        <Grid
-          item
-          xl={2}
-          lg={2}
-          underline="none"
-          sx={{ height: "60px", my: 4, justifyContent: "right" }}
-        >
-          <Link
-            href="/login"
-            underline="none"
-            sx={{
-              height: "50px",
-              mx: 3,
-              fontSize: "25px",
-              color: "green",
-            }}
-          >
-            HOME
-          </Link>
-          <Link
-            href="/login"
-            underline="none"
-            sx={{
-              height: "50px",
-              mx: 3,
-              fontSize: "25px",
-              color: "green",
-            }}
-          >
-            ABOUT
-          </Link>
-
-          <Link
-            href="/login"
-            underline="none"
-            sx={{
-              height: "50px",
-              mx: 3,
-              fontSize: "25px",
-              color: "green",
-            }}
-          >
-            Login
-          </Link>
-        </Grid>
+        <DrawerComponent />
+        <div>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/faq">FAQ</Link>
+        </div>
       </Grid>
     </div>
   );
